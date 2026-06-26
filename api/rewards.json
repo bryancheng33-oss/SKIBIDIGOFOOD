@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "spinCost": 30,
+  "vouchers": [
+    "Free Drink",
+    "Free Burger",
+    "10% Discount",
+    "RM5 Off",
+    "Double Points"
+  ]
+}

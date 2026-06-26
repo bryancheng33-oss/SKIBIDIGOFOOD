@@ -1,0 +1,6 @@
+# Vercel CLI setup. Run these yourself from the project root.
+# Paste the Groq key only into the Vercel CLI prompt, not into source code.
+vercel env add GROQ_API_KEY production
+vercel env add GROQ_API_KEY preview
+vercel env add GROQ_MODEL production
+vercel env add GROQ_MODEL preview

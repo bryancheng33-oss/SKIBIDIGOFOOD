@@ -1,0 +1,4 @@
+# Netlify CLI setup. Run these yourself from the project root.
+# Paste the Groq key only into the Netlify CLI prompt, not into source code.
+netlify env:set GROQ_API_KEY
+netlify env:set GROQ_MODEL llama-3.3-70b-versatile

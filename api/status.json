@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "service": "Skibidi GoFood static mock API",
+  "backend": false,
+  "storage": "localStorage/sessionStorage"
+}
