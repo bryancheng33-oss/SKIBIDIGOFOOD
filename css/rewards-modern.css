@@ -1,0 +1,1249 @@
+/* rewards-modern.css — consolidated final layout overrides for the Rewards page */
+:root {
+  --rw-bg: #f6f8fb;
+  --rw-card: #ffffff;
+  --rw-card-soft: #fffdf5;
+  --rw-text: #111827;
+  --rw-muted: #5f6674;
+  --rw-border: #e7edf4;
+  --rw-shadow: 0 1rem 2.6rem rgba(15, 23, 42, 0.08);
+  --rw-shadow-soft: 0 .8rem 2rem rgba(15, 23, 42, 0.05);
+  --rw-gold: #f7c948;
+  --rw-gold-strong: #c99610;
+  --rw-dark: #101827;
+  --rw-dark-soft: #1c2d45;
+  --rw-success: #0f9f57;
+  --rw-warning: #b45309;
+}
+
+body {
+  background:
+    radial-gradient(circle at top right, rgba(247, 201, 72, 0.10), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, var(--rw-bg) 100%);
+}
+
+#rewards-panel.rewards-experience {
+  max-width: 1360px;
+  margin: 0 auto 4rem;
+  padding: clamp(1.1rem, 2vw, 2.4rem) clamp(1rem, 2vw, 2rem) 4.5rem;
+}
+
+#rewards-panel .rewards-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(24rem, 0.98fr);
+  gap: 1.35rem;
+  align-items: stretch;
+  margin-bottom: 1.6rem;
+}
+
+#rewards-panel .rewards-hero__copy,
+#rewards-panel .rewards-overview,
+#rewards-panel .voucher-panel,
+#rewards-panel .birthday-band,
+#rewards-panel .rewards-spin-panel {
+  border-radius: 2.2rem;
+  box-shadow: var(--rw-shadow);
+}
+
+#rewards-panel .rewards-hero__copy {
+  padding: 2rem 2.1rem;
+  background: linear-gradient(135deg, var(--rw-dark) 0%, var(--rw-dark-soft) 100%);
+  border: 1px solid #23344d;
+  color: #ffffff;
+}
+
+#rewards-panel .section-eyebrow,
+#rewards-panel .section-kicker {
+  font-family: var(--font-stencil);
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .8rem;
+  border-radius: 999px;
+  background: rgba(250, 204, 21, .16);
+  border: 1px solid rgba(250, 204, 21, .26);
+  color: #facc15;
+  font-size: .88rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+#rewards-panel .section-kicker {
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  color: #b7791f;
+}
+
+#rewards-panel .rewards-hero__title {
+  margin: .95rem 0 0;
+  font-family: var(--font-head);
+  letter-spacing: -.04em;
+  font-size: clamp(2.35rem, 3.8vw, 3.9rem);
+  line-height: 1.07;
+  color: #ffffff;
+}
+
+#rewards-panel .rewards-hero__lead {
+  margin: 1rem 0 0;
+  max-width: 58rem;
+  color: rgba(255,255,255,.84);
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+
+#rewards-panel .rewards-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .9rem;
+  padding: .9rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf6 100%);
+  border: 1px solid var(--rw-border);
+}
+
+#rewards-panel .overview-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: .55rem;
+  min-height: 100%;
+  padding: 1.25rem 1.15rem;
+  border-radius: 1.6rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fff8e8 100%);
+  border: 1px solid #edf2f7;
+}
+
+#rewards-panel .overview-card__label {
+  font-family: var(--font-stencil);
+  color: #64748b;
+  font-size: .88rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+#rewards-panel .overview-card__value {
+  color: var(--rw-text);
+  font-size: clamp(1.95rem, 3vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+#rewards-panel .overview-card__note {
+  color: var(--rw-muted);
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+#rewards-panel .rewards-experience__grid--new {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(24rem, .92fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+#rewards-panel .rewards-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+#rewards-panel .voucher-panel {
+  padding: 1.9rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%);
+  border: 1px solid var(--rw-border);
+}
+
+#rewards-panel .section-block-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.4rem;
+}
+
+#rewards-panel .section-block-title {
+  margin: .45rem 0 0;
+  font-family: var(--font-head);
+  letter-spacing: -.04em;
+  font-size: clamp(1.9rem, 2.4vw, 2.6rem);
+  line-height: 1.14;
+  color: var(--rw-text);
+}
+
+#rewards-panel .section-block-copy {
+  margin: .75rem 0 0;
+  max-width: 48rem;
+  color: var(--rw-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+#rewards-panel .section-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+
+#rewards-panel .section-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .68rem .95rem;
+  border-radius: 999px;
+  border: 1px solid #ebe1c4;
+  background: #fff8e6;
+  color: #6b4f00;
+  font-size: .9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#rewards-panel .voucher-panel .rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+#rewards-panel .reward-card {
+  display: flex;
+  flex-direction: column;
+  gap: .95rem;
+  min-height: 100%;
+  padding: 1.25rem;
+  border-radius: 1.65rem;
+  background: #ffffff;
+  border: 1px solid #edf2f7;
+  box-shadow: var(--rw-shadow-soft);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+#rewards-panel .reward-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 2.4rem rgba(15, 23, 42, 0.08);
+  border-color: #e1e9f2;
+}
+
+#rewards-panel .reward-card__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  flex-wrap: wrap;
+}
+
+#rewards-panel .reward-badge,
+#rewards-panel .reward-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .45rem .78rem;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 800;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+#rewards-panel .reward-badge {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+
+#rewards-panel .reward-status.is-ready {
+  background: #ecfdf3;
+  border-color: #b7ebc8;
+  color: var(--rw-success);
+}
+
+#rewards-panel .reward-status.is-locked {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: var(--rw-warning);
+}
+
+#rewards-panel .reward-card__main {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .95rem;
+  align-items: start;
+}
+
+#rewards-panel .reward-card__icon-wrap {
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 1.3rem;
+  display: grid;
+  place-items: center;
+  background: rgba(247, 201, 72, .14);
+  border: 1px solid rgba(247, 201, 72, .28);
+  flex-shrink: 0;
+}
+
+#rewards-panel .reward-card .r-icon {
+  font-size: 1.95rem;
+  line-height: 1;
+}
+
+#rewards-panel .reward-card__copy h3 {
+  margin: 0 0 .42rem;
+  font-family: var(--font-head);
+  letter-spacing: -.04em;
+  font-size: 1.42rem;
+  line-height: 1.2;
+  color: var(--rw-text);
+}
+
+#rewards-panel .reward-card__copy p {
+  margin: 0;
+  color: var(--rw-muted);
+  font-size: .97rem;
+  line-height: 1.68;
+}
+
+#rewards-panel .reward-card__need {
+  color: #9a6700;
+  font-size: .93rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+#rewards-panel .reward-rules-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .9rem 1rem;
+  border-radius: 1.15rem;
+  border: 1px solid #f0e7d1;
+  background: #fffdf7;
+  color: #1f2937;
+  font-size: .96rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background .18s ease, border-color .18s ease;
+}
+
+#rewards-panel .reward-rules-toggle:hover {
+  background: #fffaf0;
+  border-color: #eadfbf;
+}
+
+#rewards-panel .reward-rules-toggle i {
+  color: #8a5a00;
+  transition: transform .18s ease;
+  flex-shrink: 0;
+}
+
+#rewards-panel .reward-rules-toggle[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+#rewards-panel .reward-rules-panel {
+  padding: .95rem 1rem .95rem 1.05rem;
+  border-radius: 1.15rem;
+  background: #fffdf8;
+  border: 1px solid #f2ead7;
+}
+
+#rewards-panel .reward-rules-panel ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--rw-muted);
+  font-size: .95rem;
+  line-height: 1.68;
+}
+
+#rewards-panel .reward-rules-panel li + li {
+  margin-top: .28rem;
+}
+
+#rewards-panel .reward-card__footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+#rewards-panel .reward-card__footer .pts-pill {
+  margin: 0;
+  font-weight: 800;
+}
+
+#rewards-panel .reward-card__footer .btn {
+  margin-left: auto;
+}
+
+#rewards-panel .reward-card__footer .btn[disabled] {
+  opacity: .45;
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+#rewards-panel .birthday-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  padding: 1.75rem 1.9rem;
+  background: linear-gradient(135deg, var(--rw-dark) 0%, var(--rw-dark-soft) 100%);
+  border: 1px solid #24344d;
+  color: #ffffff;
+}
+
+#rewards-panel .birthday-band__head {
+  display: flex;
+  align-items: flex-start;
+  gap: .95rem;
+  flex: 1 1 30rem;
+  min-width: 0;
+}
+
+#rewards-panel .birthday-band .b-icon {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 1.2rem;
+  display: grid;
+  place-items: center;
+  background: rgba(250, 204, 21, .18);
+  border: 1px solid rgba(250, 204, 21, .24);
+  font-size: 1.7rem;
+  flex-shrink: 0;
+}
+
+#rewards-panel .birthday-band h3 {
+  margin: .45rem 0 0;
+  font-family: var(--font-head);
+  letter-spacing: -.04em;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+#rewards-panel .birthday-band p {
+  margin: .5rem 0 0;
+  max-width: 44rem;
+  color: rgba(255,255,255,.82);
+  line-height: 1.7;
+}
+
+#rewards-panel .birthday-band .btn {
+  min-width: 14rem;
+  justify-content: center;
+}
+
+#rewards-panel .rewards-spin-panel {
+  position: sticky;
+  top: calc(6.2rem + env(safe-area-inset-top, 0px));
+  margin: 0;
+  padding: 1.4rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf6 100%);
+  border: 1px solid var(--rw-border);
+}
+
+#rewards-panel .rewards-spin-panel .section-title {
+  margin: .35rem 0 0;
+  text-align: left;
+  text-transform: none;
+  text-decoration: none;
+  letter-spacing: 0;
+  font-family: var(--font-head);
+  letter-spacing: -.04em;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  color: var(--rw-text);
+}
+
+#rewards-panel .rewards-spin-panel .section-sub {
+  text-align: left;
+  margin: .5rem 0 1rem;
+  font-size: .98rem;
+  color: var(--rw-muted);
+}
+
+#rewards-panel .rewards-spin-panel .wheel-stats {
+  display: flex;
+  justify-content: flex-start;
+  gap: .65rem;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 0 1rem;
+  max-width: none;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-stat-pill {
+  width: auto;
+  min-width: 0;
+  padding: .78rem .95rem;
+  border-radius: 999px;
+  font-size: .92rem;
+  text-align: center;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-panel {
+  width: 100%;
+  max-width: none;
+  gap: 1rem;
+  padding: 1.25rem 1.15rem 1.2rem;
+  border-radius: 1.9rem;
+  background: linear-gradient(180deg, #111827 0%, #18243b 100%);
+  border: 1px solid #26324b;
+  box-shadow: 0 1rem 2.4rem rgba(15, 23, 42, .18);
+}
+
+#rewards-panel .wheel-stage-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-stage {
+  width: min(100%, 26rem);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+#rewards-panel .rewards-spin-panel #wheelCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-hub {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-width: 4px;
+  box-shadow:
+    0 0 0 10px rgba(250,204,21,.18),
+    inset 0 2px 10px rgba(15,23,42,.10);
+}
+
+#rewards-panel .rewards-spin-panel .wheel-hub:hover:not(.is-spinning) {
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+#rewards-panel .rewards-spin-panel .hub-label {
+  font-size: .98rem;
+}
+
+#rewards-panel .rewards-spin-panel .hub-cost {
+  font-size: .84rem;
+  margin-top: .2rem;
+}
+
+#rewards-panel .rewards-spin-panel .seg-legend {
+  width: 100%;
+  max-width: none;
+  gap: .65rem;
+  padding: 0;
+}
+
+#rewards-panel .rewards-spin-panel .seg-legend-item {
+  flex: 1 1 10rem;
+  justify-content: flex-start;
+  padding: .78rem .92rem;
+  border-radius: 1rem;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.88);
+}
+
+#rewards-panel .rewards-spin-panel .seg-legend-item span {
+  color: rgba(255,255,255,.88) !important;
+  text-align: left;
+}
+
+#rewards-panel .rewards-spin-panel .btn-spin {
+  width: 100%;
+  min-width: 0;
+  min-height: 3.7rem;
+  justify-content: center;
+  padding: 1.15rem 1.5rem;
+  border-radius: 999px;
+}
+
+#rewards-panel .rewards-spin-panel .spin-hint {
+  margin-top: 0;
+  color: rgba(255,255,255,.82) !important;
+  font-size: .98rem;
+  line-height: 1.7;
+  max-width: none;
+}
+
+#rewards-panel .rewards-spin-panel .info-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .95rem;
+}
+
+#rewards-panel .rewards-spin-panel .spin-card:not(.result-card) {
+  min-width: 0;
+  height: 100%;
+  padding: 1.25rem 1.15rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fffaf0 100%);
+  border: 1px solid #e9edf3;
+  box-shadow: none;
+}
+
+#rewards-panel .rewards-spin-panel .spin-card-title {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  letter-spacing: .14rem;
+}
+
+#rewards-panel .rewards-spin-panel .balance-card .b-pts {
+  font-size: 3rem;
+}
+
+#rewards-panel .rewards-spin-panel .result-card,
+#rewards-panel .rewards-spin-panel .spin-card:last-child {
+  grid-column: 1 / -1;
+}
+
+#rewards-panel .rewards-spin-panel .result-card {
+  min-height: 11rem;
+  overflow: hidden;
+}
+
+#rewards-panel .rewards-spin-panel .result-headline {
+  font-size: clamp(2rem, 4vw, 2.5rem) !important;
+}
+
+#rewards-panel .rewards-spin-panel .result-sub {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+#rewards-panel .rewards-spin-panel .prob-row {
+  grid-template-columns: .9rem minmax(0, 1fr) auto;
+  align-items: start;
+  gap: .75rem 1rem;
+}
+
+#rewards-panel .rewards-spin-panel .prob-prize,
+#rewards-panel .rewards-spin-panel .prob-bar {
+  grid-column: 2;
+}
+
+#rewards-panel .rewards-spin-panel .prob-bar {
+  width: 100%;
+  max-width: none;
+}
+
+#rewards-panel .rewards-spin-panel .prob-pct {
+  grid-column: 3;
+  grid-row: 1 / span 3;
+  align-self: center;
+}
+
+#rewards-panel .rewards-spin-panel .history-header {
+  gap: .75rem;
+}
+
+#rewards-panel .rewards-spin-panel .clear-btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  line-height: 1;
+}
+
+#rewards-panel .rewards-spin-panel .history-list {
+  max-height: 14rem;
+  padding-right: .2rem;
+}
+
+#rewards-panel .rewards-spin-panel .history-entry {
+  padding: .95rem 0;
+}
+
+@media (max-width: 1120px) {
+  #rewards-panel .rewards-hero,
+  #rewards-panel .rewards-experience__grid--new {
+    grid-template-columns: 1fr;
+  }
+
+  #rewards-panel .rewards-spin-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 860px) {
+  #rewards-panel.rewards-experience {
+    padding: 1.4rem 1.2rem 3.6rem;
+  }
+
+  #rewards-panel .rewards-overview {
+    grid-template-columns: 1fr;
+  }
+
+  #rewards-panel .birthday-band {
+    padding: 1.45rem;
+  }
+
+  #rewards-panel .birthday-band .btn {
+    width: 100%;
+  }
+
+  #rewards-panel .rewards-spin-panel .info-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  #rewards-panel .rewards-hero__copy,
+  #rewards-panel .voucher-panel,
+  #rewards-panel .rewards-spin-panel {
+    padding: 1.35rem;
+    border-radius: 1.8rem;
+  }
+
+  #rewards-panel .rewards-hero__title {
+    font-size: 2.15rem;
+  }
+
+  #rewards-panel .voucher-panel .rewards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #rewards-panel .reward-card__main {
+    grid-template-columns: 1fr;
+  }
+
+  #rewards-panel .reward-card__footer {
+    align-items: stretch;
+  }
+
+  #rewards-panel .reward-card__footer .btn {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  #rewards-panel .section-pill-row {
+    width: 100%;
+  }
+
+  #rewards-panel .section-pill {
+    width: 100%;
+  }
+
+  #rewards-panel .rewards-spin-panel .wheel-stat-pill {
+    width: 100%;
+  }
+
+  #rewards-panel .rewards-spin-panel .wheel-stage {
+    width: min(100%, 20rem);
+  }
+
+  #rewards-panel .rewards-spin-panel .wheel-hub {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+
+  #rewards-panel .rewards-spin-panel .seg-legend-item {
+    flex-basis: 100%;
+  }
+
+  #rewards-panel .rewards-spin-panel .prob-pct {
+    grid-row: auto;
+    align-self: start;
+  }
+}
+
+@media (max-width: 520px) {
+  #rewards-panel.rewards-experience {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #rewards-panel .rewards-hero__lead,
+  #rewards-panel .section-block-copy,
+  #rewards-panel .birthday-band p {
+    font-size: .96rem;
+  }
+
+  #rewards-panel .rewards-spin-panel .prob-row {
+    grid-template-columns: .9rem 1fr;
+  }
+
+  #rewards-panel .rewards-spin-panel .prob-prize,
+  #rewards-panel .rewards-spin-panel .prob-bar,
+  #rewards-panel .rewards-spin-panel .prob-pct {
+    grid-column: 2;
+  }
+}
+
+
+/* structural polish patch */
+#rewards-panel .rewards-spin-panel .wheel-panel,
+#rewards-panel .rewards-spin-panel .spin-card,
+#rewards-panel .rewards-spin-panel .result-card,
+#rewards-panel .reward-card,
+#rewards-panel .overview-card,
+#rewards-panel .birthday-band {
+  min-width: 0;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-stage::before {
+  content: '';
+  position: absolute;
+  inset: 10%;
+  background: radial-gradient(circle, rgba(254, 211, 48, .12), transparent 65%);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-stage > * {
+  position: relative;
+  z-index: 1;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-rim,
+#rewards-panel .rewards-spin-panel .wheel-rim-outer {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-rim {
+  inset: -8px;
+  border: 3px solid rgba(254, 211, 48, .18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+
+#rewards-panel .rewards-spin-panel .wheel-rim-outer {
+  inset: -16px;
+  border: 1px solid rgba(254, 211, 48, .08);
+  animation: rimPulse 2.8s ease-in-out infinite;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 28px solid #fed330;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .7));
+  z-index: 3;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-pointer::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: -1px;
+  width: 2px;
+  height: 16px;
+  background: linear-gradient(180deg, rgba(254, 211, 48, .95) 0%, rgba(254, 211, 48, .18) 100%);
+  border-radius: 999px;
+}
+
+#rewards-panel .rewards-spin-panel .wheel-pointer::after {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fed330;
+  box-shadow: 0 0 10px rgba(254, 211, 48, .6);
+}
+
+#rewards-panel .rewards-spin-panel .balance-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#rewards-panel .rewards-spin-panel .balance-card .b-label {
+  margin-top: .45rem;
+  color: #64748b;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+#rewards-panel .rewards-spin-panel .balance-card .b-icon {
+  font-size: 3.4rem;
+  color: rgba(15, 23, 42, .08);
+}
+
+#rewards-panel .rewards-spin-panel .prob-row {
+  display: grid;
+  gap: .75rem 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+#rewards-panel .rewards-spin-panel .prob-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#rewards-panel .rewards-spin-panel .prob-dot {
+  width: .9rem;
+  height: .9rem;
+  border-radius: 999px;
+}
+
+#rewards-panel .rewards-spin-panel .prob-name {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+#rewards-panel .rewards-spin-panel .prob-prize,
+#rewards-panel .rewards-spin-panel .prob-pct,
+#rewards-panel .rewards-spin-panel .history-entry,
+#rewards-panel .rewards-spin-panel .history-empty-msg,
+#rewards-panel .rewards-spin-panel .result-sub,
+#rewards-panel .rewards-spin-panel .spin-hint {
+  overflow-wrap: anywhere;
+}
+
+#rewards-panel .rewards-spin-panel .prob-prize {
+  color: #64748b;
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+#rewards-panel .rewards-spin-panel .prob-bar {
+  height: .65rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e7edf5;
+}
+
+#rewards-panel .rewards-spin-panel .prob-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, .08);
+}
+
+#rewards-panel .rewards-spin-panel .prob-pct {
+  min-width: 4rem;
+  color: #111827;
+  font-size: .95rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+#rewards-panel .rewards-spin-panel .result-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 11rem;
+}
+
+#rewards-panel .rewards-spin-panel .result-idle {
+  color: #d7e0ea;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+#rewards-panel .rewards-spin-panel .result-content {
+  display: none;
+  width: 100%;
+}
+
+#rewards-panel .rewards-spin-panel .result-badge {
+  margin-bottom: .7rem;
+  font-size: .86rem;
+  font-weight: 800;
+  letter-spacing: .16rem;
+  text-transform: uppercase;
+}
+
+#rewards-panel .rewards-spin-panel .history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#rewards-panel .rewards-spin-panel .history-list {
+  overflow-y: auto;
+  max-height: 14rem;
+}
+
+#rewards-panel .rewards-spin-panel .history-entry {
+  display: grid;
+  grid-template-columns: .8rem 1fr auto;
+  align-items: start;
+  gap: .9rem;
+  padding: .95rem 0;
+  border-bottom: 1px solid #eef2f7;
+  font-size: .95rem;
+}
+
+#rewards-panel .rewards-spin-panel .history-entry:last-child {
+  border-bottom: none;
+}
+
+#rewards-panel .rewards-spin-panel .he-dot {
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+#rewards-panel .rewards-spin-panel .he-label {
+  color: #111827;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+#rewards-panel .rewards-spin-panel .he-time,
+#rewards-panel .rewards-spin-panel .history-empty-msg {
+  color: #64748b;
+}
+
+#rewards-panel .rewards-spin-panel .history-empty-msg {
+  padding: 1.8rem 0;
+  text-align: center;
+  line-height: 1.7;
+}
+
+#rewards-panel .rewards-spin-panel .clear-btn {
+  color: #64748b;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 800;
+  letter-spacing: .05rem;
+  text-transform: uppercase;
+}
+
+#rewards-panel .rewards-spin-panel .clear-btn:hover {
+  color: #e11d48;
+}
+
+@keyframes rimPulse {
+  0%, 100% { transform: scale(1); opacity: .7; }
+  50% { transform: scale(1.02); opacity: 1; }
+}
+
+
+/* Voucher detail layer */
+#rewards-panel .reward-detail-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .82rem 1rem;
+  border-radius: 1.1rem;
+  border: 1.5px solid rgba(212,160,23,.28);
+  background: #fff8e6;
+  color: #5f4109;
+  font-size: .95rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+#rewards-panel .reward-detail-btn:hover {
+  transform: translateY(-1px);
+  background: #fff1bf;
+  box-shadow: 0 .7rem 1.4rem rgba(212,160,23,.12);
+}
+#voucher-info-modal.modal-bg {
+  z-index: 7600;
+  padding: 1.25rem;
+  overflow: auto;
+}
+#voucher-info-modal .voucher-info-box {
+  width: min(720px, 94vw) !important;
+  max-width: 720px !important;
+  padding: 0 !important;
+  border-radius: 2.2rem !important;
+  overflow: hidden;
+  position: relative;
+  background: #ffffff !important;
+  box-shadow: 0 2rem 5rem rgba(15, 23, 42, .24) !important;
+}
+#voucher-info-modal .voucher-info-close {
+  float: none !important;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92) !important;
+  border: 1px solid rgba(17,24,39,.08) !important;
+  color: #1f2937 !important;
+}
+#voucher-info-content {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1.35rem;
+}
+.voucher-info-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 1.35rem 4rem 1.35rem 1.25rem;
+  border-radius: 1.8rem;
+  background: linear-gradient(135deg, #1f1a05 0%, #3a2f08 58%, #111111 100%);
+  color: #fffdf4;
+}
+.voucher-info-icon {
+  width: 4.25rem;
+  height: 4.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 1.35rem;
+  background: rgba(247,201,72,.18);
+  border: 1px solid rgba(247,201,72,.28);
+  font-size: 2.1rem;
+}
+.voucher-info-kicker {
+  margin: 0 0 .25rem;
+  color: var(--yellow);
+  font-size: .85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+#voucher-info-title {
+  margin: 0 !important;
+  color: #fffdf4 !important;
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+.voucher-info-hero p:not(.voucher-info-kicker) {
+  margin: .45rem 0 0;
+  color: rgba(255,253,244,.78);
+  font-size: 1rem;
+  line-height: 1.58;
+}
+.voucher-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .75rem;
+}
+.voucher-info-stat,
+.voucher-info-section {
+  border: 1.5px solid rgba(17,24,39,.08);
+  background: #fffdf7;
+  border-radius: 1.35rem;
+}
+.voucher-info-stat {
+  display: grid;
+  gap: .28rem;
+  padding: .95rem;
+}
+.voucher-info-stat span {
+  color: #7a5a00;
+  font-size: .78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.voucher-info-stat strong {
+  color: #1f2937;
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+.voucher-info-section {
+  padding: 1.05rem 1.1rem;
+}
+.voucher-info-section h4 {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin: 0 0 .55rem;
+  color: #1f2937;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+.voucher-info-section h4 i {
+  color: var(--yellow);
+}
+.voucher-info-section p,
+.voucher-info-section li {
+  color: #5f6674;
+  font-size: .98rem;
+  line-height: 1.65;
+}
+.voucher-info-section p {
+  margin: .35rem 0 0;
+}
+.voucher-info-section ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.voucher-info-section li + li {
+  margin-top: .28rem;
+}
+.voucher-info-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.voucher-info-actions .btn,
+.voucher-info-actions .delete-btn {
+  min-height: 3.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  font-weight: 900;
+}
+@media (max-width: 720px) {
+  .voucher-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .voucher-info-hero {
+    grid-template-columns: 1fr;
+    padding-right: 3.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .voucher-info-grid,
+  .voucher-info-actions {
+    grid-template-columns: 1fr;
+  }
+  .voucher-info-actions .btn,
+  .voucher-info-actions .delete-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "mode": "static-mock",
+  "message": "This is a front-end prototype. /api/* returns mock JSON instead of 404. Connect a real backend for production.",
+  "available": [
+    "/api/status.json",
+    "/api/menu.json",
+    "/api/rewards.json",
+    "/api/orders.json"
+  ]
+}

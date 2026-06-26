@@ -1,0 +1,13 @@
+{
+  "version": "20260526v20",
+  "budgets": {
+    "largestContentfulPaintMs": 2500,
+    "cumulativeLayoutShift": 0.1,
+    "interactionToNextPaintMs": 200,
+    "totalBlockingTimeMs": 300,
+    "javascriptTotalKbWarning": 350,
+    "cssTotalKbWarning": 350,
+    "imageTotalKbWarning": 2500
+  },
+  "notes": "Use this with Lighthouse, GTmetrix, or WebPageTest after public deployment."
+}

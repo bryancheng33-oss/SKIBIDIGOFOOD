@@ -1,0 +1,5 @@
+{
+  "ok": true,
+  "orders": [],
+  "note": "Orders are stored in browser localStorage in this static prototype."
+}

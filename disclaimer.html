@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="University Project Disclaimer — Skibidi GoFood is an academic project developed by MMU Melaka students for learning purposes only." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — Disclaimer</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<!-- Unified Home Style CSS -->
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<style>
+
+    /* ─── HERO ─────────────────────────────────────── */
+    .disc-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .disc-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(247,201,72,.12), transparent);
+      pointer-events: none;
+    }
+    .disc-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(247,201,72,.12);
+      border: 1px solid rgba(247,201,72,.3);
+      color: #f7c948;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .55rem 1.5rem;
+      border-radius: 999px;
+      margin-bottom: 2.2rem;
+    }
+    .disc-hero h1 {
+      font-size: clamp(3rem, 5.5vw, 5rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 1.6rem;
+      line-height: 1.12;
+    }
+    .disc-hero h1 em { color: #f7c948; font-style: normal; }
+    .disc-hero-lead {
+      font-size: 1.7rem;
+      color: rgba(255,255,255,.6);
+      max-width: 58ch;
+      margin: 0 auto 3rem;
+      line-height: 1.75;
+    }
+    .disc-hero-jumps {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .disc-hero-jumps a {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: rgba(247,201,72,.12);
+      border: 1px solid rgba(247,201,72,.22);
+      color: #f7c948;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: .6rem 1.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .disc-hero-jumps a:hover { background: rgba(247,201,72,.25); transform: translateY(-2px); }
+
+    /* ─── SUMMARY STRIP (below hero, full-width) ───── */
+    .disc-summary-strip {
+      background: #fffbea;
+      border-bottom: 2px solid #f7c948;
+      padding: 2.4rem 4rem;
+    }
+    .disc-summary-strip-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+    }
+    .disc-summary-icon {
+      flex-shrink: 0;
+      width: 4rem;
+      height: 4rem;
+      background: #f7c948;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      color: #1a1a2e;
+      margin-top: .2rem;
+    }
+    .disc-summary-text .disc-summary-label {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #d4a017;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: .4rem;
+    }
+    .disc-summary-text p {
+      font-size: 1.45rem;
+      color: #555;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ─── BODY ──────────────────────────────────────── */
+    .disc-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+    }
+
+    /* ─── SECTION ───────────────────────────────────── */
+    .disc-section { margin-bottom: 5rem; }
+    .disc-section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #f7c948;
+      background: rgba(247,201,72,.1);
+      border: 1px solid rgba(247,201,72,.25);
+      padding: .3rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+    .disc-section h2 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #111;
+      margin: 0 0 1.4rem;
+      line-height: 1.2;
+    }
+    .disc-section > p,
+    .disc-section li {
+      font-size: 1.55rem;
+      line-height: 1.85;
+      color: #444;
+    }
+    .disc-section ul {
+      padding-left: 2.2rem;
+      margin: 1.2rem 0 0;
+    }
+    .disc-section ul li { margin-bottom: .85rem; }
+
+    /* ─── NOTICE BOX ────────────────────────────────── */
+    .disc-notice {
+      background: linear-gradient(135deg, rgba(247,201,72,.09), rgba(247,201,72,.03));
+      border: 1.5px solid rgba(247,201,72,.3);
+      border-left: 4px solid #f7c948;
+      border-radius: .6rem 1.2rem 1.2rem .6rem;
+      padding: 2.2rem 2.6rem;
+      margin: 2.4rem 0 0;
+    }
+    .disc-notice h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #d4a017;
+      margin: 0 0 .9rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .disc-notice p {
+      font-size: 1.45rem;
+      line-height: 1.8;
+      color: #555;
+      margin: 0;
+    }
+
+    /* ─── BRAND GRID ─────────────────────────────────── */
+    .disc-brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.6rem;
+    }
+    .disc-brand-card {
+      background: #f9f9f9;
+      border: 1px solid #eaeaea;
+      border-radius: 1.2rem;
+      padding: 2rem 1.4rem 1.6rem;
+      text-align: center;
+      transition: box-shadow .2s, transform .15s;
+    }
+    .disc-brand-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.08); transform: translateY(-3px); }
+    .disc-brand-card img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .disc-brand-name { font-size: 1.3rem; font-weight: 700; color: #222; margin-bottom: .4rem; }
+    .disc-brand-note { font-size: 1.05rem; color: #999; line-height: 1.4; }
+
+    /* ─── TEAM BOX ───────────────────────────────────── */
+    .disc-team-box {
+      background: #f8f8f8;
+      border: 1px solid #eee;
+      border-radius: 1.6rem;
+      padding: 3.2rem 2.4rem;
+      text-align: center;
+    }
+    .disc-team-box h3 { font-size: 2.2rem; font-weight: 800; color: #111; margin: 0 0 .5rem; }
+    .disc-team-sub { font-size: 1.35rem; color: #999; margin-bottom: 2.2rem; }
+    .disc-team-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; }
+    .disc-team-tag {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: .45rem 1.2rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #444;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    /* ─── DIVIDER & BACK LINK ────────────────────────── */
+    .disc-divider { border: none; border-top: 1px solid #eee; margin: 4.5rem 0; }
+    .disc-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #f7c948;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .disc-back:hover { opacity: .8; transform: translateX(-3px); }
+    .disc-bottom-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .disc-bottom-copy {
+      font-size: 1.25rem;
+      color: #d6d6d6;
+    }
+
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="index, follow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/disclaimer" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="Skibidi GoFood" property="og:site_name"/><meta content="Skibidi GoFood — Disclaimer" property="og:title"/><meta content="University Project Disclaimer — Skibidi GoFood is an academic project developed by MMU Melaka students for learning purposes only." property="og:description"/><meta content="https://skibidigofood.edgeone.cool/disclaimer" property="og:url"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Skibidi GoFood — Disclaimer" name="twitter:title"/><meta content="University Project Disclaimer — Skibidi GoFood is an academic project developed by MMU Melaka students for learning purposes only." name="twitter:description"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" name="twitter:image"/></head>
+<body class="home-page" id="page-top">
+<div class="notif" id="notif"></div>
+<!-- Public legal page: wallet top-up modal removed to prevent guest wallet actions. -->
+<!-- ══ HEADER ══════════════════════════════════════════ -->
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home">
+<span class="logo-wordmark">Skibidi <em>GoFood</em></span>
+</a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</nav>
+<div class="icons">
+<a class="btn btn-primary btn-sm" href="./"><i class="fas fa-sign-in-alt"></i> Student login</a>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+</section>
+</header>
+<!-- ══ HERO ════════════════════════════════════════════ -->
+<section class="disc-hero">
+<div class="disc-hero-badge">
+<i class="fas fa-graduation-cap"></i> University Project
+  </div>
+<h1>Project <em>Disclaimer</em></h1>
+<p class="disc-hero-lead">
+    Skibidi GoFood is an academic project built entirely for learning purposes. This page explains brand ownership, project scope, and usage limitations.
+  </p>
+<div class="disc-hero-jumps">
+<a href="#academic"><i class="fas fa-bullseye"></i> Academic Purpose</a>
+<a href="#brands"><i class="fas fa-trademark"></i> Brand Notice</a>
+<a href="#affiliation"><i class="fas fa-shield-alt"></i> No Affiliation</a>
+<a href="#fairuse"><i class="fas fa-balance-scale"></i> Fair Use</a>
+<a href="#team"><i class="fas fa-users"></i> Our Team</a>
+</div>
+</section>
+<!-- ══ SUMMARY STRIP (full-width, right below hero) ════ -->
+<div class="disc-summary-strip">
+<div class="disc-summary-strip-inner">
+<div class="disc-summary-icon"><i class="fas fa-info"></i></div>
+<div class="disc-summary-text">
+<div class="disc-summary-label">Summary / Short Note</div>
+<p>
+        This project is for a <strong>uni project</strong> and academic purposes only. All product names, brand names, logos, and third-party materials remain the property of their respective owners and are displayed only as non-commercial learning references.
+      </p>
+</div>
+</div>
+</div>
+<!-- ══ BODY ════════════════════════════════════════════ -->
+<div class="disc-body">
+<!-- ── Back link ── -->
+<a class="disc-back" href="./"><i class="fas fa-arrow-left"></i> Back to Login</a>
+<hr class="disc-divider"/>
+<!-- ── Section 1: Academic Purpose ── -->
+<div class="disc-section" id="academic">
+<div class="disc-section-label"><i class="fas fa-bullseye"></i> Section 1</div>
+<h2>Academic Purpose</h2>
+<p>
+      This website, admin panel, menu mockups, reward screens, and supporting visuals are prepared solely for coursework, demonstration, prototyping, and academic evaluation.
+    </p>
+<ul>
+<li>No live commercial operation is intended.</li>
+<li>No paid endorsement or brand partnership is implied.</li>
+<li>Any resemblance to real delivery platforms is used only to communicate UX/UI concepts.</li>
+</ul>
+<div class="disc-notice">
+<h3><i class="fas fa-exclamation-triangle"></i> Important</h3>
+<p>
+        This platform does <strong>not operate commercially</strong>. No real transactions occur, no payments are processed, and no actual food is delivered. All user accounts, orders, and transactions shown are for demonstration purposes only.
+      </p>
+</div>
+</div>
+<hr class="disc-divider"/>
+<!-- ── Section 2: Third-party Brands ── -->
+<div class="disc-section" id="brands">
+<div class="disc-section-label"><i class="fas fa-trademark"></i> Section 2</div>
+<h2>Third-party Brands and Products</h2>
+<p>
+      Any third-party brand names, restaurant names, logos, menu item names, and product references shown anywhere in the project remain the property of their respective copyright, trademark, and brand owners.
+    </p>
+<ul>
+<li>They are not owned by the student team.</li>
+<li>They are not reproduced as original brand assets for resale.</li>
+<li>They are shown only as academic placeholders, references, or examples.</li>
+</ul>
+<div class="disc-brand-grid">
+<div class="disc-brand-card">
+<img alt="McDonald's" decoding="async" loading="lazy" src="images/mcdo.webp"/>
+<div class="disc-brand-name">McDonald's</div>
+<div class="disc-brand-note">Property of McDonald's Corporation</div>
+</div>
+<div class="disc-brand-card">
+<img alt="KFC" decoding="async" loading="lazy" src="images/kfc.webp"/>
+<div class="disc-brand-name">KFC</div>
+<div class="disc-brand-note">Property of Yum! Brands, Inc.</div>
+</div>
+<div class="disc-brand-card">
+<img alt="Pizza Hut" decoding="async" loading="lazy" src="images/ph.webp"/>
+<div class="disc-brand-name">Pizza Hut</div>
+<div class="disc-brand-note">Property of Yum! Brands, Inc.</div>
+</div>
+<div class="disc-brand-card">
+<img alt="Burger King" decoding="async" loading="lazy" src="images/bk.webp"/>
+<div class="disc-brand-name">Burger King</div>
+<div class="disc-brand-note">Property of Restaurant Brands International</div>
+</div>
+<div class="disc-brand-card">
+<img alt="Subway" decoding="async" loading="lazy" src="images/sw.webp"/>
+<div class="disc-brand-name">Subway</div>
+<div class="disc-brand-note">Property of Subway IP LLC</div>
+</div>
+<div class="disc-brand-card">
+<img alt="Taco Bell" decoding="async" loading="lazy" src="images/tb.webp"/>
+<div class="disc-brand-name">Taco Bell</div>
+<div class="disc-brand-note">Property of Yum! Brands, Inc.</div>
+</div>
+<div class="disc-brand-card">
+<img alt="Domino's" decoding="async" loading="lazy" src="images/dm.webp"/>
+<div class="disc-brand-name">Domino's</div>
+<div class="disc-brand-note">Property of Domino's IP Holder LLC</div>
+</div>
+</div>
+<div class="disc-notice">
+<h3><i class="fas fa-info-circle"></i> No Official Relationship</h3>
+<p>
+        Skibidi GoFood has <strong>no affiliation, sponsorship, or official representation</strong> with any of the companies listed above. Brand names and logos are used solely as sample data for this academic project.
+      </p>
+</div>
+</div>
+<hr class="disc-divider"/>
+<!-- ── Section 3: No Affiliation ── -->
+<div class="disc-section" id="affiliation">
+<div class="disc-section-label"><i class="fas fa-shield-alt"></i> Section 3</div>
+<h2>No Affiliation or Endorsement</h2>
+<p>
+      This project does not represent an official collaboration with any restaurant, delivery platform, product manufacturer, or trademark owner unless explicitly stated in writing by the owners themselves.
+    </p>
+<ul>
+<li>No sponsorship should be inferred.</li>
+<li>No approval or endorsement should be inferred.</li>
+<li>No claim is made that the displayed brands support the project.</li>
+</ul>
+</div>
+<hr class="disc-divider"/>
+<!-- ── Section 4: Fair Use ── -->
+<div class="disc-section" id="fairuse">
+<div class="disc-section-label"><i class="fas fa-balance-scale"></i> Section 4</div>
+<h2>Presentation and Fair Use Intent</h2>
+<p>
+      The project team aims to keep the presentation respectful to existing copyright and trademark rights. Brand and product references are included only to make the student prototype understandable in a classroom context.
+    </p>
+<ul>
+<li>Do not reuse the prototype for commercial launch without replacing third-party brand assets.</li>
+<li>Do not imply the third-party products are original creations of the team.</li>
+<li>Replace reference assets with original branding before any public or commercial deployment.</li>
+</ul>
+</div>
+<hr class="disc-divider"/>
+<!-- ── Section 5: Team ── -->
+<div class="disc-section" id="team">
+<div class="disc-section-label"><i class="fas fa-users"></i> Section 5</div>
+<h2>Our Team</h2>
+<div class="disc-team-box">
+<h3>Group Skibidi 🎓</h3>
+<p class="disc-team-sub">Mini IT Project  ·  Multimedia University Melaka  ·  2026</p>
+<div class="disc-team-tags">
+<span class="disc-team-tag"><i class="fas fa-university"></i> MMU Melaka</span>
+<span class="disc-team-tag"><i class="fas fa-laptop-code"></i> Web Development</span>
+<span class="disc-team-tag"><i class="fas fa-paint-brush"></i> UI/UX Design</span>
+<span class="disc-team-tag"><i class="fas fa-database"></i> Database Management</span>
+<span class="disc-team-tag"><i class="fas fa-calendar-alt"></i> 2026</span>
+</div>
+</div>
+</div>
+<hr class="disc-divider"/>
+<!-- ── Bottom nav ── -->
+<div class="disc-bottom-nav">
+<a class="disc-back" href="./"><i class="fas fa-arrow-left"></i> Back to Login</a>
+<span class="disc-bottom-copy">© 2026 Skibidi GoFood · MMU Melaka Mini IT Project</span>
+</div>
+</div>
+<!-- ══ FOOTER ══════════════════════════════════════════ -->
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/wallet.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Meet the project group behind Skibidi GoFood, including the lecturer, supervisor, group leader, and members." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — Project Group</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<style>
+    .group-page {
+      background: linear-gradient(180deg, #f0f2f5 0%, #edf1f6 100%);
+      padding: 3.2rem clamp(1rem, 2vw, 1.8rem) 5rem;
+    }
+    .team-card {
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 2.8rem;
+      box-shadow: 0 24px 80px rgba(15, 23, 42, .10);
+      padding: 4.8rem clamp(2rem, 3vw, 4rem) 4rem;
+    }
+    .team-header {
+      text-align: center;
+      margin-bottom: 4.4rem;
+    }
+    .team-header-icon {
+      width: 6.4rem;
+      height: 6.4rem;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.6rem;
+      box-shadow: 0 8px 24px rgba(212, 160, 23, .32);
+    }
+    .team-header-icon i { font-size: 2.6rem; color: var(--dark); }
+    .team-header h2 {
+      font-family: var(--font-head);
+      font-size: clamp(3.2rem, 5vw, 4.6rem);
+      color: var(--dark);
+      letter-spacing: -.03em;
+      margin-bottom: 1.4rem;
+      line-height: 1.1;
+    }
+    .team-header p {
+      font-size: 1.52rem;
+      color: #5f6b7a;
+      line-height: 1.85;
+      max-width: 76rem;
+      margin: 0 auto;
+    }
+    .team-divider {
+      border: none;
+      border-top: 1px solid #eef0f4;
+      margin-bottom: 4rem;
+    }
+    .team-section-label {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--yellow);
+      margin-bottom: 2.8rem;
+    }
+    .team-grid { display: grid; gap: 2.4rem; }
+    .team-grid-2 { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
+    .team-grid-4 { grid-template-columns: repeat(4, minmax(220px, 1fr)); }
+    .member-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2.8rem 2rem 2.4rem;
+      border-radius: 2rem;
+      background: #fff;
+      border: 1px solid #eef0f4;
+      box-shadow: 0 6px 28px rgba(15,23,42,.06);
+      transition: transform .22s, box-shadow .22s;
+      height: 100%;
+    }
+    .panel-card {
+      padding-top: 3.1rem;
+      padding-bottom: 2.8rem;
+    }
+    .member-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(15,23,42,.12);
+    }
+    .member-avatar {
+      width: 10.4rem;
+      height: 10.4rem;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      border: 3px solid var(--accent);
+      box-shadow: 0 6px 24px rgba(212, 160, 23, .22);
+      background: var(--yellow-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .panel-card .member-avatar {
+      width: 11.2rem;
+      height: 11.2rem;
+    }
+    .member-avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+    .member-avatar img.avatar-center { object-position: center center; }
+    .member-avatar img.avatar-mid { object-position: center 24%; }
+    .member-avatar .avatar-icon { font-size: 3.6rem; color: var(--yellow); }
+    .member-role {
+      font-size: 1.08rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #8b9aaa;
+      margin-bottom: .6rem;
+    }
+    .member-name {
+      font-family: var(--font-head);
+      font-size: 1.9rem;
+      color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: .9rem;
+    }
+    .member-id-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 1rem;
+      border-radius: 999px;
+      background: var(--yellow-light);
+      color: #7a5c00;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .member-desc {
+      font-size: 1.22rem;
+      color: #5f6b7a;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    .team-separator {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      margin: 4rem 0 3.2rem;
+    }
+    .team-separator::before, .team-separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #eef0f4;
+    }
+    .team-separator span {
+      font-size: 1.08rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #aab0bb;
+      white-space: nowrap;
+    }
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .6rem 1rem;
+      border-radius: 999px;
+      background: rgba(247, 201, 72, .18);
+      color: #7a5c00;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: .9rem;
+    }
+    .role-badge.leader { background: rgba(212,160,23,.22); color: #5c3d00; }
+    @media (max-width: 1200px) {
+      .team-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 768px) {
+      .team-grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .group-page { padding: 1.6rem .9rem 3rem; }
+      .team-card { padding: 2.8rem 1.3rem; }
+      .team-grid-4, .team-grid-2 { grid-template-columns: 1fr; }
+      .team-header { margin-bottom: 3rem; }
+      .team-header h2 { font-size: 3rem; }
+      .team-separator { margin: 3rem 0 2.4rem; }
+      .member-avatar { width: 9.6rem; height: 9.6rem; }
+      .panel-card .member-avatar { width: 10.2rem; height: 10.2rem; }
+    }
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="index, follow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/group" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="Skibidi GoFood" property="og:site_name"/><meta content="Skibidi GoFood — Project Group" property="og:title"/><meta content="Meet the project group behind Skibidi GoFood, including the lecturer, supervisor, group leader, and members." property="og:description"/><meta content="https://skibidigofood.edgeone.cool/group" property="og:url"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Skibidi GoFood — Project Group" name="twitter:title"/><meta content="Meet the project group behind Skibidi GoFood, including the lecturer, supervisor, group leader, and members." name="twitter:description"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" name="twitter:image"/></head>
+<body id="page-top">
+<h1 class="sr-only">Skibidi GoFood Project Team</h1>
+<div class="notif" id="notif"></div>
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<!-- WALLET MODAL -->
+<div class="modal-bg" id="wallet-modal">
+<div aria-labelledby="wallet-modal-title" aria-modal="true" class="modal-box wallet-topup-modal" role="dialog">
+<button aria-label="Close wallet" class="modal-close wallet-topup-close" onclick="closeWallet()"><i class="fas fa-times"></i></button>
+<div class="wallet-topup-shell">
+<div class="wallet-topup-hero wallet-topup-hero--refined">
+<div class="wallet-topup-icon"><i class="fas fa-wallet"></i></div>
+<div class="wallet-topup-hero-copy">
+<p class="wallet-topup-kicker">Student wallet</p>
+<h3 id="wallet-modal-title">Top Up Wallet</h3>
+<p class="wallet-topup-copy">Choose a preset amount or enter your own amount. Your wallet balance updates instantly and can be used during checkout.</p>
+</div>
+</div>
+<div class="wallet-topup-layout wallet-topup-layout--refined">
+<section class="wallet-balance wallet-balance-card wallet-balance-card--refined">
+<div class="wallet-balance-top wallet-balance-top--refined">
+<div>
+<div class="wl">Current Balance</div>
+<div class="wa">RM <span id="wallet-bal-display">0.00</span></div>
+</div>
+<span class="wallet-safe-pill"><i class="fas fa-shield-alt"></i> Saved locally</span>
+</div>
+<div class="wallet-summary-grid">
+<article class="wallet-summary-card">
+<span>Selected top up</span>
+<strong>RM <span id="wallet-selected-amount">0.00</span></strong>
+<small>Choose a preset or type your own amount.</small>
+</article>
+<article class="wallet-summary-card wallet-summary-card--accent">
+<span>Balance after top up</span>
+<strong>RM <span id="wallet-balance-after">0.00</span></strong>
+<small id="wallet-topup-status">No amount selected yet.</small>
+</article>
+</div>
+<div class="wallet-balance-note wallet-balance-note--refined"><i class="fas fa-circle-info"></i> Minimum top up is RM 1.00. Maximum top up is RM 10,000.00 per transaction.</div>
+<ul class="wallet-guideline-list">
+<li><i class="fas fa-check-circle"></i> Use wallet balance directly during checkout.</li>
+<li><i class="fas fa-check-circle"></i> Preset amounts help students top up faster for daily meals.</li>
+<li><i class="fas fa-check-circle"></i> This project stores wallet data locally for demo purposes.</li>
+</ul>
+</section>
+<section class="wallet-topup-panel wallet-topup-panel--refined">
+<div class="wallet-panel-head wallet-panel-head--refined">
+<strong>Choose amount</strong>
+<span>Tap one suggested amount below or enter a custom amount that matches your budget.</span>
+</div>
+<div class="amt-grid wallet-amount-grid">
+<button class="amt-pill" onclick="selectAmt(this,5)" type="button">RM 5</button>
+<button class="amt-pill" onclick="selectAmt(this,10)" type="button">RM 10</button>
+<button class="amt-pill" onclick="selectAmt(this,15)" type="button">RM 15</button>
+<button class="amt-pill" onclick="selectAmt(this,20)" type="button">RM 20</button>
+<button class="amt-pill" onclick="selectAmt(this,30)" type="button">RM 30</button>
+<button class="amt-pill" onclick="selectAmt(this,50)" type="button">RM 50</button>
+</div>
+<label class="wallet-custom-field wallet-custom-field--refined" for="wallet-custom">
+<span>Custom amount</span>
+<input class="form-field" id="wallet-custom" inputmode="decimal" min="1" placeholder="Enter custom amount (RM)" step="0.01" type="number"/>
+<small>Example: RM 12.50 or RM 25.00</small>
+</label>
+<div class="wallet-selection-preview" id="wallet-selection-preview">
+<i class="fas fa-receipt"></i>
+<span id="wallet-selection-preview-text">Select an amount to preview your new wallet balance.</span>
+</div>
+<div class="flex-btn wallet-actions-row wallet-actions-row--refined">
+<button class="delete-btn wallet-reset-btn" onclick="clearWalletTopup()" type="button"><i class="fas fa-rotate-left"></i> Clear</button>
+<button class="btn wallet-topup-primary" disabled="" id="wallet-topup-submit" onclick="doTopUp()" type="button"><i class="fas fa-plus"></i> Top Up</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home">
+<span class="logo-wordmark">Skibidi <em>GoFood</em></span>
+</a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a class="active" href="group">Group</a>
+</nav>
+<div class="icons">
+<div class="nav-pill" onclick="openWallet()">
+<i class="fas fa-wallet"></i> RM <span id="navWallet">0.00</span>
+</div>
+<div class="nav-pill nav-pill-dark">
+<i class="fas fa-star"></i> <span id="navPts">0</span> pts
+      </div>
+<a aria-label="Cart" class="nav-cart-icon" href="cart">
+<i class="fas fa-shopping-cart"></i><span id="navCart"></span>
+</a>
+<div class="fas fa-user" id="user-btn" onclick="toggleProfile()"></div>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+<div class="profile" id="profileDrop">
+<div class="profile-card-head">
+<div class="profile-avatar" id="profileAvatar">G</div>
+<div class="profile-meta">
+<span class="profile-kicker">Student Account</span>
+<p class="name" id="profileName">Guest</p>
+<p class="profile-handle" id="profileHandle">@guest</p>
+</div>
+</div>
+<div class="profile-stats">
+<div class="profile-stat">
+<span>Wallet</span>
+<strong>RM <span id="profileWallet">0.00</span></strong>
+</div>
+<div class="profile-stat">
+<span>Points</span>
+<strong><span id="profilePoints">0</span> pts</strong>
+</div>
+</div>
+<div class="profile-actions">
+<a class="profile-link primary" href="profile"><i class="fas fa-user-circle"></i> Profile</a>
+<a class="profile-link soft" href="rewards"><i class="fas fa-gift"></i> Rewards</a>
+</div>
+<button class="profile-logout" onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</section>
+</header>
+<div class="group-page">
+<div class="team-card">
+<div class="team-header">
+<div class="team-header-icon">
+<i class="fas fa-users"></i>
+</div>
+<h2>Our Team</h2>
+<p>This page introduces the lecturer, supervisor, and student team members responsible for the Skibidi GoFood Mini IT Project presentation and development work. The project focuses on a student-friendly food ordering concept with wallet, rewards, menu discovery, and campus-friendly UI improvements.</p>
+</div>
+<hr class="team-divider"/>
+<div class="team-section-label">Project panel</div>
+<div class="team-grid team-grid-2">
+<div class="member-card panel-card">
+<div class="member-avatar">
+<img alt="Mr. Khairol Nizat Bin Lajis" decoding="async" loading="lazy" src="images/team-khairol-nizat.webp"/>
+</div>
+<span class="role-badge"><i class="fas fa-book-open"></i> Lecturer</span>
+<div class="member-name">Mr. Khairol Nizat Bin Lajis</div>
+<p class="member-desc">Project lecturer and academic guide for the Skibidi GoFood group at MMU Melaka.</p>
+</div>
+<div class="member-card panel-card">
+<div class="member-avatar">
+<img alt="Madam Mawar Binti Madiah" decoding="async" loading="lazy" src="images/team-mawar.webp"/>
+</div>
+<span class="role-badge"><i class="fas fa-user-shield"></i> Supervisor</span>
+<div class="member-name">Madam Mawar Binti Madiah</div>
+<p class="member-desc">Project supervisor providing review support, guidance, and oversight for the Skibidi GoFood group.</p>
+</div>
+</div>
+<div class="team-separator"><span>Group members</span></div>
+<div class="team-grid team-grid-4">
+<div class="member-card">
+<div class="member-avatar">
+<img alt="Hadif Bin Fauzi" class="avatar-center" decoding="async" loading="lazy" src="images/team-hadif.webp"/>
+</div>
+<span class="role-badge leader"><i class="fas fa-crown"></i> Group Leader</span>
+<div class="member-name">Hadif Bin Fauzi</div>
+<span class="member-id-chip"><i class="fas fa-id-card"></i> 252FT254BZ</span>
+<p class="member-desc">Leads coordination, presentation flow, and overall project direction for the group.</p>
+</div>
+<div class="member-card">
+<div class="member-avatar">
+<img alt="Bryan Cheng Zi Neng" class="avatar-mid" decoding="async" loading="lazy" src="images/team-bryan-cheng.webp"/>
+</div>
+<div class="member-role">Member 1</div>
+<div class="member-name">Bryan Cheng Zi Neng</div>
+<span class="member-id-chip"><i class="fas fa-hashtag"></i> 252FT253LA</span>
+<p class="member-desc">Project team member contributing to the Skibidi GoFood group work.</p>
+</div>
+<div class="member-card">
+<div class="member-avatar">
+<img alt="Bryan Ong Shen Yang" decoding="async" loading="lazy" src="images/team-bryan-ong.webp"/>
+</div>
+<div class="member-role">Member 2</div>
+<div class="member-name">Bryan Ong Shen Yang</div>
+<span class="member-id-chip"><i class="fas fa-hashtag"></i> 252FT253F7</span>
+<p class="member-desc">Project team member supporting the group presentation and website work.</p>
+</div>
+<div class="member-card">
+<div class="member-avatar">
+<img alt="Muhammad Umar Qayyum Bin Abdul" class="avatar-mid" decoding="async" loading="lazy" src="images/team-umar.webp"/>
+</div>
+<div class="member-role">Member 3</div>
+<div class="member-name">Muhammad Umar Qayyum Bin Abdul</div>
+<span class="member-id-chip"><i class="fas fa-hashtag"></i> 252FT253D2</span>
+<p class="member-desc">Project team member contributing to the development and group deliverables.</p>
+</div>
+</div>
+</div>
+</div>
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/wallet.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/pages/group-inline.js"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

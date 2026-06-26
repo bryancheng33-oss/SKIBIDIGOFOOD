@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Review items in your cart, adjust quantities, apply rewards, and prepare your order before checkout." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — Student Cart</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<style>
+    body.order-flow-page {
+      background: linear-gradient(180deg, #fffdf7 0%, #f8fafc 100%);
+    }
+    .cart-flow-page .cart-shell {
+      max-width: 1240px;
+      margin: 0 auto 4rem;
+      padding: 1.35rem 1.5rem 0;
+    }
+    .cart-flow-page .cart-surface {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(21rem, .82fr);
+      gap: 1rem;
+      align-items: start;
+    }
+    .cart-flow-page .cart-main,
+    .cart-flow-page .cart-summary-card {
+      border: 1.5px solid var(--border);
+      border-radius: 2rem;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%);
+      box-shadow: 0 1.1rem 2.8rem rgba(15,23,42,.05);
+    }
+    .cart-flow-page .cart-main {
+      padding: 1.35rem;
+    }
+    .cart-flow-page .cart-sidebar {
+      position: sticky;
+      top: 10rem;
+    }
+    .cart-flow-page .cart-summary-card {
+      padding: 1.25rem;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0;
+      height: calc(100vh - 10.8rem) !important;
+      max-height: calc(100vh - 10.8rem) !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+    }
+    .cart-flow-page .cart-board-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eceff3;
+      margin-bottom: 1rem;
+    }
+    .cart-flow-page .cart-board-kicker {
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--light);
+      margin-bottom: .4rem;
+    }
+    .cart-flow-page .cart-page-title {
+      margin: 0;
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      text-transform: none;
+      line-height: 1.08;
+    }
+    .cart-flow-page .cart-page-sub {
+      max-width: 32rem;
+      margin: 0;
+      color: var(--light);
+      line-height: 1.7;
+    }
+    .cart-flow-page .cart-grid-head {
+      border: 1px solid #eceff3;
+      border-radius: 999px;
+      background: #fff;
+      padding: .85rem 1.1rem;
+      margin-bottom: .95rem;
+      color: var(--light);
+      font-weight: 700;
+    }
+    .cart-flow-page #cart-list {
+      display: grid;
+      gap: .95rem;
+    }
+    .cart-flow-page .cart-row {
+      border: 1px solid #eceff3;
+      border-radius: 1.6rem;
+      background: #fff;
+      padding: 1rem 1.05rem;
+      box-shadow: 0 .5rem 1.6rem rgba(15,23,42,.03);
+    }
+    .cart-flow-page .voucher-bar,
+    .cart-flow-page .cart-voucher-panel {
+      border-radius: 1.4rem;
+      background: #fff;
+      border: 1px solid #eceff3;
+      padding: 1rem;
+    }
+    .cart-flow-page .voucher-bar {
+      margin-bottom: 1rem;
+    }
+    .cart-flow-page .cart-actions-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      padding-top: 1rem;
+      margin-top: .25rem;
+      border-top: 1px solid #eceff3;
+    }
+    .cart-flow-page .cart-actions-panel > * {
+      margin: 0;
+    }
+    .cart-flow-page .cart-summary-head {
+      padding-bottom: .95rem;
+      border-bottom: 1px solid #eceff3;
+      margin-bottom: 1rem;
+    }
+    .cart-flow-page .cart-summary-lines,
+    .cart-flow-page .cart-summary-footer {
+      display: grid;
+      gap: .85rem;
+    }
+    .cart-flow-page .cart-summary-lines {
+      flex-shrink: 0;
+    }
+    .cart-flow-page .cart-summary-footer {
+      margin-top: auto !important;
+      padding-top: 1rem;
+      border-top: 1px solid #eceff3;
+      position: sticky !important;
+      bottom: 0;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(255,255,255,.92) 0%, #fff 28%) !important;
+    }
+    .cart-flow-page .cart-checkout-btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .cart-flow-page .cart-voucher-panel {
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      gap: .9rem;
+    }
+    .cart-flow-page .voucher-manager-anchor {
+      scroll-margin-top: 10rem;
+    }
+    .cart-flow-page .voucher-manager-highlight {
+      box-shadow: 0 0 0 3px rgba(247,201,72,.26), 0 1.1rem 2.8rem rgba(15,23,42,.07);
+      transition: box-shadow .22s ease;
+    }
+    .cart-flow-page .voucher-quick-actions {
+      display: grid;
+      gap: .75rem;
+      padding: .95rem;
+      border: 1px solid rgba(247,201,72,.28);
+      border-radius: 1.15rem;
+      background: linear-gradient(180deg, #fffdf7 0%, #fff8e2 100%);
+    }
+    .cart-flow-page .voucher-quick-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .7rem;
+      flex-wrap: wrap;
+    }
+    .cart-flow-page .voucher-quick-head strong {
+      font-size: 1rem;
+      color: var(--dark);
+    }
+    .cart-flow-page .voucher-quick-head span {
+      font-size: .92rem;
+      color: var(--light);
+    }
+    .cart-flow-page .voucher-quick-list {
+      display: grid;
+      gap: .7rem;
+    }
+    .cart-flow-page .voucher-quick-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: .75rem;
+      align-items: center;
+      padding: .8rem .85rem;
+      border-radius: 1rem;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(15,23,42,.08);
+    }
+    .cart-flow-page .voucher-quick-item.is-applied {
+      border-color: rgba(21,128,61,.22);
+      background: #f0fdf4;
+    }
+    .cart-flow-page .voucher-quick-copy {
+      min-width: 0;
+      display: grid;
+      gap: .18rem;
+    }
+    .cart-flow-page .voucher-quick-copy strong,
+    .cart-flow-page .voucher-quick-copy span {
+      overflow-wrap: anywhere;
+    }
+    .cart-flow-page .voucher-quick-copy span {
+      font-size: .9rem;
+      color: var(--light);
+      line-height: 1.45;
+    }
+    .cart-flow-page .voucher-quick-empty {
+      padding: .85rem .9rem;
+      border-radius: 1rem;
+      background: rgba(255,255,255,.7);
+      border: 1px dashed rgba(15,23,42,.12);
+      color: var(--light);
+      font-size: .95rem;
+      line-height: 1.55;
+    }
+    .cart-flow-page .voucher-select-grid {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      padding-right: .3rem;
+      padding-bottom: 7.5rem !important;
+      scrollbar-width: thin;
+      overscroll-behavior: contain;
+    }
+    .cart-flow-page .voucher-bar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin-top: .9rem;
+    }
+    .cart-flow-page .voucher-manage-btn {
+      min-height: 2.7rem;
+    }
+    .cart-flow-page .cart-empty-state {
+      border: 1.5px dashed var(--border);
+      border-radius: 1.6rem;
+      background: #fff;
+      padding: 1.8rem;
+    }
+
+    .cart-flow-page .cart-checkout-note {
+      padding: .95rem 1rem;
+      border-radius: 1.1rem;
+      background: linear-gradient(135deg, rgba(247,201,72,.16) 0%, rgba(244,180,0,.10) 100%);
+      border: 1px solid rgba(247,201,72,.28);
+    }
+    .cart-flow-page .cart-checkout-btn {
+      width: 100%;
+      justify-content: center;
+      gap: .7rem;
+      min-height: 5rem;
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: .01em;
+      background: linear-gradient(135deg, #f7c948 0%, #f4b400 100%);
+      color: var(--dark);
+      border: none;
+      box-shadow: 0 1.1rem 2.5rem rgba(247,201,72,.34);
+    }
+    .cart-flow-page .cart-checkout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 1.35rem 2.8rem rgba(247,201,72,.42);
+    }
+    .cart-flow-page .cart-floating-checkout {
+      position: fixed;
+      left: 50%;
+      bottom: calc(1rem + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(94vw, 34rem);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: .85rem;
+      padding: .9rem 1rem;
+      border-radius: 1.4rem;
+      background: rgba(20,24,32,.96);
+      color: #fff;
+      box-shadow: 0 1.2rem 3rem rgba(15,23,42,.28);
+      z-index: 45;
+    }
+    .cart-flow-page .cart-floating-copy {
+      display: grid;
+      gap: .18rem;
+    }
+    .cart-flow-page .cart-floating-copy span {
+      font-size: .9rem;
+      color: rgba(255,255,255,.72);
+    }
+    .cart-flow-page .cart-floating-copy strong {
+      font-size: 1.15rem;
+      color: #fff;
+    }
+    .cart-flow-page .cart-floating-checkout-btn {
+      white-space: nowrap;
+      min-height: 3.4rem;
+      padding-inline: 1.2rem;
+      box-shadow: none;
+    }
+    @media (max-width: 768px) {
+      body.cart-flow-page {
+        padding-bottom: 8.5rem;
+      }
+      .cart-flow-page .cart-floating-checkout {
+        display: flex;
+      }
+    }
+    @media (min-width: 769px) {
+      .cart-flow-page .cart-floating-checkout {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .cart-flow-page .cart-surface {
+        grid-template-columns: 1fr;
+      }
+      .cart-flow-page .cart-sidebar {
+        position: static !important;
+      }
+      .cart-flow-page .cart-summary-card {
+        height: auto !important;
+        max-height: none !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+      }
+      .cart-flow-page .cart-voucher-panel {
+        overflow: visible !important;
+      }
+      .cart-flow-page .voucher-select-grid {
+        max-height: 32rem !important;
+        padding-bottom: 1rem !important;
+      }
+      .cart-flow-page .cart-summary-footer {
+        position: static !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .cart-flow-page .cart-shell {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+      }
+      .cart-flow-page .cart-main,
+      .cart-flow-page .cart-summary-card,
+      .cart-flow-page .cart-row,
+      .cart-flow-page .voucher-bar,
+      .cart-flow-page .cart-voucher-panel {
+        padding: 1rem;
+      }
+      .cart-flow-page .voucher-quick-item {
+        grid-template-columns: 1fr;
+      }
+      .cart-flow-page .voucher-bar-actions .btn,
+      .cart-flow-page .voucher-bar-actions .delete-btn,
+      .cart-flow-page .voucher-quick-item .btn,
+      .cart-flow-page .voucher-quick-item .delete-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .cart-flow-page .cart-grid-head {
+        display: none;
+      }
+    }
+
+    body.has-top-layer {
+      overflow: hidden;
+    }
+    .notif {
+      z-index: 2147483646 !important;
+    }
+    #wallet-modal.modal-bg {
+      z-index: 2147483600;
+      padding: calc(5rem + env(safe-area-inset-top)) 1rem 1rem;
+      align-items: flex-start;
+      overflow: auto;
+    }
+    #voucher-manager-modal.modal-bg {
+      z-index: 2147483500;
+      padding: calc(5rem + env(safe-area-inset-top)) 1rem 1rem;
+      align-items: flex-start;
+      overflow: auto;
+    }
+    #wallet-modal .modal-box {
+      width: min(28rem, 100%);
+    }
+    .voucher-inline-launcher {
+      display: grid;
+      gap: .95rem;
+      padding: 1rem;
+      border-radius: 1.2rem;
+      border: 1px solid rgba(247,201,72,.3);
+      background: linear-gradient(180deg, #fffdf7 0%, #fff8e2 100%);
+    }
+    .voucher-inline-copy {
+      display: grid;
+      gap: .22rem;
+    }
+    .voucher-inline-copy strong {
+      font-size: 1rem;
+      color: var(--dark);
+    }
+    .voucher-inline-copy span {
+      font-size: .94rem;
+      color: var(--light);
+      line-height: 1.55;
+    }
+    .voucher-inline-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+    .voucher-inline-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .42rem;
+      padding: .5rem .78rem;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,.08);
+      background: rgba(255,255,255,.88);
+      color: var(--dark);
+      font-size: .93rem;
+      font-weight: 700;
+    }
+    .voucher-inline-chip.more {
+      color: var(--light);
+      font-weight: 600;
+    }
+    .voucher-inline-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+    }
+    .cart-page-top-layer .cart-layer-box {
+      width: min(64rem, 100%);
+      max-height: min(calc(100vh - 6.25rem), 58rem);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 1.75rem;
+      border: 1px solid #eceff3;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%);
+      box-shadow: 0 1.8rem 4rem rgba(15,23,42,.28);
+    }
+    .cart-layer-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.2rem 1.25rem 1rem;
+      border-bottom: 1px solid #eceff3;
+      background: linear-gradient(180deg, rgba(255,255,255,.98) 0%, #fffdf7 100%);
+    }
+    .cart-layer-kicker {
+      margin: 0 0 .35rem;
+      font-size: .88rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+    .cart-layer-head h3 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+      color: var(--dark);
+    }
+    .cart-layer-copy {
+      margin: .45rem 0 0;
+      max-width: 42rem;
+      color: var(--light);
+      line-height: 1.65;
+      font-size: .97rem;
+    }
+    .cart-layer-head .voucher-summary-pills {
+      margin-top: .85rem;
+    }
+    .cart-layer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: .65rem;
+    }
+    .cart-layer-close {
+      min-height: 2.8rem;
+      white-space: nowrap;
+    }
+    .cart-layer-body {
+      min-height: 0;
+      overflow: auto;
+      padding: 1.15rem 1.25rem 1.25rem;
+      scrollbar-width: thin;
+      overscroll-behavior: contain;
+    }
+    .cart-page-top-layer #voucher-add-box-modal {
+      display: grid;
+      gap: 1rem;
+    }
+    .cart-page-top-layer .voucher-quick-actions {
+      margin-bottom: 0;
+    }
+    .cart-page-top-layer .voucher-select-grid {
+      overflow: visible !important;
+      max-height: none !important;
+      padding-right: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    @media (max-width: 768px) {
+      #wallet-modal.modal-bg,
+      #voucher-manager-modal.modal-bg {
+        padding-top: calc(4.5rem + env(safe-area-inset-top));
+      }
+      .voucher-inline-actions {
+        display: grid;
+      }
+      .voucher-inline-actions .btn,
+      .voucher-inline-actions .delete-btn,
+      .cart-layer-actions .btn,
+      .cart-layer-actions .delete-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .cart-page-top-layer .cart-layer-box {
+        max-height: calc(100vh - 5rem);
+        border-radius: 1.25rem;
+      }
+      .cart-layer-head,
+      .cart-layer-body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .cart-layer-head {
+        flex-direction: column;
+      }
+      .cart-layer-actions {
+        width: 100%;
+        justify-content: stretch;
+      }
+    }
+
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/cart" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/></head>
+<body class="order-flow-page cart-flow-page" id="page-top">
+<div class="notif" id="notif"></div>
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<!-- WALLET MODAL -->
+<div class="modal-bg" id="wallet-modal">
+<div aria-labelledby="wallet-modal-title" aria-modal="true" class="modal-box wallet-topup-modal" role="dialog">
+<button aria-label="Close wallet" class="modal-close wallet-topup-close" onclick="closeWallet()"><i class="fas fa-times"></i></button>
+<div class="wallet-topup-shell">
+<div class="wallet-topup-hero wallet-topup-hero--refined">
+<div class="wallet-topup-icon"><i class="fas fa-wallet"></i></div>
+<div class="wallet-topup-hero-copy">
+<p class="wallet-topup-kicker">Student wallet</p>
+<h3 id="wallet-modal-title">Top Up Wallet</h3>
+<p class="wallet-topup-copy">Choose a preset amount or enter your own amount. Your wallet balance updates instantly and can be used during checkout.</p>
+</div>
+</div>
+<div class="wallet-topup-layout wallet-topup-layout--refined">
+<section class="wallet-balance wallet-balance-card wallet-balance-card--refined">
+<div class="wallet-balance-top wallet-balance-top--refined">
+<div>
+<div class="wl">Current Balance</div>
+<div class="wa">RM <span id="wallet-bal-display">0.00</span></div>
+</div>
+<span class="wallet-safe-pill"><i class="fas fa-shield-alt"></i> Saved locally</span>
+</div>
+<div class="wallet-summary-grid">
+<article class="wallet-summary-card">
+<span>Selected top up</span>
+<strong>RM <span id="wallet-selected-amount">0.00</span></strong>
+<small>Choose a preset or type your own amount.</small>
+</article>
+<article class="wallet-summary-card wallet-summary-card--accent">
+<span>Balance after top up</span>
+<strong>RM <span id="wallet-balance-after">0.00</span></strong>
+<small id="wallet-topup-status">No amount selected yet.</small>
+</article>
+</div>
+<div class="wallet-balance-note wallet-balance-note--refined"><i class="fas fa-circle-info"></i> Minimum top up is RM 1.00. Maximum top up is RM 10,000.00 per transaction.</div>
+<ul class="wallet-guideline-list">
+<li><i class="fas fa-check-circle"></i> Use wallet balance directly during checkout.</li>
+<li><i class="fas fa-check-circle"></i> Preset amounts help students top up faster for daily meals.</li>
+<li><i class="fas fa-check-circle"></i> This project stores wallet data locally for demo purposes.</li>
+</ul>
+</section>
+<section class="wallet-topup-panel wallet-topup-panel--refined">
+<div class="wallet-panel-head wallet-panel-head--refined">
+<strong>Choose amount</strong>
+<span>Tap one suggested amount below or enter a custom amount that matches your budget.</span>
+</div>
+<div class="amt-grid wallet-amount-grid">
+<button class="amt-pill" onclick="selectAmt(this,5)" type="button">RM 5</button>
+<button class="amt-pill" onclick="selectAmt(this,10)" type="button">RM 10</button>
+<button class="amt-pill" onclick="selectAmt(this,15)" type="button">RM 15</button>
+<button class="amt-pill" onclick="selectAmt(this,20)" type="button">RM 20</button>
+<button class="amt-pill" onclick="selectAmt(this,30)" type="button">RM 30</button>
+<button class="amt-pill" onclick="selectAmt(this,50)" type="button">RM 50</button>
+</div>
+<label class="wallet-custom-field wallet-custom-field--refined" for="wallet-custom">
+<span>Custom amount</span>
+<input class="form-field" id="wallet-custom" inputmode="decimal" min="1" placeholder="Enter custom amount (RM)" step="0.01" type="number"/>
+<small>Example: RM 12.50 or RM 25.00</small>
+</label>
+<div class="wallet-selection-preview" id="wallet-selection-preview">
+<i class="fas fa-receipt"></i>
+<span id="wallet-selection-preview-text">Select an amount to preview your new wallet balance.</span>
+</div>
+<div class="flex-btn wallet-actions-row wallet-actions-row--refined">
+<button class="delete-btn wallet-reset-btn" onclick="clearWalletTopup()" type="button"><i class="fas fa-rotate-left"></i> Clear</button>
+<button class="btn wallet-topup-primary" disabled="" id="wallet-topup-submit" onclick="doTopUp()" type="button"><i class="fas fa-plus"></i> Top Up</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="modal-bg cart-page-top-layer" id="voucher-manager-modal">
+<div aria-labelledby="voucher-manager-title" aria-modal="true" class="cart-layer-box" role="dialog">
+<div id="voucher-add-box-modal"></div>
+</div>
+</div>
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home">
+<span class="logo-wordmark">Skibidi <em>GoFood</em></span>
+</a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</nav>
+<div class="icons">
+<div class="nav-pill" onclick="openWallet()">
+<i class="fas fa-wallet"></i> RM <span id="navWallet">0.00</span>
+</div>
+<div class="nav-pill nav-pill-dark">
+<i class="fas fa-star"></i> <span id="navPts">0</span> pts
+      </div>
+<a aria-label="Cart" class="nav-cart-icon" href="cart">
+<i class="fas fa-shopping-cart"></i><span id="navCart"></span>
+</a>
+<div class="fas fa-user" id="user-btn" onclick="toggleProfile()"></div>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+<div class="profile" id="profileDrop">
+<div class="profile-card-head">
+<div class="profile-avatar" id="profileAvatar">G</div>
+<div class="profile-meta">
+<span class="profile-kicker">Student Account</span>
+<p class="name" id="profileName">Guest</p>
+<p class="profile-handle" id="profileHandle">@guest</p>
+</div>
+</div>
+<div class="profile-stats">
+<div class="profile-stat">
+<span>Wallet</span>
+<strong>RM <span id="profileWallet">0.00</span></strong>
+</div>
+<div class="profile-stat">
+<span>Points</span>
+<strong><span id="profilePoints">0</span> pts</strong>
+</div>
+</div>
+<div class="profile-actions">
+<a class="profile-link primary" href="profile"><i class="fas fa-user-circle"></i> Profile</a>
+<a class="profile-link soft" href="rewards"><i class="fas fa-gift"></i> Rewards</a>
+</div>
+<button class="profile-logout" onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</section>
+</header>
+<section class="cart-shell jump-target" id="cart-panel">
+<div class="cart-surface">
+<div class="cart-main">
+<div class="cart-board-head">
+<div>
+<p class="cart-board-kicker">Review before checkout</p>
+<h1 class="title cart-page-title">Items in your basket</h1>
+</div>
+<p class="section-lead cart-page-sub">Adjust quantities, review customizations, and keep your order within budget before checkout.</p>
+</div>
+<div class="voucher-bar" id="voucher-bar" style="display:none"></div>
+<div aria-hidden="true" class="cart-grid-head">
+<span>Item</span>
+<span>Price</span>
+<span>Quantity</span>
+<span>Total</span>
+</div>
+<div id="cart-list"></div>
+<div class="cart-actions-panel" id="cart-actions" style="display:none">
+<button class="delete-btn" onclick="clearCart()"><i class="fas fa-trash"></i> Clear Cart</button>
+<a class="btn" href="menu"><i class="fas fa-plus"></i> Add More Items</a>
+</div>
+</div>
+<aside class="cart-sidebar">
+<div class="cart-summary-card" id="cart-total-bar" style="display:none">
+<div class="cart-summary-head">
+<p>Order Summary</p>
+<h2 id="summary-item-count">0 items</h2>
+</div>
+<div class="cart-summary-lines">
+<div class="summary-line">
+<span>Subtotal</span>
+<strong id="subtotal-amt">RM 0.00</strong>
+</div>
+<div class="summary-line summary-line-discount" id="discount-row" style="display:none">
+<span>Voucher Savings</span>
+<strong id="discount-amt">− RM 0.00</strong>
+</div>
+<div class="discount-breakdown" id="discount-breakdown" style="display:none"></div>
+</div>
+<div class="cart-voucher-panel voucher-manager-anchor" id="voucher-add-box"></div>
+<div class="cart-summary-footer">
+<div class="summary-line total-line">
+<span>Total</span>
+<strong id="final-amt">RM 0.00</strong>
+</div>
+<div class="cart-checkout-note"><i class="fas fa-lock"></i> Secure checkout with your saved rewards and wallet balance.</div>
+<a class="btn cart-checkout-btn" href="checkout"><i class="fas fa-credit-card"></i> Checkout</a>
+</div>
+</div>
+</aside>
+</div>
+</section>
+<div class="cart-floating-checkout" id="cart-floating-checkout" style="display:none">
+<div class="cart-floating-copy">
+<span id="floating-summary-count">0 items</span>
+<strong id="floating-summary-total">RM 0.00</strong>
+</div>
+<a class="btn cart-checkout-btn cart-floating-checkout-btn" href="checkout"><i class="fas fa-credit-card"></i> Proceed to Checkout</a>
+</div>
+<!-- FOOTER -->
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/cart.js?v=20260526v21"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/wallet.js"></script>
+<script src="js/student-ai-chat.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

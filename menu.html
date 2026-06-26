@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Browse the menu in a cleaner, easier-to-scan ordering hub for MMU Melaka students." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — Menu</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<link href="css/menu-orders-combined.css" rel="stylesheet"/>
+<style>
+    .menu-page-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .menu-order-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin: 2rem auto 1.4rem;
+      padding: 1.2rem 1.5rem;
+      border: 1.5px solid var(--border);
+      border-radius: 1.6rem;
+      background: linear-gradient(135deg, #fffdf4 0%, #fff7dc 100%);
+      box-shadow: 0 .8rem 2rem rgba(26,20,0,.05);
+    }
+    .menu-order-copy {
+      display: flex;
+      align-items: center;
+      gap: .95rem;
+      flex-wrap: wrap;
+    }
+    .menu-order-copy strong {
+      font-size: 1.45rem;
+      color: var(--dark);
+      font-family: var(--font-head);
+    }
+    .menu-order-copy span {
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+    .menu-breadcrumb {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: .85rem;
+    }
+    .menu-breadcrumb a {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+    .menu-hero-card {
+      border: 1.5px solid var(--border);
+      border-radius: 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #fffaf0 100%);
+      padding: 1.55rem 1.7rem;
+      box-shadow: 0 1.2rem 3rem rgba(15,23,42,.05);
+      margin-bottom: 1.2rem;
+    }
+    .menu-hero-head {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      align-items: start;
+      margin-bottom: 0;
+    }
+    .menu-hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .45rem .9rem;
+      border-radius: 999px;
+      background: var(--yellow-light);
+      color: var(--yellow);
+      font-size: .88rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: .85rem;
+    }
+    .menu-hero-title {
+      font-size: clamp(2.35rem, 4vw, 3.5rem);
+      line-height: 1.02;
+      color: var(--dark);
+      margin-bottom: .75rem;
+      text-transform: uppercase;
+    }
+    .menu-hero-subtitle {
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 58rem;
+    }
+    .menu-hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .9rem;
+    }
+    .menu-stat-card {
+      border: 1.5px solid var(--border);
+      border-radius: 1.4rem;
+      padding: 1rem 1.1rem;
+      background: #fff;
+    }
+    .menu-stat-card strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--dark);
+      font-family: var(--font-head);
+      margin-bottom: .18rem;
+    }
+    .menu-stat-card span {
+      display: block;
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .menu-brand-row {
+      display: flex;
+      gap: .75rem;
+      overflow-x: auto;
+      padding-bottom: .45rem;
+      scrollbar-width: thin;
+    }
+    .menu-brand-chip {
+      min-width: 15rem;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: .9rem 1rem;
+      border-radius: 1.3rem;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      text-align: left;
+    }
+    .menu-brand-chip:hover,
+    .menu-brand-chip.active {
+      border-color: var(--yellow);
+      box-shadow: 0 .8rem 1.8rem rgba(212,160,23,.12);
+      transform: translateY(-1px);
+      background: var(--yellow-pale);
+    }
+    .menu-brand-chip img {
+      width: 2.7rem;
+      height: 2.7rem;
+      object-fit: contain;
+      flex: 0 0 auto;
+      border-radius: .8rem;
+    }
+    .menu-brand-copy strong {
+      display: block;
+      font-size: .98rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.25;
+    }
+    .menu-brand-copy span {
+      display: block;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-top: .15rem;
+    }
+    .menu-rail-wrap {
+      position: sticky;
+      top: 68px;
+      z-index: 80;
+      padding: .9rem 0 0;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.88) 100%);
+      backdrop-filter: blur(10px);
+    }
+    .menu-category-rail,
+    .menu-tools-row {
+      border: 1.5px solid var(--border);
+      border-radius: 1.5rem;
+      background: #fff;
+      box-shadow: 0 .8rem 2rem rgba(15,23,42,.04);
+    }
+    .menu-category-rail {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      overflow-x: auto;
+      padding: .8rem;
+      scrollbar-width: thin;
+      margin-bottom: .9rem;
+    }
+    .menu-category-pill {
+      border: 1.5px solid transparent;
+      background: #fff;
+      color: var(--dark);
+      border-radius: 999px;
+      min-height: 2.95rem;
+      padding: .7rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      cursor: pointer;
+      white-space: nowrap;
+      font-size: .95rem;
+      font-weight: 700;
+      transition: .18s ease;
+    }
+    .menu-category-pill:hover,
+    .menu-category-pill.active {
+      border-color: var(--yellow);
+      background: var(--yellow-light);
+      color: var(--yellow);
+    }
+    .menu-category-pill img {
+      width: 1.2rem;
+      height: 1.2rem;
+      object-fit: contain;
+    }
+    .menu-tools-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(15rem, .8fr) auto;
+      gap: .9rem;
+      align-items: center;
+      padding: .9rem;
+    }
+    .menu-search-shell {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      min-height: 3.15rem;
+      padding: 0 .95rem;
+      border-radius: 1rem;
+      border: 1.5px solid var(--border);
+      background: #fff;
+    }
+    .menu-search-shell i {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+    .menu-search-shell input {
+      flex: 1 1 auto;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: .98rem;
+      color: var(--dark);
+      min-width: 0;
+    }
+    .menu-search-shell input::placeholder {
+      color: #8b8f97;
+    }
+    .menu-tools-row .form-field {
+      margin: 0;
+      min-height: 3.15rem;
+      font-size: .95rem;
+      background: #fff;
+    }
+    .menu-reset-btn {
+      min-height: 3.15rem;
+      padding: 0 1.05rem;
+      border: none;
+      border-radius: 1rem;
+      background: var(--dark);
+      color: var(--yellow);
+      font-weight: 700;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+    .menu-reset-btn:hover {
+      background: var(--yellow);
+      color: var(--dark);
+    }
+    .menu-results-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0 1.2rem;
+    }
+    .menu-results-text,
+    .menu-context-text {
+      font-size: .98rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .menu-results-text strong,
+    .menu-context-text strong {
+      color: var(--dark);
+    }
+    .menu-context-text {
+      padding: .85rem 1rem;
+      border-radius: 1.25rem;
+      background: #fff7d7;
+      border: 1px solid rgba(17,17,17,.08);
+      box-shadow: 0 .65rem 1.4rem rgba(15,23,42,.04);
+    }
+    .menu-section-stack {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 2.2rem;
+    }
+    .menu-catalog-section {
+      border: 1.5px solid var(--border);
+      border-radius: 1.8rem;
+      background: linear-gradient(180deg, #fff 0%, #fffdf7 100%);
+      padding: 1.25rem;
+      scroll-margin-top: 15rem;
+      box-shadow: 0 1rem 2.4rem rgba(15,23,42,.04);
+    }
+    .menu-catalog-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      padding-bottom: .9rem;
+      border-bottom: 1px solid rgba(212,160,23,.22);
+    }
+    .menu-catalog-head h2 {
+      font-size: 1.65rem;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      margin: 0;
+    }
+    .menu-catalog-head p {
+      font-size: .92rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .menu-catalog-count {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .48rem .85rem;
+      border-radius: 999px;
+      background: var(--yellow-light);
+      color: var(--yellow);
+      font-size: .84rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .menu-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .menu-item-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: .82rem;
+      min-width: 0;
+      padding: .85rem;
+      border: 1.5px solid rgba(212,160,23,.2);
+      border-radius: 1.45rem;
+      background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .menu-item-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--yellow);
+      box-shadow: 0 .9rem 2rem rgba(212,160,23,.12);
+    }
+    .menu-item-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.2rem;
+      background: linear-gradient(135deg, #fff8e2 0%, #fff2bf 100%);
+      aspect-ratio: 1.18 / 1;
+    }
+    .menu-item-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: .75rem;
+    }
+    .menu-item-badge {
+      position: absolute;
+      top: .75rem;
+      left: .75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .32rem;
+      padding: .34rem .62rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.96);
+      color: var(--red);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      box-shadow: 0 .4rem 1rem rgba(15,23,42,.08);
+    }
+    .menu-item-copy {
+      min-width: 0;
+    }
+    .menu-item-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      margin-bottom: .42rem;
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--yellow);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .menu-item-brand img {
+      width: 1rem;
+      height: 1rem;
+      object-fit: contain;
+      border-radius: .25rem;
+    }
+    .menu-item-name {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.35;
+      min-height: 2.85rem;
+    }
+    .menu-item-note {
+      margin-top: .35rem;
+      font-size: .86rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .menu-item-foot {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-top: auto;
+    }
+    .menu-item-price span {
+      display: block;
+      font-size: .76rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: .12rem;
+    }
+    .menu-item-price strong {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1;
+      color: var(--dark);
+      font-family: var(--font-head);
+    }
+    .menu-item-actions {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      flex-shrink: 0;
+    }
+    .menu-icon-btn,
+    .menu-add-btn {
+      border: none;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+    .menu-icon-btn {
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: .95rem;
+      background: #fff4cc;
+      color: var(--dark);
+      font-size: 1rem;
+    }
+    .menu-icon-btn:hover {
+      background: var(--dark);
+      color: var(--yellow);
+    }
+    .menu-add-btn {
+      min-width: 2.9rem;
+      height: 2.9rem;
+      padding: 0 .95rem;
+      border-radius: .95rem;
+      background: var(--dark);
+      color: var(--yellow);
+      font-weight: 800;
+      font-size: .95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .45rem;
+    }
+    .menu-add-btn:hover {
+      background: var(--yellow);
+      color: var(--dark);
+    }
+
+    .menu-layout-grid {
+      display: grid;
+      grid-template-columns: minmax(17rem, 20rem) minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+      margin-bottom: 2.2rem;
+    }
+    .menu-sidebar-stack {
+      position: sticky;
+      top: 90px;
+      align-self: start;
+      display: grid;
+      gap: .9rem;
+    }
+    .menu-sidebar-card {
+      border: 1.5px solid var(--border);
+      border-radius: 1.7rem;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%);
+      box-shadow: 0 1rem 2.4rem rgba(15,23,42,.04);
+      padding: .9rem;
+      min-width: 0;
+    }
+    .menu-sidebar-card .menu-brand-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .65rem;
+      overflow: visible;
+      padding-bottom: 0;
+    }
+    .menu-sidebar-card .menu-brand-chip {
+      min-width: 0;
+      width: 100%;
+      padding: .8rem .9rem;
+      border-radius: 1.15rem;
+    }
+    .menu-sidebar-card .menu-brand-chip img {
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+    .menu-sidebar-card .menu-brand-copy span {
+      font-size: .78rem;
+      line-height: 1.35;
+    }
+    .menu-sidebar-card-brands .menu-brand-row {
+      max-height: 30rem;
+      overflow-y: auto;
+      padding-right: .2rem;
+    }
+    .menu-sidebar-card .menu-tools-row,
+    .menu-sidebar-card .menu-category-rail {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu-sidebar-card .menu-tools-row {
+      grid-template-columns: 1fr;
+    }
+    .menu-sidebar-card .menu-category-rail {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      overflow: visible;
+      gap: .65rem;
+    }
+    .menu-sidebar-card .menu-category-pill {
+      flex: 1 1 calc(50% - .4rem);
+      justify-content: center;
+      min-width: 0;
+      min-height: 3.05rem;
+      padding: .72rem .9rem;
+    }
+    .menu-sidebar-card .menu-reset-btn {
+      width: 100%;
+    }
+    .menu-content-stack {
+      min-width: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .menu-content-stack .menu-results-bar {
+      margin: 0;
+      padding: 1rem 1.1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 1.5rem;
+      background: #fff;
+      box-shadow: 0 .8rem 2rem rgba(15,23,42,.04);
+    }
+    #pdf-menu-sections {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .menu-empty-state {
+      padding: 2rem;
+      border-radius: 1.5rem;
+      border: 1.5px dashed var(--border);
+      background: #fffdf5;
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .menu-quick-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1rem;
+    }
+    .menu-quick-point {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .72rem 1rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--dark);
+      box-shadow: 0 .6rem 1.4rem rgba(15,23,42,.04);
+    }
+    .menu-quick-point i {
+      color: var(--yellow);
+    }
+    .menu-sidebar-title {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .85rem;
+      font-size: .92rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+    .menu-sidebar-title i {
+      color: var(--yellow);
+    }
+    .menu-layout-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .menu-sidebar-stack {
+      position: static;
+      gap: 1rem;
+    }
+    .menu-sidebar-card {
+      padding: 1rem 1.05rem;
+    }
+    .menu-sidebar-card .menu-tools-row {
+      grid-template-columns: minmax(0, 1.45fr) minmax(14rem, .8fr) auto;
+    }
+    .menu-sidebar-card .menu-category-rail {
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+    .menu-sidebar-card .menu-category-pill {
+      flex: 0 0 auto;
+      justify-content: flex-start;
+      min-height: 2.9rem;
+      padding: .72rem 1rem;
+    }
+    .menu-sidebar-card .menu-brand-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: .75rem;
+      overflow: visible;
+      padding-bottom: 0;
+    }
+    .menu-sidebar-card-brands .menu-brand-row {
+      max-height: none;
+      overflow: visible;
+      padding-right: 0;
+    }
+    .menu-content-stack .menu-results-bar {
+      margin: 0 0 1rem;
+    }
+    @media (max-width: 1024px) {
+      .menu-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .menu-sidebar-stack {
+        position: static;
+      }
+      .menu-sidebar-card .menu-tools-row {
+        grid-template-columns: 1fr 14rem;
+      }
+      .menu-sidebar-card .menu-reset-btn {
+        grid-column: 1 / -1;
+      }
+      .menu-sidebar-card .menu-brand-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      .menu-sidebar-card .menu-tools-row {
+        grid-template-columns: 1fr;
+      }
+      .menu-sidebar-card .menu-brand-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 1024px) {
+      .menu-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .menu-sidebar-stack {
+        position: static;
+      }
+      .menu-sidebar-card .menu-tools-row {
+        grid-template-columns: 1fr 14rem;
+      }
+      .menu-sidebar-card .menu-reset-btn {
+        grid-column: 1 / -1;
+      }
+      .menu-sidebar-card .menu-category-rail {
+        flex-wrap: wrap;
+        overflow: visible;
+      }
+      .menu-sidebar-card .menu-brand-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .menu-sidebar-card-brands .menu-brand-row {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+      }
+      .menu-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      .menu-page-shell {
+        padding: 1.3rem;
+      }
+      .menu-order-strip,
+      .menu-hero-card,
+      .menu-sidebar-card,
+      .menu-content-stack .menu-results-bar,
+      .menu-catalog-section {
+        padding: 1rem;
+      }
+      .menu-sidebar-card .menu-tools-row {
+        grid-template-columns: 1fr;
+      }
+      .menu-sidebar-card .menu-brand-row {
+        grid-template-columns: 1fr;
+      }
+      .menu-sidebar-card .menu-brand-copy span {
+        display: none;
+      }
+      .menu-sidebar-card .menu-brand-chip {
+        padding: .72rem .8rem;
+      }
+      .menu-card-grid {
+        grid-template-columns: 1fr;
+      }
+      .menu-item-name {
+        min-height: 0;
+      }
+    }
+    @media (max-width: 520px) {
+      .menu-hero-stats {
+        grid-template-columns: 1fr;
+      }
+      .menu-order-copy {
+        align-items: flex-start;
+      }
+      .menu-order-strip .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .menu-catalog-head {
+        align-items: flex-start;
+      }
+      .menu-item-foot {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .menu-item-actions {
+        width: 100%;
+      }
+      .menu-icon-btn,
+      .menu-add-btn {
+        flex: 1 1 0;
+        width: auto;
+      }
+    }
+
+
+    /* Larger search, category, brand, and detailed add-to-cart controls */
+    .menu-sidebar-card-tools,
+    .menu-sidebar-card-categories,
+    .menu-sidebar-card-brands {
+      padding: 1.25rem 1.3rem;
+    }
+    .menu-sidebar-title {
+      font-size: 1.08rem;
+      margin-bottom: 1.05rem;
+    }
+    .menu-search-shell {
+      min-height: 4.35rem;
+      padding: 0 1.3rem;
+      border-radius: 1.3rem;
+    }
+    .menu-search-shell i {
+      font-size: 1.25rem;
+    }
+    .menu-search-shell input {
+      font-size: 1.14rem;
+      font-weight: 700;
+    }
+    .menu-tools-row .form-field {
+      min-height: 4.35rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 1.25rem;
+    }
+    .menu-reset-btn {
+      min-height: 4.35rem;
+      padding: 0 1.35rem;
+      border-radius: 1.25rem;
+      font-size: 1.02rem;
+      font-weight: 900;
+    }
+    .menu-category-pill,
+    .menu-sidebar-card .menu-category-pill {
+      min-height: 4.15rem;
+      padding: .95rem 1.25rem;
+      border-radius: 1.35rem;
+      font-size: 1.06rem;
+      font-weight: 900;
+      gap: .82rem;
+    }
+    .menu-category-pill img,
+    .menu-sidebar-card .menu-category-pill img {
+      width: 1.65rem;
+      height: 1.65rem;
+    }
+    .menu-brand-chip,
+    .menu-sidebar-card .menu-brand-chip {
+      min-height: 5.4rem;
+      padding: 1rem 1.15rem;
+      border-radius: 1.35rem;
+      gap: 1rem;
+    }
+    .menu-brand-chip img,
+    .menu-sidebar-card .menu-brand-chip img {
+      width: 3.25rem;
+      height: 3.25rem;
+      border-radius: 1rem;
+    }
+    .menu-brand-copy strong {
+      font-size: 1.08rem;
+    }
+    .menu-brand-copy span,
+    .menu-sidebar-card .menu-brand-copy span {
+      font-size: .92rem;
+      line-height: 1.45;
+    }
+    .menu-item-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin-top: .8rem;
+    }
+    .menu-item-details span {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .46rem .62rem;
+      border-radius: 999px;
+      background: #fff8df;
+      border: 1px solid rgba(212,160,23,.2);
+      color: #5f4109;
+      font-size: .82rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .menu-item-actions {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .menu-card-qty {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.9rem;
+      border-radius: .95rem;
+      border: 1.5px solid rgba(212,160,23,.26);
+      overflow: hidden;
+      background: #fffdf7;
+    }
+    .menu-card-qty button {
+      width: 2.35rem;
+      height: 2.9rem;
+      border: none;
+      background: #fff4cc;
+      color: var(--dark);
+      cursor: pointer;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+    .menu-card-qty input {
+      width: 2.85rem;
+      height: 2.9rem;
+      border: none;
+      outline: none;
+      text-align: center;
+      color: var(--dark);
+      font-size: .95rem;
+      font-weight: 900;
+      background: #fffdf7;
+      -moz-appearance: textfield;
+    }
+    .menu-card-qty input::-webkit-outer-spin-button,
+    .menu-card-qty input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .menu-add-btn.menu-add-btn-detail {
+      min-width: 7.8rem;
+      height: 2.9rem;
+    }
+    @media (max-width: 768px) {
+      .menu-sidebar-card-tools,
+      .menu-sidebar-card-categories,
+      .menu-sidebar-card-brands {
+        padding: 1rem;
+      }
+      .menu-search-shell,
+      .menu-tools-row .form-field,
+      .menu-reset-btn {
+        min-height: 4rem;
+      }
+      .menu-category-pill,
+      .menu-sidebar-card .menu-category-pill {
+        min-height: 3.85rem;
+      }
+      .menu-brand-chip,
+      .menu-sidebar-card .menu-brand-chip {
+        min-height: 4.6rem;
+        padding: .9rem 1rem;
+      }
+      .menu-sidebar-card .menu-brand-copy span {
+        display: block;
+      }
+    }
+
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<style id="menu-order-final-visibility-fixes">
+    /* Latest menu page cleanup and readable order-history colours */
+    .menu-page-shell { padding-top: 1.25rem !important; }
+    .menu-layout-grid { margin-top: 0 !important; }
+
+    #orders-panel,
+    #orders-panel .orders-master-panel,
+    #orders-panel .orders-detail-panel,
+    #orders-panel .order-panel,
+    #orders-panel .order-review-box,
+    #orders-panel .order-timeline {
+      color: #262b3d !important;
+    }
+    #orders-panel .orders-panel-head h2,
+    #orders-panel .menu-order-history-head h2,
+    #orders-panel .order-list-id,
+    #orders-panel .order-detail-id,
+    #orders-panel .order-item-row strong,
+    #orders-panel .order-delivery-copy strong,
+    #orders-panel .order-timeline-item strong,
+    #orders-panel .star-picker-meta strong {
+      color: #1f2434 !important;
+    }
+    #orders-panel .menu-order-history-head p,
+    #orders-panel .order-list-date,
+    #orders-panel .order-list-eta,
+    #orders-panel .order-list-note,
+    #orders-panel .order-list-items span,
+    #orders-panel .order-list-items small,
+    #orders-panel .order-detail-date,
+    #orders-panel .order-summary-chip,
+    #orders-panel .order-delivery-copy span,
+    #orders-panel .order-driver-box,
+    #orders-panel .order-timeline-item span,
+    #orders-panel .order-timeline-item small,
+    #orders-panel .review-helper-copy,
+    #orders-panel .review-text-meta span,
+    #orders-panel .star-picker-meta,
+    #orders-panel .order-review-box p {
+      color: #4b556f !important;
+    }
+    #orders-panel .order-list-date i,
+    #orders-panel .order-list-eta i,
+    #orders-panel .order-list-note i,
+    #orders-panel .order-detail-date i,
+    #orders-panel .order-summary-chip i,
+    #orders-panel .order-mini-title i,
+    #orders-panel .menu-order-history-label i,
+    #orders-panel .order-delivery-icon i {
+      color: #9a6b00 !important;
+    }
+    #orders-panel .order-mini-title,
+    #orders-panel .order-detail-kicker,
+    #orders-panel .menu-order-history-label {
+      color: #6b4f00 !important;
+    }
+    #orders-panel .status-pill {
+      border: 1px solid transparent !important;
+      box-shadow: 0 .55rem 1.1rem rgba(15,23,42,.08) !important;
+      text-shadow: none !important;
+    }
+    #orders-panel .status-pending {
+      background: #fff0b3 !important;
+      color: #3b2605 !important;
+      border-color: #e7c95e !important;
+    }
+    #orders-panel .status-preparing {
+      background: #8f5d00 !important;
+      color: #fffaf0 !important;
+      border-color: #8f5d00 !important;
+    }
+    #orders-panel .status-on-the-way {
+      background: #145ea8 !important;
+      color: #ffffff !important;
+      border-color: #145ea8 !important;
+    }
+    #orders-panel .status-delivered {
+      background: #176b3a !important;
+      color: #ffffff !important;
+      border-color: #176b3a !important;
+    }
+    #orders-panel .status-cancelled {
+      background: #a9281e !important;
+      color: #ffffff !important;
+      border-color: #a9281e !important;
+    }
+    #orders-panel .order-progress-card {
+      background: #1f2434 !important;
+      color: #fff7d6 !important;
+    }
+    #orders-panel .order-progress-card .order-progress-meta span {
+      color: #fff3c4 !important;
+    }
+    #orders-panel .order-progress-card .order-progress-meta span i,
+    #orders-panel .order-progress-card .order-extra-meta i {
+      color: #f7c948 !important;
+    }
+    #orders-panel .order-countdown-pill {
+      background: rgba(247,201,72,.22) !important;
+      color: #fff7d6 !important;
+    }
+    #orders-panel .order-countdown-pill.delayed {
+      background: rgba(230,57,70,.30) !important;
+      color: #ffe4e6 !important;
+    }
+    #orders-panel .order-points-pill {
+      background: #fff0bf !important;
+      color: #4b3200 !important;
+    }
+    #orders-panel .order-reorder-btn {
+      background: #1f2434 !important;
+      color: #f7c948 !important;
+    }
+    #orders-panel .order-reorder-btn:hover {
+      background: #f7c948 !important;
+      color: #1f2434 !important;
+    }
+  </style>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="index, follow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/menu" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="Skibidi GoFood" property="og:site_name"/><meta content="Skibidi GoFood — Menu" property="og:title"/><meta content="Browse the menu in a cleaner, easier-to-scan ordering hub for MMU Melaka students." property="og:description"/><meta content="https://skibidigofood.edgeone.cool/menu" property="og:url"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Skibidi GoFood — Menu" name="twitter:title"/><meta content="Browse the menu in a cleaner, easier-to-scan ordering hub for MMU Melaka students." name="twitter:description"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" name="twitter:image"/></head>
+<body id="page-top">
+<h1 class="sr-only">Skibidi GoFood Menu and Orders</h1>
+<div class="notif" id="notif"></div>
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<!-- WALLET MODAL -->
+<div class="modal-bg" id="wallet-modal">
+<div aria-labelledby="wallet-modal-title" aria-modal="true" class="modal-box wallet-topup-modal" role="dialog">
+<button aria-label="Close wallet" class="modal-close wallet-topup-close" onclick="closeWallet()"><i class="fas fa-times"></i></button>
+<div class="wallet-topup-shell">
+<div class="wallet-topup-hero wallet-topup-hero--refined">
+<div class="wallet-topup-icon"><i class="fas fa-wallet"></i></div>
+<div class="wallet-topup-hero-copy">
+<p class="wallet-topup-kicker">Student wallet</p>
+<h3 id="wallet-modal-title">Top Up Wallet</h3>
+<p class="wallet-topup-copy">Choose a preset amount or enter your own amount. Your wallet balance updates instantly and can be used during checkout.</p>
+</div>
+</div>
+<div class="wallet-topup-layout wallet-topup-layout--refined">
+<section class="wallet-balance wallet-balance-card wallet-balance-card--refined">
+<div class="wallet-balance-top wallet-balance-top--refined">
+<div>
+<div class="wl">Current Balance</div>
+<div class="wa">RM <span id="wallet-bal-display">0.00</span></div>
+</div>
+<span class="wallet-safe-pill"><i class="fas fa-shield-alt"></i> Saved locally</span>
+</div>
+<div class="wallet-summary-grid">
+<article class="wallet-summary-card">
+<span>Selected top up</span>
+<strong>RM <span id="wallet-selected-amount">0.00</span></strong>
+<small>Choose a preset or type your own amount.</small>
+</article>
+<article class="wallet-summary-card wallet-summary-card--accent">
+<span>Balance after top up</span>
+<strong>RM <span id="wallet-balance-after">0.00</span></strong>
+<small id="wallet-topup-status">No amount selected yet.</small>
+</article>
+</div>
+<div class="wallet-balance-note wallet-balance-note--refined"><i class="fas fa-circle-info"></i> Minimum top up is RM 1.00. Maximum top up is RM 10,000.00 per transaction.</div>
+<ul class="wallet-guideline-list">
+<li><i class="fas fa-check-circle"></i> Use wallet balance directly during checkout.</li>
+<li><i class="fas fa-check-circle"></i> Preset amounts help students top up faster for daily meals.</li>
+<li><i class="fas fa-check-circle"></i> This project stores wallet data locally for demo purposes.</li>
+</ul>
+</section>
+<section class="wallet-topup-panel wallet-topup-panel--refined">
+<div class="wallet-panel-head wallet-panel-head--refined">
+<strong>Choose amount</strong>
+<span>Tap one suggested amount below or enter a custom amount that matches your budget.</span>
+</div>
+<div class="amt-grid wallet-amount-grid">
+<button class="amt-pill" onclick="selectAmt(this,5)" type="button">RM 5</button>
+<button class="amt-pill" onclick="selectAmt(this,10)" type="button">RM 10</button>
+<button class="amt-pill" onclick="selectAmt(this,15)" type="button">RM 15</button>
+<button class="amt-pill" onclick="selectAmt(this,20)" type="button">RM 20</button>
+<button class="amt-pill" onclick="selectAmt(this,30)" type="button">RM 30</button>
+<button class="amt-pill" onclick="selectAmt(this,50)" type="button">RM 50</button>
+</div>
+<label class="wallet-custom-field wallet-custom-field--refined" for="wallet-custom">
+<span>Custom amount</span>
+<input class="form-field" id="wallet-custom" inputmode="decimal" min="1" placeholder="Enter custom amount (RM)" step="0.01" type="number"/>
+<small>Example: RM 12.50 or RM 25.00</small>
+</label>
+<div class="wallet-selection-preview" id="wallet-selection-preview">
+<i class="fas fa-receipt"></i>
+<span id="wallet-selection-preview-text">Select an amount to preview your new wallet balance.</span>
+</div>
+<div class="flex-btn wallet-actions-row wallet-actions-row--refined">
+<button class="delete-btn wallet-reset-btn" onclick="clearWalletTopup()" type="button"><i class="fas fa-rotate-left"></i> Clear</button>
+<button class="btn wallet-topup-primary" disabled="" id="wallet-topup-submit" onclick="doTopUp()" type="button"><i class="fas fa-plus"></i> Top Up</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<!-- QUICK VIEW MODAL -->
+<div class="modal-bg" id="qv-modal">
+<div class="modal-box qv-box">
+<button aria-label="Close quick view" class="modal-close qv-close" onclick="closeQV()" type="button"><i aria-hidden="true" class="fas fa-times"></i></button>
+<div class="qv-shell">
+<div class="qv-media-panel">
+<div class="qv-media-frame">
+<img alt="Selected menu item preview" decoding="async" id="qv-img" loading="lazy" src="images/food-burger.webp"/>
+</div>
+</div>
+<div class="qv-content-panel">
+<div class="qv-topline">
+<div class="qv-brand-chip" id="qv-brand"></div>
+<span class="qv-badge-pill" id="qv-badge" style="display:none"></span>
+</div>
+<h2 class="qv-name" id="qv-name"></h2>
+<div class="qv-price-row">
+<div class="qv-price"><span>RM </span><span id="qv-price"></span></div>
+</div>
+<div class="qv-pts" id="qv-pts"></div>
+<div class="qv-popularity" id="qv-popularity"></div>
+<div class="qv-sections-scroll">
+<section class="qv-section-card">
+<div class="qv-section-title"><i class="fas fa-sliders-h"></i> <span>Customise your order</span></div>
+<div id="qv-customizations"></div>
+<div class="qv-option-price" id="qv-option-price"></div>
+</section>
+<section class="qv-section-card">
+<div class="qv-section-title"><i class="fas fa-star"></i> <span>Customer feedback</span></div>
+<div class="qv-reviews" id="qv-reviews"></div>
+</section>
+</div>
+<div class="qv-footer-bar">
+<div class="qty-row">
+<span class="qv-qty-label">QTY</span>
+<button aria-label="Decrease quick-view quantity" class="qty-btn" onclick="changeQuickViewQty(-1)" type="button">−</button>
+<input aria-label="Quick-view quantity" id="qv-qty" max="99" min="1" type="number" value="1"/>
+<button aria-label="Increase quick-view quantity" class="qty-btn" onclick="changeQuickViewQty(1)" type="button">+</button>
+</div>
+<button class="cart-action-btn" onclick="addFromQV()">
+<i class="fas fa-shopping-cart"></i> Add To Cart
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home">
+<span class="logo-wordmark">Skibidi <em>GoFood</em></span>
+</a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a class="active" href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</nav>
+<div class="icons">
+<div class="nav-pill" onclick="openWallet()">
+<i class="fas fa-wallet"></i> RM <span id="navWallet">0.00</span>
+</div>
+<div class="nav-pill nav-pill-dark">
+<i class="fas fa-star"></i> <span id="navPts">0</span> pts
+      </div>
+<a aria-label="Cart" class="nav-cart-icon" href="cart">
+<i class="fas fa-shopping-cart"></i><span id="navCart"></span>
+</a>
+<div class="fas fa-user" id="user-btn" onclick="toggleProfile()"></div>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+<div class="profile" id="profileDrop">
+<div class="profile-card-head">
+<div class="profile-avatar" id="profileAvatar">G</div>
+<div class="profile-meta">
+<span class="profile-kicker">Student Account</span>
+<p class="name" id="profileName">Guest</p>
+<p class="profile-handle" id="profileHandle">@guest</p>
+</div>
+</div>
+<div class="profile-stats">
+<div class="profile-stat">
+<span>Wallet</span>
+<strong>RM <span id="profileWallet">0.00</span></strong>
+</div>
+<div class="profile-stat">
+<span>Points</span>
+<strong><span id="profilePoints">0</span> pts</strong>
+</div>
+</div>
+<div class="profile-actions">
+<a class="profile-link primary" href="profile"><i class="fas fa-user-circle"></i> Profile</a>
+<a class="profile-link soft" href="rewards"><i class="fas fa-gift"></i> Rewards</a>
+</div>
+<button class="profile-logout" onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</section>
+</header>
+<main class="menu-page-shell">
+<section class="menu-layout-grid">
+<aside aria-label="menu filters" class="menu-sidebar-stack">
+<div class="menu-sidebar-card menu-sidebar-card-tools">
+<div class="menu-sidebar-title"><i class="fas fa-sliders-h"></i><span>Search &amp; Sort</span></div>
+<div class="menu-tools-row">
+<label class="menu-search-shell" for="menu-search">
+<i class="fas fa-search"></i>
+<input id="menu-search" oninput="setSearch(this.value)" placeholder="Search food, brand, category, or badge" type="search"/>
+</label>
+<select class="form-field" id="menu-sort" onchange="setMenuSort(this.value)">
+<option value="popular">Sort: popularity</option>
+<option value="rating">Sort: rating</option>
+<option value="price-asc">Price: low to high</option>
+<option value="price-desc">Price: high to low</option>
+</select>
+<button class="menu-reset-btn" onclick="resetMenuFilters()" type="button"><i class="fas fa-rotate-left"></i> Reset</button>
+</div>
+</div>
+<div class="menu-sidebar-card menu-sidebar-card-categories">
+<div class="menu-sidebar-title"><i class="fas fa-shapes"></i><span>Categories</span></div>
+<div class="menu-category-rail" id="menu-category-rail"></div>
+</div>
+<div class="menu-sidebar-card menu-sidebar-card-brands">
+<div class="menu-sidebar-title"><i class="fas fa-store"></i><span>Brands</span></div>
+<div class="menu-brand-row" id="menu-brand-row"></div>
+</div>
+</aside>
+<div class="menu-content-stack">
+<div class="menu-results-bar">
+<div class="menu-results-text" id="menu-search-result"></div>
+<div class="menu-context-text" id="menu-active-context" style="display:none"></div>
+</div>
+<section class="menu-section-stack" id="catalog-start">
+<div id="pdf-menu-sections">
+<noscript>
+<div class="menu-empty-state">
+<strong>JavaScript is required to place orders.</strong><br/>
+            The menu preview below is still available for browsing.
+          </div>
+</noscript>
+<section aria-label="Fast Food menu preview" class="menu-catalog-section menu-static-fallback">
+<div class="menu-catalog-head">
+<div>
+<h2>Fast Food</h2>
+<p>Burgers, fried chicken, wraps, fries, and quick sides for lunch breaks, hostel nights, and last-minute study sessions.</p>
+</div>
+<div class="menu-catalog-count"><i class="fas fa-utensils"></i> 16 items</div>
+</div>
+<div class="menu-card-grid">
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Big Mac" decoding="async" loading="lazy" src="images/mcdo-bigmac.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="McDonald's" decoding="async" loading="lazy" src="images/mcdo.webp"/> <span>McDonald's</span></div>
+<div class="menu-item-name">Big Mac</div>
+<div class="menu-item-note">Layered beef burger option with cheese, lettuce, pickles and a signature-style sauce in the demo catalog.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 5.0</span>
+<span><i class="fas fa-fire"></i> 98%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 9.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(1)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="McFries Large" decoding="async" loading="lazy" src="images/mcdo-fries.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="McDonald's" decoding="async" loading="lazy" src="images/mcdo.webp"/> <span>McDonald's</span></div>
+<div class="menu-item-name">McFries Large</div>
+<div class="menu-item-note">Large salted fries for a quick side order or sharing snack.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.9</span>
+<span><i class="fas fa-fire"></i> 85%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 4.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(2)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Zinger Burger" decoding="async" loading="lazy" src="images/kfc-zinger.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="KFC" decoding="async" loading="lazy" src="images/kfc.webp"/> <span>KFC</span></div>
+<div class="menu-item-name">Zinger Burger</div>
+<div class="menu-item-note">Spicy crispy chicken burger option for a filling fast-food meal.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 5.0</span>
+<span><i class="fas fa-fire"></i> 95%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 9.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(6)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="3-pc Chicken" decoding="async" loading="lazy" src="images/kfc-chicken.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="KFC" decoding="async" loading="lazy" src="images/kfc.webp"/> <span>KFC</span></div>
+<div class="menu-item-name">3-pc Chicken</div>
+<div class="menu-item-note">Three-piece fried chicken set for a heavier lunch or dinner order.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.9</span>
+<span><i class="fas fa-fire"></i> 93%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 11.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(7)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Coleslaw + Corn" decoding="async" loading="lazy" src="images/kfc-coleslaw.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="KFC" decoding="async" loading="lazy" src="images/kfc.webp"/> <span>KFC</span></div>
+<div class="menu-item-name">Coleslaw + Corn</div>
+<div class="menu-item-note">Simple side combo to balance a chicken or burger meal.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.6</span>
+<span><i class="fas fa-fire"></i> 45%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 5.00</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(8)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Whopper" decoding="async" loading="lazy" src="images/bk-whopper.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Burger King" decoding="async" loading="lazy" src="images/bk.webp"/> <span>Burger King</span></div>
+<div class="menu-item-name">Whopper</div>
+<div class="menu-item-note">Flame-grilled style beef burger option in the Burger King demo set.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 5.0</span>
+<span><i class="fas fa-fire"></i> 96%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 10.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(10)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Onion Rings" decoding="async" loading="lazy" src="images/bk-onionrings.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Burger King" decoding="async" loading="lazy" src="images/bk.webp"/> <span>Burger King</span></div>
+<div class="menu-item-name">Onion Rings</div>
+<div class="menu-item-note">Crispy onion ring side for pairing with burgers.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.7</span>
+<span><i class="fas fa-fire"></i> 68%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 4.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(11)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Garlic Breadsticks" decoding="async" loading="lazy" src="images/ph-breadsticks.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Pizza Hut" decoding="async" loading="lazy" src="images/ph.webp"/> <span>Pizza Hut</span></div>
+<div class="menu-item-name">Garlic Breadsticks</div>
+<div class="menu-item-note">Baked garlic bread side for pizza or group orders.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.7</span>
+<span><i class="fas fa-fire"></i> 63%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 6.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(14)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Chicken Teriyaki Sub" decoding="async" loading="lazy" src="images/sw-sub.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Subway" decoding="async" loading="lazy" src="images/sw.webp"/> <span>Subway</span></div>
+<div class="menu-item-name">Chicken Teriyaki Sub</div>
+<div class="menu-item-note">Chicken teriyaki sandwich option for a quick campus meal.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.8</span>
+<span><i class="fas fa-fire"></i> 78%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 11.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(16)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Garden Fresh Salad" decoding="async" loading="lazy" src="images/sw-salad.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Subway" decoding="async" loading="lazy" src="images/sw.webp"/> <span>Subway</span></div>
+<div class="menu-item-name">Garden Fresh Salad</div>
+<div class="menu-item-note">Lighter vegetable-based option for users who do not want fried food.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.6</span>
+<span><i class="fas fa-fire"></i> 50%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 8.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(17)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Cheesy Garlic Bread" decoding="async" loading="lazy" src="images/dm-garlicbread.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Domino's" decoding="async" loading="lazy" src="images/dm.webp"/> <span>Domino's</span></div>
+<div class="menu-item-name">Cheesy Garlic Bread</div>
+<div class="menu-item-note">Cheese garlic bread side for sharing with pizza.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.7</span>
+<span><i class="fas fa-fire"></i> 65%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 7.20</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(21)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Crunchy Beef Taco" decoding="async" loading="lazy" src="images/tb-taco.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Taco Bell" decoding="async" loading="lazy" src="images/tb.webp"/> <span>Taco Bell</span></div>
+<div class="menu-item-name">Crunchy Beef Taco</div>
+<div class="menu-item-note">Crunchy beef taco option for a fast, handheld meal.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.9</span>
+<span><i class="fas fa-fire"></i> 82%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 5.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(22)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Chalupa Supreme" decoding="async" loading="lazy" src="images/tb-chalupa.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Taco Bell" decoding="async" loading="lazy" src="images/tb.webp"/> <span>Taco Bell</span></div>
+<div class="menu-item-name">Chalupa Supreme</div>
+<div class="menu-item-note">Soft chalupa-style item with a heavier filling for a full snack.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.7</span>
+<span><i class="fas fa-fire"></i> 66%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 8.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(23)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Popeyes Sandwich" decoding="async" loading="lazy" src="images/pz-sandwich.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Popeyes" decoding="async" loading="lazy" src="images/pz.webp"/> <span>Popeyes</span></div>
+<div class="menu-item-name">Popeyes Sandwich</div>
+<div class="menu-item-note">Crispy chicken sandwich option for a filling campus order.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 5.0</span>
+<span><i class="fas fa-fire"></i> 94%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 11.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(25)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="3-pc Tenders" decoding="async" loading="lazy" src="images/pz-tenders.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Popeyes" decoding="async" loading="lazy" src="images/pz.webp"/> <span>Popeyes</span></div>
+<div class="menu-item-name">3-pc Tenders</div>
+<div class="menu-item-note">Chicken tender set for users who prefer boneless pieces.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.8</span>
+<span><i class="fas fa-fire"></i> 80%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 12.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(26)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Buttermilk Biscuit" decoding="async" loading="lazy" src="images/pz-biscuit.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Popeyes" decoding="async" loading="lazy" src="images/pz.webp"/> <span>Popeyes</span></div>
+<div class="menu-item-name">Buttermilk Biscuit</div>
+<div class="menu-item-note">Small biscuit side for pairing with chicken meals.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.7</span>
+<span><i class="fas fa-fire"></i> 58%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 3.20</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(27)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section aria-label="Pizza menu preview" class="menu-catalog-section menu-static-fallback">
+<div class="menu-catalog-head">
+<div>
+<h2>Pizza</h2>
+<p>Shareable pan pizzas with classic toppings, cheese pulls, and campus-friendly group value.</p>
+</div>
+<div class="menu-catalog-count"><i class="fas fa-utensils"></i> 3 items</div>
+</div>
+<div class="menu-card-grid">
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Pepperoni Pan Pizza" decoding="async" loading="lazy" src="images/ph-pizza.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Pizza Hut" decoding="async" loading="lazy" src="images/ph.webp"/> <span>Pizza Hut</span></div>
+<div class="menu-item-name">Pepperoni Pan Pizza</div>
+<div class="menu-item-note">Pan pizza choice for students who want a richer shared meal.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.9</span>
+<span><i class="fas fa-fire"></i> 91%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 16.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(13)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="BBQ Chicken Pizza" decoding="async" loading="lazy" src="images/dm-bbqpizza.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Domino's" decoding="async" loading="lazy" src="images/dm.webp"/> <span>Domino's</span></div>
+<div class="menu-item-name">BBQ Chicken Pizza</div>
+<div class="menu-item-note">Chicken pizza with a barbecue-style flavour profile for group meals.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.9</span>
+<span><i class="fas fa-fire"></i> 90%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 18.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(19)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Margherita Pizza" decoding="async" loading="lazy" src="images/dm-margherita.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Domino's" decoding="async" loading="lazy" src="images/dm.webp"/> <span>Domino's</span></div>
+<div class="menu-item-name">Margherita Pizza</div>
+<div class="menu-item-note">Simple cheese-and-tomato pizza option for a lighter pizza order.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.8</span>
+<span><i class="fas fa-fire"></i> 70%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 14.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(20)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section aria-label="Drinks menu preview" class="menu-catalog-section menu-static-fallback">
+<div class="menu-catalog-head">
+<div>
+<h2>Drinks</h2>
+<p>Coffee, tea, soft drinks, and bottled water to keep orders complete and students refreshed.</p>
+</div>
+<div class="menu-catalog-count"><i class="fas fa-utensils"></i> 6 items</div>
+</div>
+<div class="menu-card-grid">
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="McCafé Iced Latte" decoding="async" loading="lazy" src="images/mcdo-latte.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="McDonald's" decoding="async" loading="lazy" src="images/mcdo.webp"/> <span>McDonald's</span></div>
+<div class="menu-item-name">McCafé Iced Latte</div>
+<div class="menu-item-note">Chilled coffee drink option for study breaks and late project sessions.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.7</span>
+<span><i class="fas fa-fire"></i> 60%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 6.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(4)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Pepsi Regular" decoding="async" loading="lazy" src="images/kfc-pepsi.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="KFC" decoding="async" loading="lazy" src="images/kfc.webp"/> <span>KFC</span></div>
+<div class="menu-item-name">Pepsi Regular</div>
+<div class="menu-item-note">Regular soft drink add-on for a single meal.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.5</span>
+<span><i class="fas fa-fire"></i> 40%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 2.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(9)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Pepsi Pitcher" decoding="async" loading="lazy" src="images/ph-pitcher.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Pizza Hut" decoding="async" loading="lazy" src="images/ph.webp"/> <span>Pizza Hut</span></div>
+<div class="menu-item-name">Pepsi Pitcher</div>
+<div class="menu-item-note">Large drink format intended for sharing with pizza meals.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.5</span>
+<span><i class="fas fa-fire"></i> 42%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 8.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(15)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Iced Peach Tea" decoding="async" loading="lazy" src="images/sw-tea.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Subway" decoding="async" loading="lazy" src="images/sw.webp"/> <span>Subway</span></div>
+<div class="menu-item-name">Iced Peach Tea</div>
+<div class="menu-item-note">Cold tea drink add-on for subs, salads, or snacks.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.6</span>
+<span><i class="fas fa-fire"></i> 46%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 4.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(18)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Baja Blast Freeze" decoding="async" loading="lazy" src="images/tb-bajaBlast.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Taco Bell" decoding="async" loading="lazy" src="images/tb.webp"/> <span>Taco Bell</span></div>
+<div class="menu-item-name">Baja Blast Freeze</div>
+<div class="menu-item-note">Frozen drink option for Taco Bell-style meal combos.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.8</span>
+<span><i class="fas fa-fire"></i> 75%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 6.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(24)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Lemonade" decoding="async" loading="lazy" src="images/pz-lemonade.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Popeyes" decoding="async" loading="lazy" src="images/pz.webp"/> <span>Popeyes</span></div>
+<div class="menu-item-name">Lemonade</div>
+<div class="menu-item-note">Cold lemonade drink add-on for chicken meals.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.6</span>
+<span><i class="fas fa-fire"></i> 48%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 4.90</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(28)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section aria-label="Dessert menu preview" class="menu-catalog-section menu-static-fallback">
+<div class="menu-catalog-head">
+<div>
+<h2>Dessert</h2>
+<p>Cold sweets and snackable desserts for a simple finish after meals.</p>
+</div>
+<div class="menu-catalog-count"><i class="fas fa-utensils"></i> 3 items</div>
+</div>
+<div class="menu-card-grid">
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="McFlurry Oreo" decoding="async" loading="lazy" src="images/mcdo-mcflurry.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="McDonald's" decoding="async" loading="lazy" src="images/mcdo.webp"/> <span>McDonald's</span></div>
+<div class="menu-item-name">McFlurry Oreo</div>
+<div class="menu-item-note">Cold Oreo dessert cup for students who want a sweet finish after a meal.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.8</span>
+<span><i class="fas fa-fire"></i> 72%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 6.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(3)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="Sundae Cone" decoding="async" loading="lazy" src="images/mcdo-sundae.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="McDonald's" decoding="async" loading="lazy" src="images/mcdo.webp"/> <span>McDonald's</span></div>
+<div class="menu-item-name">Sundae Cone</div>
+<div class="menu-item-note">Budget-friendly vanilla cone dessert for a light sweet add-on.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.6</span>
+<span><i class="fas fa-fire"></i> 55%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 3.50</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(5)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+<article class="menu-item-card menu-static-card">
+<div class="menu-item-media">
+<img alt="BK Sundae" decoding="async" loading="lazy" src="images/bk-sundae.webp"/>
+</div>
+<div class="menu-item-copy">
+<div class="menu-item-brand"><img alt="Burger King" decoding="async" loading="lazy" src="images/bk.webp"/> <span>Burger King</span></div>
+<div class="menu-item-name">BK Sundae</div>
+<div class="menu-item-note">Cold dessert cup from the Burger King demo menu.</div>
+<div class="menu-item-details">
+<span><i class="fas fa-star"></i> 4.6</span>
+<span><i class="fas fa-fire"></i> 52%</span>
+</div>
+<div class="menu-card-bottom">
+<div class="menu-price">RM 5.20</div>
+<button class="menu-add-btn menu-static-note" onclick="staticAddToCart(12)" type="button">Add to cart</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+<section class="menu-orders-shell" data-embed="orders">
+<section class="jump-target menu-order-history-card" id="orders-panel">
+<div class="menu-order-history-head">
+<div>
+<div class="menu-order-history-label"><i class="fas fa-receipt"></i> Order history</div>
+<h2>Track recent orders without leaving this page</h2>
+<p>When you finish browsing the menu above, you can check status updates, delivery progress, and past order details right here.</p>
+</div>
+<a class="btn btn-outline menu-back-to-menu" href="#catalog-start"><i class="fas fa-arrow-up"></i> Back to Menu</a>
+</div>
+<div class="orders-workspace">
+<aside class="orders-master-panel">
+<div class="orders-panel-head">
+<h2>Order timeline</h2>
+</div>
+<div class="orders-list-grid" id="orders-list"></div>
+</aside>
+<section aria-live="polite" class="orders-detail-panel" id="order-detail"></section>
+</div>
+</section>
+</section>
+</main>
+<div class="modal-bg" id="review-modal">
+<div class="modal-box review-modal-box">
+<button aria-label="Close review dialog" class="modal-close" onclick="closeReviewPrompt()" type="button"><i aria-hidden="true" class="fas fa-times"></i></button>
+<h3><i class="fas fa-star"></i> Leave a Comment &amp; Rating</h3>
+<p class="review-helper-copy" id="review-modal-copy">Your order has been delivered. Please tap a star, share a quick comment, and submit your review.</p>
+<div class="review-input-wrap">
+<label class="review-label">Your rating</label>
+<div aria-label="Rate this order" class="star-picker" id="prompt-stars" role="radiogroup"></div>
+<input id="prompt-rate" type="hidden" value="5"/>
+<div class="star-picker-meta">
+<strong id="prompt-rate-label">Excellent • 5/5</strong>
+<span>Tap a star to rate your order</span>
+</div>
+</div>
+<div class="review-chip-row" id="prompt-review-chips">
+<button class="review-chip" onclick="useReviewChip('prompt-review','Fast delivery')" type="button">Fast delivery</button>
+<button class="review-chip" onclick="useReviewChip('prompt-review','Tasty food')" type="button">Tasty food</button>
+<button class="review-chip" onclick="useReviewChip('prompt-review','Good packaging')" type="button">Good packaging</button>
+<button class="review-chip" onclick="useReviewChip('prompt-review','Needs improvement')" type="button">Needs improvement</button>
+</div>
+<textarea class="form-field review-textarea" id="prompt-review" maxlength="240" placeholder="Tell us what went well or what needs to improve." rows="4"></textarea>
+<div class="review-text-meta"><span>Add a short comment to help improve the service.</span><strong id="prompt-review-count">0/240</strong></div>
+<div class="flex-btn">
+<button class="btn" onclick="submitPromptReview()" type="button"><i class="fas fa-paper-plane"></i> Submit Comment &amp; Rating</button>
+<button class="delete-btn" onclick="closeReviewPrompt()" type="button">Later</button>
+</div>
+</div>
+</div>
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/products.js"></script>
+<script src="js/wallet.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/pages/menu-inline.js"></script>
+<script src="orders_inline.js?v=20260526v21"></script>
+<script src="js/student-ai-chat.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

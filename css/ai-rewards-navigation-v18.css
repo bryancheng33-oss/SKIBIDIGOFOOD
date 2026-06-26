@@ -1,0 +1,30 @@
+/* ============================================================
+   V18 — Rewards navigation + secure AI UI polish
+   ============================================================ */
+.nav-pill.nav-pill-dark[data-destination="rewards"],
+.nav-pill:has(#navPts) {
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+.nav-pill.nav-pill-dark[data-destination="rewards"]:hover,
+.nav-pill:has(#navPts):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, .18), inset 0 0 0 1px rgba(255,255,255,.14);
+}
+.nav-pill.nav-pill-dark[data-destination="rewards"]:focus-visible,
+.nav-pill:has(#navPts):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(254, 211, 48, .42), 0 10px 22px rgba(15, 23, 42, .18);
+}
+#student-ai-shell .student-ai-online[data-ai-mode="groq"]::after {
+  content: " · Secure proxy";
+  font-weight: 700;
+  color: #7a5200;
+}
+#student-ai-shell .student-ai-msg-ai .ai-source-note {
+  display: block;
+  margin-top: .42rem;
+  font-size: .72rem;
+  color: #7b8798;
+}

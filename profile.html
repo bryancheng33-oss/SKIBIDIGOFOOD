@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Manage your Skibidi GoFood account details, delivery address, wallet, points, and saved vouchers." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — MMU Melaka Student Profile</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<style>
+    /* ── PAGE WRAPPER ─────────────────────────────────── */
+    .heading{
+      background:transparent;
+      min-height:auto;
+      padding:3rem 2rem 0;
+      gap:.6rem;
+    }
+    .heading h3{ color:var(--dark); font-size:3.2rem; }
+    .heading p{ color:var(--muted); }
+    .heading p a{ color:var(--yellow); }
+
+    .user-profile.profile-page{ padding-top:2rem; padding-bottom:4rem; }
+
+    /* ── OUTER SHELL ─────────────────────────────────── */
+    .profile-shell{
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    /* ── HERO BANNER: photo left, identity right ─────── */
+    .profile-kc-hero{
+      display:flex;
+      align-items:flex-start;
+      gap:3.2rem;
+      padding:3rem 3.2rem 2.4rem;
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(160deg,var(--white) 60%,var(--yellow-pale));
+    }
+    .profile-kc-photo-col{
+      flex-shrink:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:1.2rem;
+    }
+    .profile-kc-avatar{
+      width:160px;
+      height:160px;
+      border-radius:20px;
+      object-fit:cover;
+      border:2px solid var(--border);
+      background:var(--card-bg);
+      display:block;
+    }
+    .profile-kc-avatar-btns{
+      display:flex;
+      flex-direction:column;
+      gap:.8rem;
+      width:160px;
+    }
+    .profile-kc-avatar-btns .btn,
+    .profile-kc-avatar-btns .delete-btn{
+      width:100%;
+      justify-content:center;
+      font-size:1.15rem;
+      padding:.9rem 1.2rem;
+    }
+    .profile-kc-avatar-hint{
+      font-size:1.15rem;
+      color:var(--muted);
+      line-height:1.5;
+      text-align:center;
+    }
+
+    .profile-kc-identity{
+      flex:1;
+      min-width:0;
+    }
+    .profile-kc-nameline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1.6rem;
+      flex-wrap:wrap;
+      margin-bottom:.5rem;
+    }
+    .profile-kc-name{
+      font-family:var(--font-head);
+      font-size:3.4rem;
+      color:var(--dark);
+      line-height:1.05;
+    }
+    .profile-kc-location{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      font-size:1.35rem;
+      color:var(--muted);
+    }
+    .profile-kc-location i{ color:var(--yellow); font-size:1.2rem; }
+    .profile-kc-role{
+      font-size:1.45rem;
+      color:var(--yellow);
+      font-weight:700;
+      margin-bottom:1.2rem;
+    }
+
+    .profile-kc-ranking{
+      display:flex;
+      align-items:center;
+      gap:1.4rem;
+      margin-bottom:1.6rem;
+    }
+    .profile-kc-ranking-label{
+      font-size:1.1rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .profile-kc-ranking-score{
+      font-family:var(--font-head);
+      font-size:3rem;
+      color:var(--dark);
+      line-height:1;
+    }
+    .profile-kc-stars{
+      display:flex;
+      gap:.3rem;
+      align-items:center;
+    }
+    .profile-kc-stars i{
+      font-size:1.8rem;
+      color:var(--yellow);
+    }
+    .profile-kc-stars i.half{ color:var(--border); }
+
+    .profile-kc-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      margin-bottom:2rem;
+    }
+    .profile-kc-actions .btn,
+    .profile-kc-actions .delete-btn{
+      font-size:1.25rem;
+      padding:1rem 1.8rem;
+    }
+    .profile-kc-actions .btn.active-action{
+      background:var(--yellow);
+      color:var(--dark);
+    }
+
+    /* ── TAB STRIP ───────────────────────────────────── */
+    .profile-kc-tabs{
+      display:flex;
+      gap:0;
+      border-top:1px solid var(--border);
+      padding-top:0;
+      margin-top:0;
+    }
+    .profile-kc-tab{
+      display:inline-flex;
+      align-items:center;
+      gap:.7rem;
+      padding:1.1rem 1.8rem;
+      font-size:1.3rem;
+      font-weight:600;
+      color:var(--muted);
+      border-bottom:3px solid transparent;
+      cursor:pointer;
+      transition:color .2s,border-color .2s;
+    }
+    .profile-kc-tab.active{
+      color:var(--dark);
+      border-bottom-color:var(--yellow);
+    }
+    .profile-kc-tab:hover:not(.active){
+      color:var(--text);
+    }
+
+    /* ── BODY: sidebar left + main right ─────────────── */
+    .profile-kc-body{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:0;
+      align-items:start;
+    }
+
+    /* ── LEFT SIDEBAR ─────────────────────────────────── */
+    .profile-kc-rail{
+      border-right:1px solid var(--border);
+      padding:2.4rem 2.2rem;
+      display:flex;
+      flex-direction:column;
+      gap:2.4rem;
+      background:linear-gradient(180deg,var(--card-bg),var(--white));
+    }
+    .profile-kc-section-label{
+      font-size:1.1rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:1.2rem;
+      padding-bottom:.7rem;
+      border-bottom:1px solid var(--border);
+    }
+
+    /* Work-style entries (wallet, points) */
+    .profile-kc-work-entry{
+      margin-bottom:1.4rem;
+    }
+    .profile-kc-work-entry:last-child{ margin-bottom:0; }
+    .profile-kc-work-name{
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+      margin-bottom:.3rem;
+    }
+    .profile-kc-work-name strong{
+      font-size:1.5rem;
+      font-weight:700;
+      color:var(--dark);
+    }
+    .profile-kc-badge{
+      display:inline-flex;
+      align-items:center;
+      padding:.35rem .9rem;
+      border-radius:999px;
+      font-size:1.1rem;
+      font-weight:700;
+      border:1px solid var(--border);
+    }
+    .profile-kc-badge.primary{
+      background:var(--yellow-pale);
+      color:var(--yellow);
+      border-color:var(--yellow);
+    }
+    .profile-kc-badge.secondary{
+      background:#f5f5f5;
+      color:var(--muted);
+    }
+    .profile-kc-work-meta{
+      font-size:1.3rem;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    /* Skills-style list (quick actions) */
+    .profile-kc-skills-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+    }
+    .profile-kc-skills-list li a,
+    .profile-kc-skills-list li button{
+      display:flex;
+      align-items:center;
+      gap:.9rem;
+      font-size:1.35rem;
+      font-weight:600;
+      color:var(--dark);
+      background:none;
+      border:none;
+      cursor:pointer;
+      padding:.6rem 0;
+      width:100%;
+      text-align:left;
+      border-bottom:1px solid rgba(242,221,160,.5);
+      transition:color .2s;
+    }
+    .profile-kc-skills-list li:last-child a,
+    .profile-kc-skills-list li:last-child button{ border-bottom:none; }
+    .profile-kc-skills-list li a:hover,
+    .profile-kc-skills-list li button:hover{ color:var(--yellow); }
+    .profile-kc-skills-list i{ color:var(--yellow); width:1.8rem; }
+
+    /* Voucher strip in sidebar */
+    .profile-kc-voucher-strip{
+      padding:1.2rem 1.4rem;
+      border-radius:16px;
+      background:var(--yellow-pale);
+      border:1px dashed var(--border);
+      font-size:1.3rem;
+      font-weight:700;
+      color:var(--dark);
+    }
+
+    /* ── MAIN CONTENT ─────────────────────────────────── */
+    .profile-kc-main{
+      padding:2.4rem 2.8rem;
+      display:flex;
+      flex-direction:column;
+      gap:2.8rem;
+    }
+
+    /* Contact + Basic info two-column row */
+    .profile-kc-info-row{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(220px,.6fr);
+      gap:3.2rem;
+      align-items:start;
+    }
+    .profile-kc-info-section-title{
+      font-size:1.1rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:1.6rem;
+    }
+    .profile-kc-info-table{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+    }
+    .profile-kc-info-line{
+      display:grid;
+      grid-template-columns:130px minmax(0,1fr);
+      gap:1rem;
+      padding:1.1rem 0;
+      border-bottom:1px solid rgba(242,221,160,.6);
+      align-items:start;
+      font-size:1.38rem;
+    }
+    .profile-kc-info-line:first-child{ padding-top:0; }
+    .profile-kc-info-line:last-child{ border-bottom:none; padding-bottom:0; }
+    .profile-kc-info-line .lbl{
+      color:var(--muted);
+      font-weight:600;
+    }
+    .profile-kc-info-line .val{
+      color:var(--dark);
+      word-break:break-word;
+    }
+    .profile-kc-info-line .val a{
+      color:var(--yellow);
+      text-decoration:underline;
+      text-underline-offset:.3rem;
+    }
+
+    /* Edit address section below the info row */
+    .profile-kc-edit-strip{
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:2rem;
+      align-items:start;
+    }
+    .profile-kc-edit-card{
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:2rem;
+    }
+    .profile-kc-edit-card-title{
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+      font-size:1.25rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:1.4rem;
+    }
+    .profile-kc-edit-card-title i{ color:var(--yellow); }
+
+    /* misc reused */
+    .profile-address-input{ min-height:130px; resize:vertical; }
+    .profile-address-help,.profile-avatar-help{
+      font-size:1.2rem;
+      color:var(--muted);
+      line-height:1.55;
+      margin-bottom:1rem;
+    }
+
+    /* Voucher bar (hidden by default, shown by JS) */
+    .profile-saved-vouchers{
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:2rem;
+    }
+    .profile-address-title{
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+      font-size:1.25rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:.8rem;
+    }
+    .profile-address-title i{ color:var(--yellow); }
+    .profile-saved-voucher-bar{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-top:1.2rem;
+    }
+    .profile-voucher-pill{
+      display:flex;
+      align-items:center;
+      min-height:46px;
+      flex:1 1 220px;
+      padding:1.1rem 1.5rem;
+      border-radius:14px;
+      border:1px dashed var(--border);
+      background:var(--yellow-pale);
+      color:var(--dark);
+      font-size:1.3rem;
+      font-weight:700;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width:1100px){
+      .profile-kc-hero{ flex-direction:column; gap:2rem; }
+      .profile-kc-body{ grid-template-columns:1fr; }
+      .profile-kc-rail{ border-right:none; border-bottom:1px solid var(--border); }
+      .profile-kc-info-row{ grid-template-columns:1fr; gap:2rem; }
+      .profile-kc-edit-strip{ grid-template-columns:1fr; }
+    }
+    @media (max-width:760px){
+      .profile-kc-hero{ padding:2rem; }
+      .profile-kc-photo-col{ align-items:flex-start; }
+      .profile-kc-avatar,.profile-kc-avatar-btns{ width:120px; }
+      .profile-kc-name{ font-size:2.6rem; }
+      .profile-kc-main{ padding:1.8rem; }
+      .profile-kc-rail{ padding:1.8rem; }
+    }
+
+    /* ── WALLET CUSTOM INPUT ──────────────────────────── */
+    #wallet-custom{ width:100%; }
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<style>
+    /* Remove decorative circle images from the top profile banner. */
+    .heading{
+      background:linear-gradient(135deg,#171104 0%,#2a2108 100%) !important;
+      border-bottom:1px solid rgba(255,210,77,.22) !important;
+      box-shadow:var(--depth-shadow-md), var(--depth-inner-highlight) !important;
+    }
+  </style>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/profile" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/></head>
+<body id="page-top">
+<h1 class="sr-only">Skibidi GoFood User Profile</h1>
+<div class="notif" id="notif"></div>
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<!-- WALLET MODAL -->
+<div class="modal-bg" id="wallet-modal">
+<div aria-labelledby="wallet-modal-title" aria-modal="true" class="modal-box wallet-topup-modal" role="dialog">
+<button aria-label="Close wallet" class="modal-close wallet-topup-close" onclick="closeWallet()"><i class="fas fa-times"></i></button>
+<div class="wallet-topup-shell">
+<div class="wallet-topup-hero wallet-topup-hero--refined">
+<div class="wallet-topup-icon"><i class="fas fa-wallet"></i></div>
+<div class="wallet-topup-hero-copy">
+<p class="wallet-topup-kicker">Student wallet</p>
+<h3 id="wallet-modal-title">Top Up Wallet</h3>
+<p class="wallet-topup-copy">Choose a preset amount or enter your own amount. Your wallet balance updates instantly and can be used during checkout.</p>
+</div>
+</div>
+<div class="wallet-topup-layout wallet-topup-layout--refined">
+<section class="wallet-balance wallet-balance-card wallet-balance-card--refined">
+<div class="wallet-balance-top wallet-balance-top--refined">
+<div>
+<div class="wl">Current Balance</div>
+<div class="wa">RM <span id="wallet-bal-display">0.00</span></div>
+</div>
+<span class="wallet-safe-pill"><i class="fas fa-shield-alt"></i> Saved locally</span>
+</div>
+<div class="wallet-summary-grid">
+<article class="wallet-summary-card">
+<span>Selected top up</span>
+<strong>RM <span id="wallet-selected-amount">0.00</span></strong>
+<small>Choose a preset or type your own amount.</small>
+</article>
+<article class="wallet-summary-card wallet-summary-card--accent">
+<span>Balance after top up</span>
+<strong>RM <span id="wallet-balance-after">0.00</span></strong>
+<small id="wallet-topup-status">No amount selected yet.</small>
+</article>
+</div>
+<div class="wallet-balance-note wallet-balance-note--refined"><i class="fas fa-circle-info"></i> Minimum top up is RM 1.00. Maximum top up is RM 10,000.00 per transaction.</div>
+<ul class="wallet-guideline-list">
+<li><i class="fas fa-check-circle"></i> Use wallet balance directly during checkout.</li>
+<li><i class="fas fa-check-circle"></i> Preset amounts help students top up faster for daily meals.</li>
+<li><i class="fas fa-check-circle"></i> This project stores wallet data locally for demo purposes.</li>
+</ul>
+</section>
+<section class="wallet-topup-panel wallet-topup-panel--refined">
+<div class="wallet-panel-head wallet-panel-head--refined">
+<strong>Choose amount</strong>
+<span>Tap one suggested amount below or enter a custom amount that matches your budget.</span>
+</div>
+<div class="amt-grid wallet-amount-grid">
+<button class="amt-pill" onclick="selectAmt(this,5)" type="button">RM 5</button>
+<button class="amt-pill" onclick="selectAmt(this,10)" type="button">RM 10</button>
+<button class="amt-pill" onclick="selectAmt(this,15)" type="button">RM 15</button>
+<button class="amt-pill" onclick="selectAmt(this,20)" type="button">RM 20</button>
+<button class="amt-pill" onclick="selectAmt(this,30)" type="button">RM 30</button>
+<button class="amt-pill" onclick="selectAmt(this,50)" type="button">RM 50</button>
+</div>
+<label class="wallet-custom-field wallet-custom-field--refined" for="wallet-custom">
+<span>Custom amount</span>
+<input class="form-field" id="wallet-custom" inputmode="decimal" min="1" placeholder="Enter custom amount (RM)" step="0.01" type="number"/>
+<small>Example: RM 12.50 or RM 25.00</small>
+</label>
+<div class="wallet-selection-preview" id="wallet-selection-preview">
+<i class="fas fa-receipt"></i>
+<span id="wallet-selection-preview-text">Select an amount to preview your new wallet balance.</span>
+</div>
+<div class="flex-btn wallet-actions-row wallet-actions-row--refined">
+<button class="delete-btn wallet-reset-btn" onclick="clearWalletTopup()" type="button"><i class="fas fa-rotate-left"></i> Clear</button>
+<button class="btn wallet-topup-primary" disabled="" id="wallet-topup-submit" onclick="doTopUp()" type="button"><i class="fas fa-plus"></i> Top Up</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home">
+<span class="logo-wordmark">Skibidi <em>GoFood</em></span>
+</a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</nav>
+<div class="icons">
+<div class="nav-pill" onclick="openWallet()">
+<i class="fas fa-wallet"></i> RM <span id="navWallet">0.00</span>
+</div>
+<div class="nav-pill nav-pill-dark">
+<i class="fas fa-star"></i> <span id="navPts">0</span> pts
+      </div>
+<a aria-label="Cart" class="nav-cart-icon" href="cart">
+<i class="fas fa-shopping-cart"></i><span id="navCart"></span>
+</a>
+<div class="fas fa-user" id="user-btn" onclick="toggleProfile()"></div>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+<div class="profile" id="profileDrop">
+<div class="profile-card-head">
+<div class="profile-avatar" id="profileAvatar">G</div>
+<div class="profile-meta">
+<span class="profile-kicker">Student Account</span>
+<p class="name" id="profileName">Guest</p>
+<p class="profile-handle" id="profileHandle">@guest</p>
+</div>
+</div>
+<div class="profile-stats">
+<div class="profile-stat">
+<span>Wallet</span>
+<strong>RM <span id="profileWallet">0.00</span></strong>
+</div>
+<div class="profile-stat">
+<span>Points</span>
+<strong><span id="profilePoints">0</span> pts</strong>
+</div>
+</div>
+<div class="profile-actions">
+<a class="profile-link primary" href="profile"><i class="fas fa-user-circle"></i> Profile</a>
+<a class="profile-link soft" href="rewards"><i class="fas fa-gift"></i> Rewards</a>
+</div>
+<button class="profile-logout" onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</section>
+</header>
+<div class="heading">
+<h3>My profile</h3>
+<p><a href="home">home</a> <span>/ profile</span></p>
+</div>
+<section class="user-profile jump-target profile-page" id="profile-panel">
+<div class="profile-shell">
+<!-- HERO: photo col (left) + identity col (right) -->
+<div class="profile-kc-hero">
+<!-- LEFT: avatar + upload controls -->
+<div class="profile-kc-photo-col">
+<img alt="avatar" class="profile-kc-avatar" decoding="async" id="prof-avatar-img" loading="lazy" src="images/user-avatar.webp"/>
+<div class="profile-kc-avatar-btns">
+<label class="btn btn-sm" for="prof-avatar-input"><i class="fas fa-image"></i> Upload Image</label>
+<button class="delete-btn" onclick="clearProfileImage()" type="button"><i class="fas fa-trash"></i> Remove</button>
+<input accept="image/*" hidden="" id="prof-avatar-input" onchange="handleProfileImageUpload(event)" type="file"/>
+</div>
+<p class="profile-kc-avatar-hint">JPG, PNG or WEBP · saved as WEBP for faster loading.</p>
+</div>
+<!-- RIGHT: name / role / ranking / actions / tabs -->
+<div class="profile-kc-identity">
+<!-- Name row -->
+<div class="profile-kc-nameline">
+<div>
+<div class="profile-kc-name" id="prof-name-hero">—</div>
+<span class="profile-kc-location">
+<i class="fas fa-map-marker-alt"></i>
+              MMU Melaka, Melaka
+            </span>
+</div>
+</div>
+<!-- Role / account type line -->
+<div class="profile-kc-role">
+<span id="prof-inline-account">Student account</span>
+</div>
+<!-- Rankings (wallet balance as score) -->
+<div class="profile-kc-ranking">
+<div class="profile-kc-ranking-label">Wallet</div>
+<div class="profile-kc-ranking-score">RM <span id="prof-wallet-inline">0.00</span></div>
+<div class="profile-kc-stars">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half-alt"></i>
+</div>
+           
+          <span style="font-size:1.35rem;color:var(--muted);"><span id="prof-points-inline">0</span> pts</span>
+</div>
+<!-- Action buttons -->
+<div class="profile-kc-actions">
+<button class="btn" onclick="openWallet()" type="button"><i class="fas fa-plus"></i> Top Up Wallet</button>
+<a class="btn btn-dark active-action" href="rewards"><i class="fas fa-gift"></i> Rewards</a>
+<a class="btn" href="menu#orders-panel"><i class="fas fa-receipt"></i> Order History</a>
+<a class="delete-btn" href="contact"><i class="fas fa-flag"></i> Report Issue</a>
+</div>
+<!-- Tab strip -->
+<div class="profile-kc-tabs">
+<a class="profile-kc-tab" href="#profile-address-box">
+<i class="fas fa-map-marker-alt"></i> Delivery Setup
+          </a>
+<a class="profile-kc-tab active" href="#profile-about">
+<i class="fas fa-user"></i> About
+          </a>
+</div>
+</div><!-- /identity -->
+</div><!-- /hero -->
+<!-- BODY: left sidebar + right main content -->
+<div class="profile-kc-body">
+<!-- LEFT SIDEBAR -->
+<aside class="profile-kc-rail">
+<!-- ACCOUNT SNAPSHOT (like "Work" entries in reference) -->
+<div>
+<div class="profile-kc-section-label">Account Snapshot</div>
+<div class="profile-kc-work-entry">
+<div class="profile-kc-work-name">
+<strong>RM <span id="prof-wallet">0.00</span></strong>
+<span class="profile-kc-badge primary">Wallet</span>
+</div>
+<div class="profile-kc-work-meta">Available balance · top up anytime</div>
+</div>
+<div class="profile-kc-work-entry">
+<div class="profile-kc-work-name">
+<strong><span id="prof-points">0</span> pts</strong>
+<span class="profile-kc-badge secondary">Points</span>
+</div>
+<div class="profile-kc-work-meta">Loyalty points · redeem via Rewards</div>
+</div>
+<div class="profile-kc-work-entry">
+<div class="profile-kc-work-name">
+<strong><span id="prof-voucher-count">0</span> vouchers</strong>
+<span class="profile-kc-badge secondary">Saved</span>
+</div>
+<div class="profile-kc-work-meta">Apply in cart at checkout</div>
+</div>
+</div>
+<!-- DELIVERY SETUP -->
+<div>
+<div class="profile-kc-section-label">Delivery Setup</div>
+<div id="prof-address-short" style="font-size:1.3rem;color:var(--text);line-height:1.6;margin-bottom:.8rem;">
+            No detailed delivery address saved yet.
+          </div>
+<div style="font-size:1.2rem;color:var(--muted);line-height:1.5;">
+            Add your hostel block or campus drop-off point for faster checkout.
+          </div>
+</div>
+<!-- QUICK ACTIONS (like "Skills" section in reference) -->
+<div>
+<div class="profile-kc-section-label">Quick Actions</div>
+<ul class="profile-kc-skills-list">
+<li><button onclick="openWallet()" type="button"><i class="fas fa-wallet"></i> Top Up Wallet</button></li>
+<li><a href="rewards"><i class="fas fa-gift"></i> Rewards</a></li>
+<li><a href="menu#orders-panel"><i class="fas fa-list"></i> My Orders</a></li>
+<li><a href="cart"><i class="fas fa-shopping-cart"></i> My Cart</a></li>
+<li><button onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
+</ul>
+</div>
+<!-- SAVED VOUCHER STRIP (shown by JS when vouchers exist) -->
+<div id="prof-voucher" style="display:none">
+<div class="profile-kc-section-label">Saved Vouchers</div>
+<div class="profile-kc-voucher-strip" id="prof-voucher-label">—</div>
+<div style="margin-top:1rem;">
+<a class="btn btn-sm" href="cart" style="width:100%;justify-content:center;">Open Cart to Apply</a>
+</div>
+</div>
+</aside><!-- /rail -->
+<!-- MAIN CONTENT -->
+<div class="profile-kc-main">
+<!-- Contact + Basic info two-column (mirrors reference) -->
+<div class="profile-kc-info-row" id="profile-about">
+<!-- LEFT: Contact Information -->
+<div>
+<div class="profile-kc-info-section-title">Contact Information</div>
+<div class="profile-kc-info-table">
+<div class="profile-kc-info-line">
+<span class="lbl">Phone:</span>
+<span class="val" id="prof-phone">—</span>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">Address:</span>
+<span class="val" id="prof-address">—</span>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">E-mail:</span>
+<span class="val"><a href="#" id="prof-email">—</a></span>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">Username:</span>
+<span class="val" id="prof-username">—</span>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">Full Name:</span>
+<span class="val" id="prof-name">—</span>
+</div>
+</div>
+</div>
+<!-- RIGHT: Basic Information + readiness -->
+<div>
+<div class="profile-kc-info-section-title">Basic Information</div>
+<div class="profile-kc-info-table">
+<div class="profile-kc-info-line">
+<span class="lbl">Birthday:</span>
+<span class="val" id="prof-bday">—</span>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">Account:</span>
+<span class="val" id="prof-side-account">Student</span>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">Vouchers:</span>
+<span class="val"><span id="prof-voucher-count-inline">0</span> saved</span>
+</div>
+</div>
+<div style="margin-top:2rem;">
+<div class="profile-kc-info-section-title">Readiness Check</div>
+<div class="profile-kc-info-table">
+<div class="profile-kc-info-line">
+<span class="lbl">Address:</span>
+<strong class="val" id="prof-check-address">Pending</strong>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">Avatar:</span>
+<strong class="val" id="prof-check-avatar">Default image</strong>
+</div>
+<div class="profile-kc-info-line">
+<span class="lbl">Vouchers:</span>
+<strong class="val" id="prof-check-vouchers">No saved vouchers</strong>
+</div>
+</div>
+</div>
+<!-- Hidden elements preserved for JS compatibility -->
+<span id="prof-mini-email" style="display:none">—</span>
+<span id="prof-mini-phone" style="display:none">—</span>
+<span id="prof-mini-bday" style="display:none">—</span>
+<span id="prof-account-chip" style="display:none">Student</span>
+<span id="prof-username-hero" style="display:none">@—</span>
+</div>
+</div><!-- /info-row -->
+<!-- Edit address -->
+<div class="profile-kc-edit-strip" id="profile-address-box">
+<div class="profile-kc-edit-card">
+<div class="profile-kc-edit-card-title"><i class="fas fa-pen"></i> Edit Detailed Address</div>
+<p class="profile-address-help">Use Malaysia format, for example: Hostel Block A, MMU Melaka, 75450 Bukit Beruang, Melaka, Malaysia</p>
+<textarea class="form-field profile-address-input" id="prof-address-input" placeholder="Enter your detailed delivery address in Melaka"></textarea>
+<div class="flex-btn" style="margin-top:1rem;flex-wrap:wrap">
+<button class="btn" onclick="saveProfileAddress()" style="flex:1;text-align:center" type="button">
+<i class="fas fa-save"></i> Save Address
+              </button>
+<button class="delete-btn" onclick="clearProfileAddress()" style="flex:1;text-align:center" type="button">
+<i class="fas fa-trash"></i> Clear
+              </button>
+</div>
+</div>
+</div><!-- /edit-strip -->
+</div><!-- /main -->
+</div><!-- /body -->
+</div><!-- /shell -->
+</section>
+<!-- FOOTER -->
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/wallet.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/pages/profile-inline.js"></script>
+<script src="js/student-ai-chat.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

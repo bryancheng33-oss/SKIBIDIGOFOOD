@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Confirm your order details, delivery address, payment method, and final total before placing your food order." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — Student Checkout</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<!-- Unified Home Style CSS -->
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<style>
+    body.order-flow-page {
+      background: linear-gradient(180deg, #fffdf7 0%, #f8fafc 100%);
+    }
+    .checkout-flow-page .heading {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem .45rem;
+      background: transparent;
+    }
+    .checkout-flow-page .checkout-page-shell {
+      max-width: 1240px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+    }
+    .checkout-flow-page .checkout-hero {
+      border: 1.5px solid var(--border);
+      border-radius: 2rem;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%);
+      box-shadow: 0 1.1rem 2.8rem rgba(15,23,42,.05);
+      padding: 1.3rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .checkout-flow-page .checkout-hero-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .checkout-flow-page .checkout-hero .title {
+      margin: 0 0 .45rem;
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      text-transform: none;
+      line-height: 1.08;
+    }
+    .checkout-flow-page .checkout-hero .section-lead {
+      margin: 0;
+      max-width: 46rem;
+      color: var(--light);
+      line-height: 1.7;
+    }
+    .checkout-flow-page .checkout-dashboard {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(22rem, .92fr);
+      gap: 1rem;
+      align-items: start;
+    }
+    .checkout-flow-page .checkout-primary {
+      display: grid;
+      gap: 1rem;
+    }
+    .checkout-flow-page .checkout-sidebar {
+      position: sticky;
+      top: 10rem;
+      align-self: start;
+    }
+    .checkout-flow-page .checkout-block {
+      margin: 0;
+      border: 1.5px solid var(--border);
+      border-radius: 1.7rem;
+      background: #fff;
+      box-shadow: 0 .8rem 2rem rgba(15,23,42,.04);
+      overflow: hidden;
+    }
+    .checkout-flow-page .checkout-block h3 {
+      margin: 0;
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid #eceff3;
+      background: linear-gradient(180deg, #fffdf7 0%, #fffaf0 100%);
+    }
+    .checkout-flow-page .checkout-block .body {
+      display: grid;
+      gap: .85rem;
+      padding: 1rem 1.15rem 1.15rem;
+    }
+    .checkout-flow-page .co-item,
+    .checkout-flow-page .co-discount,
+    .checkout-flow-page .co-grand,
+    .checkout-flow-page .info-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: .45rem .9rem;
+      align-items: start;
+      padding: .85rem 0;
+      border-bottom: 1px dashed #eceff3;
+    }
+    .checkout-flow-page .co-item:last-child,
+    .checkout-flow-page .co-discount:last-child,
+    .checkout-flow-page .co-grand:last-child,
+    .checkout-flow-page .info-row:last-child {
+      border-bottom: 0;
+    }
+    .checkout-flow-page .co-item .cn,
+    .checkout-flow-page .info-row .value {
+      min-width: 0;
+    }
+    .checkout-flow-page .info-row {
+      grid-template-columns: auto auto minmax(0, 1fr);
+      gap: .45rem .8rem;
+    }
+    .checkout-flow-page .info-row i {
+      width: 1.25rem;
+      color: var(--light);
+      margin-top: .2rem;
+    }
+    .checkout-flow-page .info-row .label {
+      color: var(--light);
+      font-weight: 700;
+    }
+    .checkout-flow-page .info-row .value {
+      text-align: right;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .checkout-flow-page .co-grand {
+      border-top: 1px solid #eceff3;
+      margin-top: .15rem;
+      padding-top: 1rem;
+    }
+    .checkout-flow-page .form-field {
+      width: 100%;
+    }
+    .checkout-flow-page #wallet-warning {
+      padding: .85rem 1rem;
+      border-radius: 1rem;
+      background: #fff5f5;
+      border: 1px solid rgba(220, 38, 38, .12);
+    }
+    .checkout-flow-page .delete-btn,
+    .checkout-flow-page .btn {
+      justify-content: center;
+    }
+    @media (max-width: 1024px) {
+      .checkout-flow-page .checkout-dashboard {
+        grid-template-columns: 1fr;
+      }
+      .checkout-flow-page .checkout-sidebar {
+        position: static;
+      }
+    }
+    @media (max-width: 768px) {
+      .checkout-flow-page .heading,
+      .checkout-flow-page .checkout-page-shell {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+      }
+      .checkout-flow-page .checkout-hero,
+      .checkout-flow-page .checkout-block .body {
+        padding: 1rem;
+      }
+      .checkout-flow-page .checkout-block h3 {
+        padding: 1rem;
+      }
+      .checkout-flow-page .co-item,
+      .checkout-flow-page .co-discount,
+      .checkout-flow-page .co-grand,
+      .checkout-flow-page .info-row {
+        grid-template-columns: 1fr;
+      }
+      .checkout-flow-page .info-row .value {
+        text-align: left;
+      }
+    }
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/checkout" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/></head>
+<body class="order-flow-page checkout-flow-page" id="page-top">
+<div class="notif" id="notif"></div>
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<!-- WALLET MODAL -->
+<div class="modal-bg" id="wallet-modal">
+<div aria-labelledby="wallet-modal-title" aria-modal="true" class="modal-box wallet-topup-modal" role="dialog">
+<button aria-label="Close wallet" class="modal-close wallet-topup-close" onclick="closeWallet()"><i class="fas fa-times"></i></button>
+<div class="wallet-topup-shell">
+<div class="wallet-topup-hero wallet-topup-hero--refined">
+<div class="wallet-topup-icon"><i class="fas fa-wallet"></i></div>
+<div class="wallet-topup-hero-copy">
+<p class="wallet-topup-kicker">Student wallet</p>
+<h3 id="wallet-modal-title">Top Up Wallet</h3>
+<p class="wallet-topup-copy">Choose a preset amount or enter your own amount. Your wallet balance updates instantly and can be used during checkout.</p>
+</div>
+</div>
+<div class="wallet-topup-layout wallet-topup-layout--refined">
+<section class="wallet-balance wallet-balance-card wallet-balance-card--refined">
+<div class="wallet-balance-top wallet-balance-top--refined">
+<div>
+<div class="wl">Current Balance</div>
+<div class="wa">RM <span id="wallet-bal-display">0.00</span></div>
+</div>
+<span class="wallet-safe-pill"><i class="fas fa-shield-alt"></i> Saved locally</span>
+</div>
+<div class="wallet-summary-grid">
+<article class="wallet-summary-card">
+<span>Selected top up</span>
+<strong>RM <span id="wallet-selected-amount">0.00</span></strong>
+<small>Choose a preset or type your own amount.</small>
+</article>
+<article class="wallet-summary-card wallet-summary-card--accent">
+<span>Balance after top up</span>
+<strong>RM <span id="wallet-balance-after">0.00</span></strong>
+<small id="wallet-topup-status">No amount selected yet.</small>
+</article>
+</div>
+<div class="wallet-balance-note wallet-balance-note--refined"><i class="fas fa-circle-info"></i> Minimum top up is RM 1.00. Maximum top up is RM 10,000.00 per transaction.</div>
+<ul class="wallet-guideline-list">
+<li><i class="fas fa-check-circle"></i> Use wallet balance directly during checkout.</li>
+<li><i class="fas fa-check-circle"></i> Preset amounts help students top up faster for daily meals.</li>
+<li><i class="fas fa-check-circle"></i> This project stores wallet data locally for demo purposes.</li>
+</ul>
+</section>
+<section class="wallet-topup-panel wallet-topup-panel--refined">
+<div class="wallet-panel-head wallet-panel-head--refined">
+<strong>Choose amount</strong>
+<span>Tap one suggested amount below or enter a custom amount that matches your budget.</span>
+</div>
+<div class="amt-grid wallet-amount-grid">
+<button class="amt-pill" onclick="selectAmt(this,5)" type="button">RM 5</button>
+<button class="amt-pill" onclick="selectAmt(this,10)" type="button">RM 10</button>
+<button class="amt-pill" onclick="selectAmt(this,15)" type="button">RM 15</button>
+<button class="amt-pill" onclick="selectAmt(this,20)" type="button">RM 20</button>
+<button class="amt-pill" onclick="selectAmt(this,30)" type="button">RM 30</button>
+<button class="amt-pill" onclick="selectAmt(this,50)" type="button">RM 50</button>
+</div>
+<label class="wallet-custom-field wallet-custom-field--refined" for="wallet-custom">
+<span>Custom amount</span>
+<input class="form-field" id="wallet-custom" inputmode="decimal" min="1" placeholder="Enter custom amount (RM)" step="0.01" type="number"/>
+<small>Example: RM 12.50 or RM 25.00</small>
+</label>
+<div class="wallet-selection-preview" id="wallet-selection-preview">
+<i class="fas fa-receipt"></i>
+<span id="wallet-selection-preview-text">Select an amount to preview your new wallet balance.</span>
+</div>
+<div class="flex-btn wallet-actions-row wallet-actions-row--refined">
+<button class="delete-btn wallet-reset-btn" onclick="clearWalletTopup()" type="button"><i class="fas fa-rotate-left"></i> Clear</button>
+<button class="btn wallet-topup-primary" disabled="" id="wallet-topup-submit" onclick="doTopUp()" type="button"><i class="fas fa-plus"></i> Top Up</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home">
+<span class="logo-wordmark">Skibidi <em>GoFood</em></span>
+</a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</nav>
+<div class="icons">
+<div class="nav-pill" onclick="openWallet()">
+<i class="fas fa-wallet"></i> RM <span id="navWallet">0.00</span>
+</div>
+<div class="nav-pill nav-pill-dark">
+<i class="fas fa-star"></i> <span id="navPts">0</span> pts
+      </div>
+<a aria-label="Cart" class="nav-cart-icon" href="cart">
+<i class="fas fa-shopping-cart"></i><span id="navCart"></span>
+</a>
+<div class="fas fa-user" id="user-btn" onclick="toggleProfile()"></div>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+<div class="profile" id="profileDrop">
+<div class="profile-card-head">
+<div class="profile-avatar" id="profileAvatar">G</div>
+<div class="profile-meta">
+<span class="profile-kicker">Student Account</span>
+<p class="name" id="profileName">Guest</p>
+<p class="profile-handle" id="profileHandle">@guest</p>
+</div>
+</div>
+<div class="profile-stats">
+<div class="profile-stat">
+<span>Wallet</span>
+<strong>RM <span id="profileWallet">0.00</span></strong>
+</div>
+<div class="profile-stat">
+<span>Points</span>
+<strong><span id="profilePoints">0</span> pts</strong>
+</div>
+</div>
+<div class="profile-actions">
+<a class="profile-link primary" href="profile"><i class="fas fa-user-circle"></i> Profile</a>
+<a class="profile-link soft" href="rewards"><i class="fas fa-gift"></i> Rewards</a>
+</div>
+<button class="profile-logout" onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</section>
+</header>
+<div class="heading">
+<h3>checkout</h3>
+<p><a href="home">home</a> <span>/ checkout</span></p>
+</div>
+<main class="checkout-page-shell">
+<section class="jump-target checkout-hero" id="checkout-panel">
+<div class="checkout-hero-head">
+<div>
+<h1 class="title">Order summary</h1>
+<p class="section-lead">Confirm every important detail here, from delivery information to payment preference, before placing the order.</p>
+</div>
+</div>
+<div class="checkout-dashboard">
+<div class="checkout-primary">
+<div class="checkout-block">
+<h3 style="color:#111827 !important"><i class="fas fa-list" style="color:#8a5a00 !important"></i> Cart Items</h3>
+<div class="body" id="co-items"></div>
+</div>
+<div class="checkout-block">
+<h3 style="color:#111827 !important"><i class="fas fa-user" style="color:#8a5a00 !important"></i> Your Information</h3>
+<div class="body" id="co-user-info"></div>
+</div>
+</div>
+<aside class="checkout-sidebar">
+<div class="checkout-block">
+<h3 style="color:#111827 !important"><i class="fas fa-map-marker-alt" style="color:#8a5a00 !important"></i> Detailed Address &amp; Payment</h3>
+<div class="body">
+<label for="co-address" style="display:block;font-size:1.45rem;font-weight:700;color:var(--black);margin-bottom:.6rem">Detailed Address</label>
+<input class="form-field" id="co-address" placeholder="Enter your detailed address — e.g. Hostel Block A, MMU Melaka, 75450 Bukit Beruang, Melaka, Malaysia" required="" type="text"/>
+<select class="form-field" id="co-method" required="">
+<option disabled="" selected="" value="">Select payment method —</option>
+<option value="cash">Cash on Delivery</option>
+<option value="credit">Credit / Debit Card</option>
+<option value="fpx">Online Banking (FPX)</option>
+<option value="ewallet">E-Wallet (Touch 'n Go)</option>
+<option value="wallet">GoFood Wallet</option>
+</select>
+<div style="font-size:1.5rem;color:var(--light);margin:.3rem 0 .6rem">
+              Wallet balance: <strong>RM <span id="co-wallet-bal">0.00</span></strong>
+</div>
+<div id="wallet-warning" style="font-size:1.6rem;color:var(--red);margin:.5rem 0;display:none">
+              ⚠️ Insufficient wallet balance.
+              <a href="#" onclick="openWallet()" style="color:var(--black);text-decoration:underline">Top up now</a>
+</div>
+<button class="btn" onclick="placeOrder()" style="width:100%;font-size:2rem;margin-top:1rem">
+<i class="fas fa-check-circle"></i> Place Order
+            </button>
+<a class="delete-btn" href="cart" style="display:block;text-align:center;margin-top:.8rem">
+<i class="fas fa-arrow-left"></i> Back to Cart
+            </a>
+</div>
+</div>
+</aside>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/wallet.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/student-ai-chat.js?v=20260526v21"></script>
+<script src="js/pages/checkout-inline.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

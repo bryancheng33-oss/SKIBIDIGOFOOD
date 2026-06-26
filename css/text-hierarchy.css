@@ -1,0 +1,379 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   TYPOGRAPHIC HIERARCHY BY TEXT TRANSPARENCY — readability-first
+   Purpose: guide the eye with alpha-based color levels, without lowering
+   contrast on buttons, prices, totals, status chips, or form actions.
+
+   Level 1: primary information      = near-solid ink
+   Level 2: supporting information   = soft ink
+   Level 3: explanatory / metadata   = muted ink
+   Level 4: helper / timestamps      = quiet ink
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --type-primary: rgba(26, 20, 0, .96);
+  --type-secondary: rgba(44, 32, 16, .80);
+  --type-tertiary: rgba(70, 56, 24, .66);
+  --type-quaternary: rgba(87, 74, 38, .54);
+  --type-faint: rgba(87, 74, 38, .42);
+  --type-accent-readable: #9a6a05;
+  --type-accent-strong: #7d5200;
+  --type-danger-readable: #c92f3a;
+
+  --type-inverse-primary: rgba(255, 255, 255, .96);
+  --type-inverse-secondary: rgba(255, 255, 255, .78);
+  --type-inverse-tertiary: rgba(255, 255, 255, .64);
+  --type-inverse-faint: rgba(255, 255, 255, .50);
+
+  --type-placeholder: rgba(44, 32, 16, .46);
+  --type-disabled: rgba(44, 32, 16, .42);
+}
+
+html,
+body {
+  color: var(--type-secondary);
+}
+
+/* Main reading level. Keep paragraphs readable, not pale. */
+:where(body, p, li, td, textarea, input, select) {
+  color: var(--type-secondary);
+}
+
+/* Level 1 — things users should read first. */
+:where(
+  h1, h2, h3, h4, h5, h6,
+  .title,
+  .section-title,
+  .section-heading,
+  .section-block-title,
+  .menu-hero-title,
+  .rewards-hero__title,
+  .checkout-hero h1,
+  .profile-kc-hero h1,
+  .disc-hero h1,
+  .error-title,
+  .error-content h1,
+  .cart-page-title,
+  .profile-kc-name,
+  .profile-kc-nameline,
+  .profile-kc-edit-card-title,
+  .profile-kc-plans-title,
+  .profile-kc-info-section-title,
+  .adm-page-title,
+  .adm-card-title,
+  .adm-stat-value,
+  .card-title,
+  .menu-item-name,
+  .reward-card h3,
+  .voucher-title,
+  .overview-card__value,
+  .balance-card strong,
+  .wa,
+  .wallet-balance .wa,
+  .menu-item-price,
+  .hub-cost,
+  .b-pts,
+  .co-grand,
+  .total-line,
+  .summary-line strong,
+  .value,
+  strong,
+  b
+) {
+  color: var(--type-primary) !important;
+}
+
+/* Prices, totals, and reward values remain strong and scannable. */
+:where(
+  .menu-item-price,
+  .hub-cost,
+  .co-grand,
+  .total-line,
+  .cart-summary-footer,
+  .summary-line.total-line,
+  .overview-card__value,
+  .wallet-balance .wa,
+  .wa,
+  .b-pts,
+  .prob-pct,
+  .prob-prize,
+  .adm-stat-value
+) {
+  color: var(--type-accent-strong) !important;
+}
+
+/* Level 2 — normal supportive copy and navigational text. */
+:where(
+  .header .flex .navbar a,
+  .mobile-menu a,
+  .nav-pill,
+  .menu-context-text,
+  .menu-results-text,
+  .menu-catalog-count,
+  .menu-item-copy,
+  .cart-floating-copy,
+  .cart-summary-lines,
+  .checkout-block,
+  .profile-kc-role,
+  .profile-kc-location,
+  .profile-kc-info-row,
+  .profile-kc-info-line,
+  .adm-card,
+  .adm-table,
+  .disc-card,
+  .disc-panel,
+  .group-card,
+  .team-card,
+  .modal-box,
+  .auth-form-wrap
+) {
+  color: var(--type-secondary) !important;
+}
+
+/* Level 3 — descriptive text, subtitles, notes, captions. */
+:where(
+  .hero p,
+  .section-sub,
+  .section-lead,
+  .section-block-copy,
+  .rewards-hero__lead,
+  .rewards-hero__copy p,
+  .menu-hero-subtitle,
+  .menu-item-note,
+  .menu-item-brand,
+  .menu-brand-copy,
+  .menu-empty-state,
+  .cart-page-sub,
+  .cart-checkout-note,
+  .checkout-hero p,
+  .profile-address-help,
+  .profile-kc-avatar-hint,
+  .profile-kc-ranking-label,
+  .profile-kc-work-meta,
+  .overview-card__note,
+  .reward-card p,
+  .cost-note,
+  .result-sub,
+  .history-empty-msg,
+  .review-helper-copy,
+  .order-timeline-item span,
+  .disc-card p,
+  .disc-panel p,
+  .group-card p,
+  .team-card p,
+  .lead,
+  .hint,
+  .brand-copy span,
+  .admin-badge,
+  .adm-card-copy,
+  .adm-empty,
+  .adm-muted,
+  .fp-disclaimer-bar,
+  .fp-footer-col p,
+  .fp-footer-col a
+) {
+  color: var(--type-tertiary) !important;
+}
+
+/* Level 4 — metadata: timestamps, helper labels, small secondary values. */
+:where(
+  small,
+  .wl,
+  .wallet-balance .wl,
+  .badge-text span,
+  .blog-card-author span,
+  .profile .account,
+  .section-kicker,
+  .section-eyebrow,
+  .overview-card__label,
+  .hub-label,
+  .b-label,
+  .he-time,
+  .he-label,
+  .prob-name,
+  .menu-breadcrumb,
+  .order-card .order-date,
+  .order-timeline-item small,
+  .review-text-meta span,
+  .info-row .label,
+  .profile-info-row .label,
+  .lbl,
+  .adm-card-kicker,
+  .adm-meta,
+  .adm-label,
+  .redirect-top,
+  .countdown-badge,
+  .partners-label
+) {
+  color: var(--type-quaternary) !important;
+}
+
+/* Labels/eyebrows should be quieter than titles, but still branded. */
+:where(
+  .hero-eyebrow,
+  .menu-hero-label,
+  .menu-order-history-label,
+  .section-label,
+  .section-eyebrow,
+  .section-kicker,
+  .blog-card-tag,
+  .disc-hero-badge,
+  .cart-board-kicker,
+  .rewards-hero__eyebrow,
+  .profile-kc-section-label,
+  .adm-card-kicker,
+  .admin-badge,
+  .eyebrow
+) {
+  color: var(--type-accent-readable) !important;
+}
+
+/* Dark / image / footer surfaces get their own transparency scale. */
+:where(.heading, .fp-footer, .partners-strip, .auth-left, .rewards-hero__copy, .birthday-band, .error-card .error-visual) {
+  color: var(--type-inverse-secondary) !important;
+}
+
+:where(.heading h1, .heading h2, .heading h3, .fp-footer-logo, .fp-footer h3, .auth-left h1, .auth-left h2, .auth-left h3, .rewards-hero__title, .birthday-band h3, .error-card .error-visual h1) {
+  color: var(--type-inverse-primary) !important;
+}
+
+:where(.heading p, .fp-footer p, .fp-footer a, .fp-footer-col p, .fp-footer-col a, .auth-left p, .rewards-hero__lead, .birthday-band p) {
+  color: var(--type-inverse-tertiary) !important;
+}
+
+:where(.fp-footer-bar, .fp-disclaimer-bar, .partners-label) {
+  color: var(--type-inverse-faint) !important;
+}
+
+/* Buttons and actionable chips must never look disabled or low-contrast. */
+:where(
+  .btn-primary,
+  .auth-submit,
+  .cart-checkout-btn,
+  .cart-floating-checkout-btn,
+  .menu-add-btn,
+  .adm-btn-primary,
+  button[type="submit"]
+) {
+  color: var(--type-primary) !important;
+}
+
+:where(
+  .btn-dark,
+  .btn-secondary,
+  .delete-btn:hover,
+  .status-preparing,
+  .status-on-the-way,
+  .status-delivered,
+  .status-cancelled
+) {
+  color: var(--type-inverse-primary) !important;
+}
+
+:where(.btn-outline, .blog-read-btn, .cta-link, .clear-btn, .menu-reset-btn) {
+  color: var(--type-accent-readable) !important;
+}
+
+/* Status badges keep semantic readability; do not fade critical state labels. */
+:where(
+  .badge,
+  .plan-badge,
+  .status-pill,
+  .status-pending,
+  .status-preparing,
+  .status-on-the-way,
+  .status-delivered,
+  .status-cancelled,
+  .menu-item-badge,
+  .result-badge,
+  .section-pill,
+  .amt-pill,
+  .menu-category-pill,
+  .menu-brand-chip,
+  .orders-filter-pill,
+  .filter-btn,
+  .adm-tab,
+  .auth-tab
+) {
+  color: var(--type-primary) !important;
+}
+
+:where(.menu-category-pill:not(.active), .menu-brand-chip:not(.active), .filter-btn:not(.active), .auth-tab:not(.active), .adm-tab:not(.active), .section-pill) {
+  color: var(--type-secondary) !important;
+}
+
+/* Forms: clear entered text, quieter placeholders/helper copy. */
+:where(input, textarea, select, .form-field, .profile-address-input, .review-textarea, .adm-inp, .adm-search-inp, .adm-user-select, .adm-order-select, .adm-catalog-select) {
+  color: var(--type-primary) !important;
+}
+
+:where(input, textarea)::placeholder {
+  color: var(--type-placeholder) !important;
+  opacity: 1;
+}
+
+:where(label, .label, .review-label) {
+  color: var(--type-secondary) !important;
+}
+
+/* Disabled states should look disabled, but still legible. */
+:where(.disabled, [disabled], [aria-disabled="true"]) {
+  color: var(--type-disabled) !important;
+}
+
+/* Links inside muted areas become more discoverable on hover.
+   Exclude action buttons so hover never makes CTA text harder to read. */
+:where(
+  a:hover:not(.btn):not(.cart-checkout-btn):not(.cart-floating-checkout-btn):not(.blog-read-btn):not(.cta-link),
+  .header .flex .navbar a:hover,
+  .header .flex .navbar a.active,
+  .mobile-menu a:hover
+) {
+  color: var(--type-accent-strong) !important;
+}
+
+/* Preserve CTA and dark-surface brand contrast after the general hierarchy rules. */
+:where(.btn-primary:hover, .cart-checkout-btn:hover, .cart-floating-checkout-btn:hover, .menu-add-btn:hover, .auth-submit:hover, .adm-btn-primary:hover) {
+  color: var(--type-primary) !important;
+}
+
+:where(.fp-footer strong, .fp-footer b, .fp-footer-logo em, .fp-disclaimer-bar strong, .fp-disclaimer-bar a, .heading p a) {
+  color: var(--type-accent-readable) !important;
+}
+
+:where(.heading strong, .heading b, .rewards-hero__copy strong, .rewards-hero__copy b, .auth-left strong, .auth-left b, .birthday-band strong, .birthday-band b) {
+  color: var(--type-inverse-primary) !important;
+}
+
+/* Tiny text needs slightly more contrast than large captions. */
+:where(.fp-disclaimer-bar, .fp-footer-bar, small, .order-timeline-item small, .review-text-meta span) {
+  font-weight: 600;
+}
+
+/* Admin and dense data screens: keep table values crisp, labels quieter. */
+:where(.adm-table th, .adm-table label, .adm-field label, .adm-filter-label) {
+  color: var(--type-quaternary) !important;
+}
+
+:where(.adm-table td, .adm-order-card, .adm-user-card, .adm-catalog-card) {
+  color: var(--type-secondary) !important;
+}
+
+/* 404 page hierarchy: large number + title first, instructions second. */
+:where(.error-content h1, .error-content h1 span) {
+  color: var(--type-primary) !important;
+}
+
+:where(.error-content .lead, .error-content .hint, .redirect-box p) {
+  color: var(--type-tertiary) !important;
+}
+
+@media (max-width: 640px) {
+  :root {
+    /* Slightly stronger mobile text because smaller screens need more contrast. */
+    --type-secondary: rgba(44, 32, 16, .84);
+    --type-tertiary: rgba(70, 56, 24, .72);
+    --type-quaternary: rgba(87, 74, 38, .62);
+    --type-inverse-secondary: rgba(255, 255, 255, .84);
+    --type-inverse-tertiary: rgba(255, 255, 255, .70);
+  }
+}

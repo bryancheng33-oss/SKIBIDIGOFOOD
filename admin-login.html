@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Administrator sign-in page for the Skibidi GoFood management dashboard." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — Admin Login</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<style>
+    .admin-login-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--bg); padding:2rem; }
+    .admin-login-box  { background:var(--white); border-radius:1.2rem; padding:4rem 3.5rem; width:100%; max-width:42rem; box-shadow:0 8px 40px rgba(0,0,0,.12); }
+    .admin-login-box .logo { font-size:2.8rem; font-weight:800; color:var(--black); text-align:center; display:block; margin-bottom:.5rem; }
+    .admin-login-box .logo span { color:var(--red); }
+    .admin-login-logo-img { display:block; width:7rem; height:7rem; object-fit:contain; margin:0 auto 1rem; }
+    .admin-badge { display:inline-block; background:#fff4bf; color:#8a5a00; font-size:1.2rem; font-weight:700; letter-spacing:.1em; padding:.3rem 1rem; border-radius:3rem; margin-bottom:2rem; border:1px solid rgba(217,154,0,.28); }
+    .admin-login-box h1, .admin-login-box h2 { font-size:2.2rem; color:var(--black); margin-bottom:1rem; text-align:center; }
+    .adm-notice { background:#fff8dc; border:1px solid rgba(247,201,72,.8); border-radius:.8rem; padding:1rem 1.4rem; font-size:1.35rem; margin-bottom:2rem; color:#5d4200; line-height:1.5; }
+    .adm-form-row { margin-bottom:1rem; }
+    .adm-label { display:block; font-size:1.35rem; font-weight:700; color:var(--black); margin-bottom:.45rem; }
+    .adm-help { display:block; font-size:1.2rem; color:var(--light); margin-top:.45rem; }
+    .adm-login-error { min-height:1.6rem; color:#c62828; font-weight:700; font-size:1.25rem; margin-top:.8rem; }
+    @media (max-width: 520px) {
+      .admin-login-box { padding:3rem 2rem; }
+      .admin-login-box .logo { font-size:2.4rem; }
+    }
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/admin-login" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/></head>
+<body>
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<div class="notif" id="notif"></div>
+<div class="admin-login-wrap">
+<div class="admin-login-box">
+<a class="logo" href="./">Skibidi <span>GoFood</span></a>
+<div style="text-align:center"><span class="admin-badge">⚙️ ADMIN PANEL</span></div>
+<h1>Administrator login</h1>
+<div class="adm-notice" id="adm-notice">
+      Use the original administrator credentials assigned to this project. This page accepts only the original administrator account so the management page remains the real admin flow.
+    </div>
+<form id="adm-login-form" novalidate="">
+<div class="adm-form-row">
+<label class="adm-label" for="adm-user">Admin username</label>
+<input autocomplete="username" class="form-field" id="adm-user" placeholder="Enter admin username" required="" type="text"/>
+</div>
+<div class="adm-form-row">
+<label class="adm-label" for="adm-pass">Admin password</label>
+<input autocomplete="current-password" class="form-field" id="adm-pass" placeholder="Enter admin password" required="" type="password"/>
+<span class="adm-help">Credentials are checked against the original admin account only.</span>
+</div>
+<div aria-live="polite" class="adm-login-error" id="adm-login-error"></div>
+<button class="btn" style="width:100%;margin-top:1.5rem;font-size:1.8rem" type="submit">
+<i class="fas fa-shield-alt"></i> Open admin dashboard
+      </button>
+</form>
+<a href="./" style="display:block;text-align:center;margin-top:1.2rem;font-size:1.5rem;color:var(--light)">
+      ← Back to User Login
+    </a>
+</div>
+</div>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/admin-login.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Learn how Skibidi GoFood works for MMU Melaka students, from the platform story to ordering steps and student feedback." name="description"/>
+<meta content="#d4a017" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — How It Works</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://unpkg.com" rel="preconnect"/>
+<link href="https://unpkg.com/swiper@8/swiper-bundle.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Unified Home Style CSS -->
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<link href="css/home-about-combined.css" rel="stylesheet"/>
+<!-- Home Page Specific Styles -->
+<style>
+    /* ── HERO SECTION (Home Page Specific) ───────────────────────────── */
+    .hero {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--yellow-pale) 0%, #fef9c3 60%, #fde58a 100%);
+      padding: 80px max(5%, calc((100vw - 1200px) / 2)) 60px;
+      width: 100vw;
+      max-width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(176,125,16,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow-light); color: var(--yellow);
+      border: 1.5px solid rgba(176,125,16,.2);
+      padding: 6px 16px; border-radius: 50px;
+      font-size: 1.2rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 22px;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--yellow); display: block;
+    }
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      line-height: 1.12; color: var(--dark);
+      margin-bottom: 20px;
+    }
+    .hero h1 em { color: var(--yellow); font-style: normal; }
+    .hero p {
+      font-size: 1.4rem; color: var(--muted);
+      max-width: 440px; margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-socials {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 44px;
+    }
+    .hero-socials span { font-size: 1.2rem; color: var(--muted); font-weight: 500; }
+    .social-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--white); color: var(--yellow);
+      font-size: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      transition: all .2s;
+    }
+    .social-icon:hover { background: var(--yellow); color: var(--dark); transform: translateY(-2px); }
+    .hero-image-wrap {
+      position: relative;
+    }
+    .hero-image-circle {
+      position: relative;
+      width: min(480px, 100%); aspect-ratio: 1/1;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 40% 40%, #fde68a, #fcd34d);
+      display: flex; align-items: center; justify-content: center;
+      margin-left: auto;
+      box-shadow: 0 24px 80px rgba(176,125,16,.22);
+      overflow: hidden;
+    }
+    .hero-food-img {
+      width: 95%; height: 95%; object-fit: contain;
+      transform: rotate(-6deg) scale(1.05);
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,.15));
+      transition: transform .4s ease;
+    }
+    .hero-image-circle:hover .hero-food-img { transform: rotate(0deg) scale(1.08); }
+    .hero-stat-badge {
+      position: absolute; bottom: 32px; left: -24px;
+      background: var(--white); border-radius: var(--radius);
+      padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+      box-shadow: var(--shadow-lg);
+      animation: float 3s ease-in-out infinite;
+    }
+    .hero-stat-badge.top { top: 48px; left: auto; right: -20px; bottom: auto; animation-delay: -1.5s; }
+    @keyframes float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+    .badge-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--yellow-light); color: var(--yellow);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .badge-text strong { display: block; font-size: 1.5rem; font-weight: 800; color: var(--dark); }
+    .badge-text span { font-size: 1rem; color: var(--muted); }
+
+    /* ── FEATURES GRID (Home Page Specific) ───────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    /* ── PARTNERS STRIP (Home Page Specific) ───────────────────────────── */
+    .partners-strip {
+      background: var(--yellow);
+      padding: 36px 5%;
+      overflow: hidden;
+    }
+    .partners-inner { max-width: 1200px; margin: 0 auto; }
+    .partners-label {
+      text-align: center; font-size: 1.1rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.6); margin-bottom: 28px;
+    }
+    .partners-scroll {
+      display: flex; align-items: center; gap: 48px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .partner-logo {
+      display: flex; align-items: center; gap: 10px;
+      opacity: .75; transition: opacity .2s;
+      filter: brightness(10);
+    }
+    .partner-logo:hover { opacity: 1; }
+    .partner-logo img { height: 34px; width: auto; }
+    .partner-logo span {
+      font-size: 1.3rem; font-weight: 700; color: var(--white);
+      letter-spacing: .04em;
+    }
+
+    /* ── HOME PAGE RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-image-wrap { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MOBILE MENU OVERLAY ───────────────────────────────── */
+    .mobile-menu a {
+      font-weight: 700;
+    }
+    .mobile-menu a:hover { color: var(--yellow); }
+    .mobile-close {
+      position: absolute; top: 22px; right: 22px;
+      background: none; border: none; font-size: 1.6rem;
+      cursor: pointer; color: var(--text);
+    }
+  </style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="index, follow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/how-it-works" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="Skibidi GoFood" property="og:site_name"/><meta content="Skibidi GoFood — How It Works" property="og:title"/><meta content="Learn how Skibidi GoFood works for MMU Melaka students, from the platform story to ordering steps and student feedback." property="og:description"/><meta content="https://skibidigofood.edgeone.cool/how-it-works" property="og:url"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Skibidi GoFood — How It Works" name="twitter:title"/><meta content="Learn how Skibidi GoFood works for MMU Melaka students, from the platform story to ordering steps and student feedback." name="twitter:description"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" name="twitter:image"/></head>
+<body id="page-top">
+<!-- LOADER -->
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<!-- NOTIFICATION -->
+<div class="notif" id="notif"></div>
+<!-- WALLET MODAL -->
+<div class="modal-bg" id="wallet-modal">
+<div aria-labelledby="wallet-modal-title" aria-modal="true" class="modal-box wallet-topup-modal" role="dialog">
+<button aria-label="Close wallet" class="modal-close wallet-topup-close" onclick="closeWallet()"><i class="fas fa-times"></i></button>
+<div class="wallet-topup-shell">
+<div class="wallet-topup-hero wallet-topup-hero--refined">
+<div class="wallet-topup-icon"><i class="fas fa-wallet"></i></div>
+<div class="wallet-topup-hero-copy">
+<p class="wallet-topup-kicker">Student wallet</p>
+<h3 id="wallet-modal-title">Top Up Wallet</h3>
+<p class="wallet-topup-copy">Choose a preset amount or enter your own amount. Your wallet balance updates instantly and can be used during checkout.</p>
+</div>
+</div>
+<div class="wallet-topup-layout wallet-topup-layout--refined">
+<section class="wallet-balance wallet-balance-card wallet-balance-card--refined">
+<div class="wallet-balance-top wallet-balance-top--refined">
+<div>
+<div class="wl">Current Balance</div>
+<div class="wa">RM <span id="wallet-bal-display">0.00</span></div>
+</div>
+<span class="wallet-safe-pill"><i class="fas fa-shield-alt"></i> Saved locally</span>
+</div>
+<div class="wallet-summary-grid">
+<article class="wallet-summary-card">
+<span>Selected top up</span>
+<strong>RM <span id="wallet-selected-amount">0.00</span></strong>
+<small>Choose a preset or type your own amount.</small>
+</article>
+<article class="wallet-summary-card wallet-summary-card--accent">
+<span>Balance after top up</span>
+<strong>RM <span id="wallet-balance-after">0.00</span></strong>
+<small id="wallet-topup-status">No amount selected yet.</small>
+</article>
+</div>
+<div class="wallet-balance-note wallet-balance-note--refined"><i class="fas fa-circle-info"></i> Minimum top up is RM 1.00. Maximum top up is RM 10,000.00 per transaction.</div>
+<ul class="wallet-guideline-list">
+<li><i class="fas fa-check-circle"></i> Use wallet balance directly during checkout.</li>
+<li><i class="fas fa-check-circle"></i> Preset amounts help students top up faster for daily meals.</li>
+<li><i class="fas fa-check-circle"></i> This project stores wallet data locally for demo purposes.</li>
+</ul>
+</section>
+<section class="wallet-topup-panel wallet-topup-panel--refined">
+<div class="wallet-panel-head wallet-panel-head--refined">
+<strong>Choose amount</strong>
+<span>Tap one suggested amount below or enter a custom amount that matches your budget.</span>
+</div>
+<div class="amt-grid wallet-amount-grid">
+<button class="amt-pill" onclick="selectAmt(this,5)" type="button">RM 5</button>
+<button class="amt-pill" onclick="selectAmt(this,10)" type="button">RM 10</button>
+<button class="amt-pill" onclick="selectAmt(this,15)" type="button">RM 15</button>
+<button class="amt-pill" onclick="selectAmt(this,20)" type="button">RM 20</button>
+<button class="amt-pill" onclick="selectAmt(this,30)" type="button">RM 30</button>
+<button class="amt-pill" onclick="selectAmt(this,50)" type="button">RM 50</button>
+</div>
+<label class="wallet-custom-field wallet-custom-field--refined" for="wallet-custom">
+<span>Custom amount</span>
+<input class="form-field" id="wallet-custom" inputmode="decimal" min="1" placeholder="Enter custom amount (RM)" step="0.01" type="number"/>
+<small>Example: RM 12.50 or RM 25.00</small>
+</label>
+<div class="wallet-selection-preview" id="wallet-selection-preview">
+<i class="fas fa-receipt"></i>
+<span id="wallet-selection-preview-text">Select an amount to preview your new wallet balance.</span>
+</div>
+<div class="flex-btn wallet-actions-row wallet-actions-row--refined">
+<button class="delete-btn wallet-reset-btn" onclick="clearWalletTopup()" type="button"><i class="fas fa-rotate-left"></i> Clear</button>
+<button class="btn wallet-topup-primary" disabled="" id="wallet-topup-submit" onclick="doTopUp()" type="button"><i class="fas fa-plus"></i> Top Up</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+<button aria-label="Close mobile menu" class="mobile-close" onclick="closeMobile()" type="button"><i aria-hidden="true" class="fas fa-times"></i></button>
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</div>
+<!-- ═══════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════ -->
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home">
+<span class="logo-wordmark">Skibidi <em>GoFood</em></span>
+</a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</nav>
+<div class="icons">
+<div class="nav-pill" onclick="openWallet()">
+<i class="fas fa-wallet"></i> RM <span id="navWallet">0.00</span>
+</div>
+<div class="nav-pill nav-pill-dark">
+<i class="fas fa-star"></i> <span id="navPts">0</span> pts
+      </div>
+<a aria-label="Cart" class="nav-cart-icon" href="cart">
+<i class="fas fa-shopping-cart"></i><span id="navCart"></span>
+</a>
+<div class="fas fa-user" id="user-btn" onclick="toggleProfile()"></div>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+<div class="profile" id="profileDrop">
+<div class="profile-card-head">
+<div class="profile-avatar" id="profileAvatar">G</div>
+<div class="profile-meta">
+<span class="profile-kicker">Student Account</span>
+<p class="name" id="profileName">Guest</p>
+<p class="profile-handle" id="profileHandle">@guest</p>
+</div>
+</div>
+<div class="profile-stats">
+<div class="profile-stat">
+<span>Wallet</span>
+<strong>RM <span id="profileWallet">0.00</span></strong>
+</div>
+<div class="profile-stat">
+<span>Points</span>
+<strong><span id="profilePoints">0</span> pts</strong>
+</div>
+</div>
+<div class="profile-actions">
+<a class="profile-link primary" href="profile"><i class="fas fa-user-circle"></i> Profile</a>
+<a class="profile-link soft" href="rewards"><i class="fas fa-gift"></i> Rewards</a>
+</div>
+<button class="profile-logout" onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</section>
+</header>
+<!-- ═══════════════════════════════════════════════
+     PAGE INTRO
+════════════════════════════════════════════════ -->
+<section class="section" id="how-it-works-overview">
+<div class="section-inner">
+<div class="text-center fade-up">
+<div class="section-label">How It Works</div>
+<h1 class="section-title">Learn the flow before you order</h1>
+<p class="section-sub">All the extra home-page information now lives here, so the main home page stays clean while users can still read the full details in one place.</p>
+<div class="hero-actions" style="justify-content:center; margin-top: 28px;">
+<a class="btn btn-primary" href="menu"><i class="fas fa-utensils"></i> Order Now</a>
+<a class="btn btn-outline" href="home">Back Home <i class="fas fa-arrow-left"></i></a>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════
+     QUICK HIGHLIGHTS
+════════════════════════════════════════════════ -->
+<section class="section" id="features">
+<div class="section-inner">
+<div class="text-center">
+<div class="section-label">Quick Highlights</div>
+<h2 class="section-title">A simpler home page with a clearer flow</h2>
+<p class="section-sub">Everything important now appears in a more natural order: what the service is, why it helps students, how it works, and where to order next.</p>
+</div>
+<div class="features-grid">
+<div class="feature-card fade-up">
+<div class="feature-icon"><i class="fas fa-compass"></i></div>
+<h4>Easy to Understand</h4>
+<p>New visitors can learn about the platform directly on the home page without jumping between separate pages.</p>
+</div>
+<div class="feature-card fade-up">
+<div class="feature-icon"><i class="fas fa-motorcycle"></i></div>
+<h4>Fast Campus Delivery</h4>
+<p>Orders are built around MMU Melaka hostels, residences, and student hangout spots for easier drop-offs.</p>
+</div>
+<div class="feature-card fade-up">
+<div class="feature-icon"><i class="fas fa-star"></i></div>
+<h4>Rewards on Every Order</h4>
+<p>Students earn points with every purchase and can turn them into discounts, freebies, and better value later.</p>
+</div>
+<div class="feature-card fade-up">
+<div class="feature-icon"><i class="fas fa-bag-shopping"></i></div>
+<h4>Smoother Ordering Journey</h4>
+<p>Home leads naturally to Menu, Orders, and Checkout so users can move through the site with less confusion.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════
+     ABOUT / CAMPUS STORY
+════════════════════════════════════════════════ -->
+<section class="section home-about-lite" id="about-panel">
+<div class="section-inner home-about-layout">
+<div class="home-about-copy fade-up" id="campus-story">
+<div class="section-label">About Skibidi GoFood</div>
+<h2 class="section-title">Built around the rhythm of campus life</h2>
+<p class="home-about-text">Skibidi GoFood was created for MMU Melaka students who often need a faster, simpler way to get meals between lectures, meetings, and study sessions. Instead of keeping that story on a separate page, the most useful background now lives here in a shorter and more readable format.</p>
+<p class="home-about-text">The idea is straightforward: help students discover food quickly, place orders with less friction, and stay rewarded every time they come back.</p>
+<div class="home-story-points">
+<div class="home-story-point">
+<i class="fas fa-map-marker-alt"></i>
+<div>
+<strong>Campus-first delivery</strong>
+<span>Made for hostels, residences, labs, and common study spots around MMU Melaka.</span>
+</div>
+</div>
+<div class="home-story-point">
+<i class="fas fa-wallet"></i>
+<div>
+<strong>Student-friendly payments</strong>
+<span>Wallet top-up and a simple checkout flow make repeat orders quicker and easier.</span>
+</div>
+</div>
+<div class="home-story-point">
+<i class="fas fa-users"></i>
+<div>
+<strong>Made for student routines</strong>
+<span>Whether ordering solo or with friends, the flow stays simple and less crowded.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="home-about-visual fade-up">
+<div class="home-about-image-card">
+<img alt="Campus delivery illustration" decoding="async" loading="lazy" onerror="this.src='images/about.webp'" src="images/auth-delivery-happy.webp"/>
+</div>
+<div class="home-metrics-grid">
+<div class="home-metric-card">
+<strong>20 min</strong>
+<span>Average delivery</span>
+</div>
+<div class="home-metric-card">
+<strong>4.9 / 5</strong>
+<span>Student satisfaction</span>
+</div>
+<div class="home-metric-card">
+<strong>1 app flow</strong>
+<span>Learn, browse, and order</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════════ -->
+<section class="ab-steps" id="campus-order-steps">
+<div class="ab-steps-inner">
+<div class="ab-steps-header">
+<div class="ab-tag ab-tag-light" style="margin:0 auto 20px;"><span></span> Simple Process</div>
+<h2>How ordering works on campus</h2>
+<p class="ab-steps-sub">Three easy steps from browsing to delivery.</p>
+</div>
+<div class="ab-steps-track">
+<div class="ab-step">
+<div class="ab-step-circle">
+<span class="ab-step-num">1</span>
+<img alt="Choose meal" decoding="async" loading="lazy" src="images/step-order.webp"/>
+</div>
+<h3>Pick Your Meal</h3>
+<p>Browse partner menus, compare categories, and choose what you want without wasting time.</p>
+</div>
+<div class="ab-step">
+<div class="ab-step-circle">
+<span class="ab-step-num">2</span>
+<img alt="Fast delivery" decoding="async" loading="lazy" src="images/step-delivery.webp"/>
+</div>
+<h3>Choose a Drop Point</h3>
+<p>Select your campus location, confirm the details, and let the delivery flow handle the rest.</p>
+</div>
+<div class="ab-step">
+<div class="ab-step-circle">
+<span class="ab-step-num">3</span>
+<img alt="Enjoy and earn" decoding="async" loading="lazy" src="images/step-enjoy.webp"/>
+</div>
+<h3>Enjoy and Earn</h3>
+<p>Receive your meal, track your order history, and collect rewards points for your next order.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════
+     STUDENT REVIEWS
+════════════════════════════════════════════════ -->
+<section class="section home-reviews" id="reviews">
+<div class="section-inner">
+<div class="text-center">
+<div class="section-label">Student Feedback</div>
+<h2 class="section-title">What MMU students like most</h2>
+<p class="section-sub">A few quick reviews from students who use Skibidi GoFood during busy campus days.</p>
+</div>
+<div class="blog-grid" id="blog-grid">
+<div class="blog-card fade-up">
+<img alt="Big Mac combo" class="blog-card-img" decoding="async" loading="lazy" onerror="this.src='images/food-fries.webp'" src="images/food-burger.webp"/>
+<div class="blog-card-body">
+<span class="blog-card-tag">Burger</span>
+<h4>Perfect when classes are back-to-back</h4>
+<p>I can order quickly, keep walking to class, and still get food without losing too much time in between sessions.</p>
+<div class="blog-card-footer">
+<div class="blog-card-author">
+<img alt="Aiman" decoding="async" loading="lazy" onerror="this.style.display='none'" src="images/user-1.webp"/>
+<span>Aiman R. <div class="stars">★★★★★</div></span>
+</div>
+<a class="blog-read-btn" href="menu">Order <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+<div class="blog-card fade-up">
+<img alt="KFC meal" class="blog-card-img" decoding="async" loading="lazy" onerror="this.src='images/food-burger.webp'" src="images/food-fries.webp"/>
+<div class="blog-card-body">
+<span class="blog-card-tag">Campus Flow</span>
+<h4>The new layout feels much easier to use</h4>
+<p>I like that the home page explains the service clearly first, then sends me to the menu without too many extra steps.</p>
+<div class="blog-card-footer">
+<div class="blog-card-author">
+<img alt="Priya" decoding="async" loading="lazy" onerror="this.style.display='none'" src="images/user-2.webp"/>
+<span>Priya N. <div class="stars">★★★★★</div></span>
+</div>
+<a class="blog-read-btn" href="menu">Browse <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+<div class="blog-card fade-up">
+<img alt="Dessert" class="blog-card-img" decoding="async" loading="lazy" onerror="this.src='images/mcdo-mcflurry.webp'" src="images/food-dessert.webp"/>
+<div class="blog-card-body">
+<span class="blog-card-tag">Rewards</span>
+<h4>Points make repeat orders more worth it</h4>
+<p>The reward system gives me a good reason to keep using the app, especially when I can save on the next meal.</p>
+<div class="blog-card-footer">
+<div class="blog-card-author">
+<img alt="Zhi Han" decoding="async" loading="lazy" onerror="this.style.display='none'" src="images/user-5.webp"/>
+<span>Zhi Han L. <div class="stars">★★★★☆</div></span>
+</div>
+<a class="blog-read-btn" href="rewards">Rewards <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════ -->
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/wallet.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/pages/how-it-works-inline.js"></script>
+<script src="js/student-ai-chat.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

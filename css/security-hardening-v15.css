@@ -1,0 +1,61 @@
+/* Skibidi GoFood V15 security hardening layer.
+   Visual helpers only; server-side protection is configured in _headers,
+   vercel.json, and .htaccess. */
+:root { --sg-security-focus-ring: 0 0 0 .32rem rgba(247, 201, 72, .45); }
+
+html.sg-security-v15 { scroll-behavior: smooth; }
+
+/* Keep security/accessibility affordances visible without changing the brand. */
+a[target="_blank"]:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 3px;
+  box-shadow: var(--sg-security-focus-ring);
+}
+
+/* Long external URLs, order references, or generated tokens should never break layouts. */
+a, code, kbd, samp, pre, .order-note, .timeline-desc, .timeline-title, .order-id, .status-pill {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Avoid hidden third-party or legacy embeds from creating unsafe click targets. */
+iframe:not([title]) {
+  outline: 2px dashed rgba(220, 38, 38, .65);
+  outline-offset: 4px;
+}
+
+/* Optional client-side banner is injected only on non-local HTTP pages. */
+.sg-security-warning {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 99999;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  background: #111;
+  color: #fff;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.22);
+  font: 600 1.35rem/1.45 system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+.sg-security-warning button {
+  float: right;
+  margin-left: 1rem;
+  border: 0;
+  border-radius: 999px;
+  padding: .45rem .8rem;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.sg-security-v15 { scroll-behavior: auto; }
+  .sg-security-warning { transition: none; }
+}

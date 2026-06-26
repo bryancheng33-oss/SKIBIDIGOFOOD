@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="MMU Melaka student, staff, and teacher login and registration portal for Skibidi GoFood." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — MMU Login</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Open+Sans:wght@400;600;700;800&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @font-face {
+      font-family: 'Dapifer';
+      src: local('Dapifer'), local('Dapifer Regular');
+      font-style: normal;
+      font-weight: 400 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Dapifer Stencil';
+      src: local('Dapifer Stencil'), local('DapiferStencil'), local('Dapifer Stencil Regular');
+      font-style: normal;
+      font-weight: 400 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ITC Tiffany';
+      src: local('ITC Tiffany'), local('Tiffany'), local('Tiffany Std'), local('Tiffany Std Regular');
+      font-style: normal;
+      font-weight: 400 900;
+      font-display: swap;
+    }
+
+    :root {
+      --orange:    #f7a82a;
+      --orange2:   #f5c842;
+      --orange-bg: #f9a825;
+      --green:     #5bbf5f;
+      --green-h:   #4aaa4e;
+      --cream:     #faf8f3;
+      --ink:       #1a1a2e;
+      --muted:     #6b7280;
+      --border:    #e4e0d8;
+      --input-bg:  #eeebe4;
+      --red:       #ef4444;
+      --font-head: 'Dapifer', 'ITC Tiffany', 'Tiffany', Georgia, 'Times New Roman', serif;
+      --font-stencil: 'Dapifer Stencil', 'Dapifer', 'ITC Tiffany', Georgia, serif;
+      --font-body: 'Inter', 'Nunito Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      min-height: 100vh;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── NOTIFICATION ── */
+    #notif {
+      position: fixed;
+      top: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      z-index: 9999;
+      padding: 1rem 2.2rem;
+      border-radius: 999px;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s, transform .28s;
+      white-space: nowrap;
+    }
+    #notif.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ══════════════════════════════════════
+       TWO-COLUMN SHELL
+    ══════════════════════════════════════ */
+    .auth-shell {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      width: 100%;
+      min-height: 100vh;
+      height: 100vh;
+    }
+
+    /* ────────────────────────────
+       LEFT — showcase panel
+    ──────────────────────────── */
+    .auth-left {
+      position: relative;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,249,220,.96) 0 8%, rgba(255,249,220,0) 9%),
+        radial-gradient(circle at 76% 18%, rgba(255,231,149,.34) 0 10%, rgba(255,231,149,0) 11%),
+        linear-gradient(145deg, #f8bc33 0%, #f6ae27 48%, #f4a61e 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+      padding: 3rem;
+      isolation: isolate;
+    }
+
+    .auth-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 85%, rgba(147,88,7,.12) 0 20%, rgba(147,88,7,0) 21%),
+        radial-gradient(circle at 82% 76%, rgba(255,215,112,.14) 0 14%, rgba(255,215,112,0) 15%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* soft cream edge at right */
+    .auth-left::after {
+      content: '';
+      position: absolute;
+      right: -4.6rem;
+      top: -5%;
+      width: 10rem;
+      height: 110%;
+      background: rgba(250,248,243,.96);
+      border-radius: 50%;
+      z-index: 3;
+    }
+
+    .left-blob {
+      position: absolute;
+      bottom: -11rem;
+      left: -7rem;
+      width: 34rem;
+      height: 34rem;
+      background: radial-gradient(circle, rgba(154,94,10,.18) 0%, rgba(154,94,10,.1) 46%, rgba(154,94,10,0) 74%);
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(2px);
+    }
+    .left-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(14px);
+      opacity: .72;
+    }
+    .left-glow-1 {
+      width: 16rem;
+      height: 16rem;
+      top: 4rem;
+      left: 2rem;
+      background: radial-gradient(circle, rgba(255,247,214,.92), rgba(255,247,214,0));
+    }
+    .left-glow-2 {
+      width: 13rem;
+      height: 13rem;
+      right: 12rem;
+      top: 6rem;
+      background: radial-gradient(circle, rgba(255,223,127,.42), rgba(255,223,127,0));
+    }
+
+    .auth-brand {
+      position: absolute;
+      top: 2.6rem; left: 2.6rem;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      text-decoration: none;
+      background: linear-gradient(135deg, rgba(255,245,214,.92), rgba(255,238,186,.78));
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,.44);
+      border-radius: 999px;
+      padding: .72rem 1.55rem .72rem .95rem;
+      box-shadow: 0 12px 30px rgba(133,83,10,.10);
+    }
+    .auth-brand img {
+      width: 3rem; height: 3rem;
+      object-fit: contain;
+    }
+    .auth-brand span {
+      font-family: var(--font-stencil);
+      font-size: 1.55rem; font-weight: 700;
+      color: #8a4b00;
+      letter-spacing: -.02em;
+      text-shadow: none;
+    }
+    .auth-brand span strong { color: #8a4b00; font-weight: 800; text-shadow: none; }
+    .auth-brand span em {
+      color: var(--ink);
+      font-style: normal;
+      text-shadow: none;
+    }
+
+    .bolt {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      color: rgba(124,76,12,.22);
+    }
+    .bolt svg { display: block; }
+    .b1 { top: 6rem;  left: 58%; transform: rotate(-10deg); }
+    .b2 { top: 4rem;  right: 8.4rem; transform: rotate(6deg); opacity: .55; }
+    .b3 { bottom: 7rem; right: 8rem; transform: rotate(-5deg); opacity: .35; }
+    .b4 { bottom: 5rem; left: 4rem;  transform: rotate(15deg); opacity: .18; }
+
+    .hero-stage,
+    .hero-stage-inner,
+    .hero-visual,
+    .hero-copy,
+    .hero-pill,
+    .hero-stat {
+      display: none !important;
+    }
+    /* ────────────────────────────
+       RIGHT — form panel
+    ──────────────────────────── */
+    .auth-right {
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.4rem 2.4rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* bolt decorations — right */
+    .bolt-r {
+      position: absolute;
+      pointer-events: none;
+      color: var(--orange2);
+    }
+    .br1 { top: 4rem;   right: 5rem;  opacity: .50; transform: rotate(8deg); }
+    .br2 { bottom: 9rem; left: 3rem;  opacity: .40; transform: rotate(-14deg); }
+    .br3 { bottom: 3.5rem; right: 5rem; opacity: .30; transform: rotate(20deg); }
+
+    .auth-form-wrap {
+      width: min(34rem, 100%);
+      position: relative;
+      z-index: 1;
+      max-height: calc(100vh - 2.4rem);
+      overflow-y: auto;
+      padding-right: .35rem;
+      scrollbar-width: thin;
+    }
+    .auth-form-wrap::-webkit-scrollbar { width: 7px; }
+    .auth-form-wrap::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,.12);
+      border-radius: 999px;
+    }
+
+    /* heading */
+    .auth-heading {
+      font-family: var(--font-head);
+      font-size: clamp(2.35rem, 3.2vw, 3.45rem);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.055em;
+      text-align: center;
+      margin-bottom: .25rem;
+      line-height: 1.08;
+      text-transform: none;
+    }
+    .auth-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 1.2rem;
+      line-height: 1.45;
+    }
+
+    /* tab switcher */
+    .tab-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--input-bg);
+      border-radius: 999px;
+      padding: .25rem;
+      margin-bottom: 1.15rem;
+      border: 1.5px solid var(--border);
+    }
+    .tab-btn {
+      padding: .8rem .9rem;
+      border-radius: 999px;
+      font-size: 1.12rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all .22s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 4px 16px rgba(0,0,0,.09);
+    }
+
+    /* forms */
+    .auth-form { display: none; }
+    .auth-form.active { display: block; }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+    }
+    .input-group { margin-bottom: .95rem; }
+    .input-group label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .38rem;
+      letter-spacing: .015em;
+    }
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      height: 4.1rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--input-bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 0 1.4rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      appearance: none;
+    }
+    .input-group input::placeholder { color: #aaa; font-weight: 500; }
+    .input-group input:focus,
+    .input-group select:focus {
+      border-color: var(--orange);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(247,168,42,.17);
+    }
+    .input-group input.field-error {
+      border-color: var(--red) !important;
+      background: rgba(239,68,68,.06) !important;
+      box-shadow: none !important;
+    }
+
+    /* autofill override */
+    .input-group input:-webkit-autofill,
+    .input-group input:-webkit-autofill:focus {
+      -webkit-text-fill-color: var(--ink);
+      box-shadow: 0 0 0 1000px var(--input-bg) inset;
+      transition: background-color 9999s ease 0s;
+    }
+
+    /* password toggle */
+    .input-icon-wrap { position: relative; }
+    .input-icon-wrap input { padding-right: 3.9rem; }
+    .input-icon-toggle {
+      position: absolute;
+      right: 1.25rem; top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 1.15rem;
+      transition: color .18s;
+    }
+    .input-icon-toggle:hover { color: var(--orange); }
+
+    /* hints */
+    .field-hint {
+      font-size: .9rem; color: var(--muted);
+      margin-top: .25rem; display: block;
+      line-height: 1.35; padding-left: .55rem;
+    }
+    .field-error-msg {
+      font-size: .9rem; color: var(--red);
+      margin-top: .25rem; display: block; padding-left: .55rem;
+    }
+
+    /* password strength */
+    .pass-strength-wrap { margin-top: .45rem; padding: 0 .45rem; }
+    .pass-strength-track {
+      height: .48rem; background: var(--border);
+      border-radius: 999px; overflow: hidden;
+    }
+    .pass-strength-fill {
+      height: 100%; width: 0;
+      border-radius: 999px;
+      transition: width .3s, background .3s;
+    }
+    .pass-strength-label {
+      font-size: .95rem; font-weight: 700;
+      margin-top: .25rem; display: block;
+    }
+
+    /* req box */
+    .req-box {
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: 1.2rem; padding: .7rem .9rem; margin-top: .45rem;
+    }
+    .req-box .req-title {
+      font-size: .95rem; font-weight: 700;
+      color: var(--ink); margin-bottom: .35rem;
+    }
+    .req-box ul {
+      list-style: none; display: flex; flex-wrap: wrap; gap: .45rem;
+    }
+    .req-box li {
+      font-size: .86rem; color: var(--ink);
+      padding: .22rem .58rem;
+      background: var(--input-bg); border: 1.5px solid var(--border);
+      border-radius: 999px; font-weight: 600;
+    }
+
+    /* submit */
+    .auth-submit {
+      width: 100%; height: 4.35rem;
+      border-radius: 999px; border: none;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 1.22rem; font-weight: 850;
+      cursor: pointer; letter-spacing: .01em;
+      transition: background .18s, transform .14s, box-shadow .18s;
+      box-shadow: 0 8px 22px rgba(91,191,95,.28);
+      display: flex; align-items: center;
+      justify-content: center; gap: .8rem;
+      margin-top: .5rem;
+    }
+    .auth-submit:hover {
+      background: var(--green-h);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(91,191,95,.36);
+    }
+    .auth-submit:disabled { opacity: .65; cursor: wait; transform: none; }
+
+    /* footer */
+    .auth-footer-note {
+      text-align: center; font-size: 1rem;
+      color: var(--muted); margin-top: .95rem;
+    }
+    .auth-footer-note a {
+      color: var(--green); font-weight: 700;
+      text-decoration: none; transition: color .18s;
+    }
+    .auth-footer-note a:hover { color: var(--green-h); }
+
+    /* admin link */
+    .auth-admin-link { text-align: center; margin-top: .8rem; }
+    .auth-admin-link a {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-size: .98rem; font-weight: 700;
+      color: var(--muted); text-decoration: none;
+      border: 1.5px solid var(--border);
+      padding: .68rem 1.35rem; border-radius: 999px;
+      background: var(--input-bg); transition: all .2s;
+    }
+    .auth-admin-link a:hover {
+      border-color: var(--orange); color: var(--ink); background: #fff;
+    }
+
+    /* disclaimer */
+    .site-disclaimer {
+      text-align: center; padding: .9rem .4rem 0;
+      font-size: .84rem; color: var(--muted);
+      line-height: 1.45; border-top: 1.5px solid var(--border);
+      margin-top: 1rem;
+    }
+    .site-disclaimer strong { color: var(--orange); }
+    .site-disclaimer a { color: var(--orange); text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-height: 860px) {
+      .auth-brand { top: 1.4rem; left: 1.4rem; padding: .55rem 1.1rem .55rem .8rem; }
+      .auth-brand img { width: 2.5rem; height: 2.5rem; }
+      .auth-brand span { font-size: 1.15rem; }
+    }
+    @media (max-height: 760px) {
+      .bolt, .bolt-r { display: none; }
+      .auth-right { padding-top: .85rem; padding-bottom: .75rem; }
+      .auth-heading { font-size: 1.8rem; }
+      .auth-sub { margin-bottom: .8rem; }
+      .input-group { margin-bottom: .72rem; }
+      .site-disclaimer { display: none; }
+    }
+    @media (max-width: 1020px) {
+      body {
+        display: block;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      .auth-shell {
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        height: auto;
+      }
+      .auth-left {
+        min-height: 31rem; padding: 2rem;
+      }
+      .auth-left::after { display: none; }
+      .auth-right { padding: 2rem 1.6rem 1.5rem; }
+      .auth-form-wrap {
+        width: min(40rem, 100%);
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+      }
+      .site-disclaimer { display: block; }
+    }
+    @media (max-width: 600px) {
+      .auth-left { min-height: 24rem; padding: 1.2rem; }
+      .auth-right { padding: 1.5rem 1rem 1.1rem; }
+      .input-row { grid-template-columns: 1fr; gap: .7rem; }
+      .auth-brand { top: 1rem; left: 1rem; }
+      .auth-brand span { font-size: 1rem; }
+      .auth-heading { font-size: 1.65rem; }
+      .auth-sub { font-size: .95rem; }
+      .tab-btn { font-size: 1rem; }
+      .input-group input,
+      .input-group select,
+      .auth-submit { height: 3.7rem; }
+    }
+
+    .auth-public-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin: .9rem 0 1.1rem;
+    }
+    .auth-public-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .65rem .95rem;
+      border: 1px solid rgba(26,26,46,.12);
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(255,255,255,.68);
+      font-size: .92rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .auth-public-links a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+    }
+    .auth-public-links a.primary-browse {
+      border-color: rgba(91,191,95,.34);
+      background: linear-gradient(135deg, rgba(91,191,95,.16), rgba(255,255,255,.9));
+      color: #176c2a;
+      box-shadow: 0 10px 24px rgba(91,191,95,.14);
+    }
+    .auth-browse-first {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .75rem;
+      align-items: center;
+      margin: .2rem 0 1rem;
+      padding: .85rem 1rem;
+      border: 1px solid rgba(91,191,95,.24);
+      border-radius: 1rem;
+      background: rgba(91,191,95,.08);
+      color: #1f2937;
+      font-size: .92rem;
+      line-height: 1.35;
+    }
+    .auth-browse-first i { color: #218838; font-size: 1.05rem; }
+    .auth-browse-first a { color: #176c2a; font-weight: 900; text-decoration: none; }
+    .auth-browse-first a:hover { text-decoration: underline; }
+
+    @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
+  }
+</style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<link href="css/auth-astro-redesign.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="index, follow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="Skibidi GoFood" property="og:site_name"/><meta content="Skibidi GoFood — MMU Login" property="og:title"/><meta content="MMU Melaka student, staff, and teacher login and registration portal for Skibidi GoFood." property="og:description"/><meta content="https://skibidigofood.edgeone.cool/" property="og:url"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Skibidi GoFood — MMU Login" name="twitter:title"/><meta content="MMU Melaka student, staff, and teacher login and registration portal for Skibidi GoFood." name="twitter:description"/><meta content="https://skibidigofood.edgeone.cool/images/logo.webp" name="twitter:image"/></head>
+<body class="auth-astro-page">
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<div id="notif"></div>
+<div class="auth-shell astro-auth">
+<!-- ══ RIGHT — Astro-style visual panel ══ -->
+<div class="auth-left">
+<div class="left-blob"></div>
+<div class="left-glow left-glow-1"></div>
+<div class="left-glow left-glow-2"></div>
+<!-- brand -->
+<a class="auth-brand auth-background-brand" href="./">
+<img alt="logo" decoding="async" fetchpriority="high" loading="eager" src="images/logo.webp"/>
+<span><strong>Skibidi</strong> <em>GoFood</em></span>
+</a>
+<!-- lightning bolts -->
+<span class="bolt b1">
+<svg fill="none" height="42" viewbox="0 0 26 42" width="26"><path d="M16 2L2 24H13L9 40L24 18H13L16 2Z" fill="currentColor"></path></svg>
+</span>
+<span class="bolt b2">
+<svg fill="none" height="33" viewbox="0 0 20 33" width="20"><path d="M13 2L2 18H9L7 31L18 15H11L13 2Z" fill="currentColor"></path></svg>
+</span>
+<span class="bolt b3">
+<svg fill="none" height="30" viewbox="0 0 18 30" width="18"><path d="M12 2L2 16H8L6 28L16 14H10L12 2Z" fill="currentColor"></path></svg>
+</span>
+<span class="bolt b4">
+<svg fill="none" height="36" viewbox="0 0 22 36" width="22"><path d="M14 2L2 20H10L8 34L20 16H12L14 2Z" fill="currentColor"></path></svg>
+</span>
+<div aria-hidden="true" class="auth-visual-stage">
+<div class="auth-orbit auth-orbit--one"></div>
+<div class="auth-orbit auth-orbit--two"></div>
+<div class="auth-grid-glow"></div>
+<div class="auth-phone-mockup">
+<div class="auth-phone-mockup__notch"></div>
+<div class="auth-phone-mockup__screen">
+<div class="auth-miniapp-topbar">
+<div>
+<div class="auth-miniapp-kicker">Skibidi GoFood</div>
+<div class="auth-miniapp-title">Your delivery dashboard</div>
+</div>
+<span class="auth-miniapp-badge">Live</span>
+</div>
+<div class="auth-map-card">
+<span class="auth-map-card__pin auth-map-card__pin--start"></span>
+<span class="auth-map-card__pin auth-map-card__pin--end"></span>
+<span class="auth-map-card__pulse"></span>
+<span class="auth-map-card__route auth-map-card__route--one"></span>
+<span class="auth-map-card__route auth-map-card__route--two"></span>
+<span class="auth-map-card__rider"><i class="fas fa-motorcycle"></i></span>
+<div class="auth-map-card__label auth-map-card__label--pickup">Pickup</div>
+<div class="auth-map-card__label auth-map-card__label--dropoff">Hostel</div>
+</div>
+<div class="auth-order-widget">
+<div class="auth-order-widget__row">
+<div>
+<strong>Chicken Burger Set</strong>
+<span>Order #GF-2184</span>
+</div>
+<span class="auth-order-widget__price">RM 13.90</span>
+</div>
+<div class="auth-progress">
+<span class="is-done"></span>
+<span class="is-done"></span>
+<span class="is-active"></span>
+<span></span>
+</div>
+<div class="auth-progress-labels">
+<span>Placed</span>
+<span>Cooking</span>
+<span>On the way</span>
+<span>Delivered</span>
+</div>
+</div>
+</div>
+</div>
+<div class="auth-float-card auth-float-card--eta">
+<span class="auth-float-card__icon"><i class="fas fa-clock"></i></span>
+<div>
+<strong>ETA 12 mins</strong>
+<p>Fast delivery to your campus block.</p>
+</div>
+</div>
+<div class="auth-float-card auth-float-card--status">
+<span class="auth-float-card__icon"><i class="fas fa-bell-concierge"></i></span>
+<div>
+<strong>Fresh &amp; packed</strong>
+<p>Your meal is sealed and ready for drop-off.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ══ LEFT — Astro-style form panel ══ -->
+<div class="auth-right">
+<a aria-label="Go to Skibidi GoFood home" class="auth-astro-brand" href="./">
+<span class="auth-astro-brand__mark"><img alt="Skibidi GoFood logo" decoding="async" fetchpriority="high" loading="eager" src="images/logo.webp"/></span>
+<span class="auth-astro-brand__text">
+<strong>Skibidi GoFood</strong>
+<span>Campus delivery dashboard</span>
+</span>
+</a>
+<!-- bolt decorations -->
+<span class="bolt-r br1">
+<svg fill="none" height="33" viewbox="0 0 20 33" width="20"><path d="M13 2L2 18H9L7 31L18 15H11L13 2Z" fill="currentColor"></path></svg>
+</span>
+<span class="bolt-r br2">
+<svg fill="none" height="28" viewbox="0 0 17 28" width="17"><path d="M11 2L2 15H8L6 26L15 13H9L11 2Z" fill="currentColor"></path></svg>
+</span>
+<span class="bolt-r br3">
+<svg fill="none" height="24" viewbox="0 0 15 24" width="15"><path d="M10 2L2 13H7L5 22L13 11H8L10 2Z" fill="currentColor"></path></svg>
+</span>
+<div class="auth-form-wrap">
+<h1 class="auth-heading" id="auth-heading">Welcome back</h1>
+<p class="auth-sub" id="auth-sub">Sign in to your Skibidi GoFood account</p>
+<!-- tab switcher -->
+<div aria-label="Authentication options" class="tab-row" role="tablist">
+<button aria-controls="form-login" aria-selected="true" class="tab-btn active" id="tab-login" onclick="switchTab('login')" role="tab" type="button">
+<i aria-hidden="true" class="fas fa-sign-in-alt"></i> Login
+        </button>
+<button aria-controls="form-register" aria-selected="false" class="tab-btn" id="tab-register" onclick="switchTab('register')" role="tab" tabindex="-1" type="button">
+<i aria-hidden="true" class="fas fa-user-plus"></i> Register
+        </button>
+</div>
+<!-- ── LOGIN FORM ── -->
+<form class="auth-form active" id="form-login" novalidate="" onsubmit="doLogin(event)">
+<div class="input-group">
+<label for="l-id">Username or Email</label>
+<input autocapitalize="none" autocomplete="username" id="l-id" name="login_identifier" placeholder="Use username or MMU email" spellcheck="false" type="text"/>
+</div>
+<div class="input-group">
+<label for="l-pass">Password</label>
+<div class="input-icon-wrap">
+<input autocomplete="current-password" id="l-pass" name="login_password" placeholder="Enter your password" type="password"/>
+<span class="input-icon-toggle" onclick="togglePass('l-pass',this)">
+<i class="fas fa-eye"></i>
+</span>
+</div>
+</div>
+<button class="auth-submit" type="submit">
+<i aria-hidden="true" class="fas fa-sign-in-alt"></i> Login
+        </button>
+<p class="auth-footer-note">
+          Don't have an account?
+          <a href="#" onclick="switchTab('register');return false">Register →</a>
+</p>
+</form>
+<!-- ── REGISTER FORM ── -->
+<form class="auth-form" hidden="" id="form-register" novalidate="" onsubmit="doRegister(event)">
+<div class="input-row">
+<div class="input-group">
+<label for="r-fname">First Name</label>
+<input id="r-fname" maxlength="30" name="first_name" placeholder="e.g. Ahmad" type="text"/>
+</div>
+<div class="input-group">
+<label for="r-lname">Last Name</label>
+<input id="r-lname" maxlength="30" name="last_name" placeholder="e.g. Rizz" type="text"/>
+</div>
+</div>
+<div class="input-group">
+<label for="r-username">Username</label>
+<input autocomplete="off" id="r-username" maxlength="30" name="username" placeholder="e.g. Ahmad_Rizz99!" type="text"/>
+<span class="field-hint" id="username-hint"></span>
+<div class="req-box">
+<div class="req-title">Username requirements</div>
+<ul>
+<li>3–30 characters</li>
+<li>Letters &amp; numbers</li>
+<li>Supports _ . - @ ! # $ % ^ &amp; *</li>
+</ul>
+</div>
+</div>
+<div class="input-group">
+<label for="r-email">Email Address</label>
+<input autocapitalize="none" autocomplete="email" id="r-email" inputmode="email" maxlength="80" name="email" placeholder="name@student.mmu.edu.my or name@mmu.edu.my" spellcheck="false" type="text"/>
+<span class="field-hint" id="email-hint">Only MMU emails are accepted: <strong>@student.mmu.edu.my</strong> (student) or <strong>@mmu.edu.my</strong> (staff).</span>
+</div>
+<div class="input-group">
+<label for="r-phone">Phone <span class="label-muted">(Malaysia)</span></label>
+<input id="r-phone" name="phone" placeholder="+601X-XXXXXXX" type="tel"/>
+<span class="field-hint" id="phone-hint">Format: <strong>+601X-XXXXXXX</strong> or <strong>+603-XXXXXXXX</strong></span>
+</div>
+<div class="input-group">
+<label for="r-birthday">Birthday</label>
+<input id="r-birthday" name="birthday" type="date"/>
+<span class="field-hint" id="birthday-hint">Valid ages: 13 to 110 years old.</span>
+</div>
+<div class="input-group">
+<label for="r-pass">Password</label>
+<div class="input-icon-wrap">
+<input autocomplete="new-password" id="r-pass" name="password" placeholder="Create a strong password" type="password"/>
+<span class="input-icon-toggle" onclick="togglePass('r-pass',this)">
+<i class="fas fa-eye"></i>
+</span>
+</div>
+<div class="pass-strength-wrap">
+<div class="pass-strength-track">
+<div class="pass-strength-fill" id="pass-strength-bar"></div>
+</div>
+<span class="pass-strength-label" id="pass-strength-label"></span>
+</div>
+<div class="req-box">
+<div class="req-title">Password requirements</div>
+<ul>
+<li>Min 8 characters</li>
+<li>Uppercase &amp; lowercase</li>
+<li>At least 1 number</li>
+<li>1 special character</li>
+</ul>
+</div>
+</div>
+<div class="input-group">
+<label for="r-cpass">Confirm Password</label>
+<div class="input-icon-wrap">
+<input autocomplete="new-password" id="r-cpass" name="confirm_password" placeholder="Repeat your password" type="password"/>
+<span class="input-icon-toggle" onclick="togglePass('r-cpass',this)">
+<i class="fas fa-eye"></i>
+</span>
+</div>
+<span class="field-hint" id="cpass-hint"></span>
+</div>
+<button class="auth-submit" type="submit">
+<i aria-hidden="true" class="fas fa-user-plus"></i> Create Account
+        </button>
+<p class="auth-footer-note">
+          Already registered?
+          <a href="#" onclick="switchTab('login');return false">Sign in →</a>
+</p>
+</form>
+<div class="site-disclaimer">
+<strong>🎓 University Project</strong> —
+        Skibidi GoFood is an academic project for learning purposes only. All brand names &amp; logos are property of their respective owners.
+        <a href="disclaimer">Full Disclaimer</a>
+</div>
+</div>
+<div class="auth-panel-footer">
+<p><em>Deliver campus cravings, faster.</em></p>
+</div>
+</div>
+</div><!-- /auth-shell -->
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/pages/index-inline.js"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

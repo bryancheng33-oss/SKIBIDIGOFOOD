@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "items": [
+    {
+      "id": 1,
+      "name": "Big Mac",
+      "brand": "McDonald's",
+      "price": 9.9
+    },
+    {
+      "id": 6,
+      "name": "Zinger Burger",
+      "brand": "KFC",
+      "price": 9.5
+    },
+    {
+      "id": 13,
+      "name": "Pepperoni Pan Pizza",
+      "brand": "Pizza Hut",
+      "price": 16.9
+    },
+    {
+      "id": 19,
+      "name": "BBQ Chicken Pizza",
+      "brand": "Domino's",
+      "price": 18.5
+    }
+  ]
+}

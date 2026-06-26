@@ -1,0 +1,391 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   TEXT COLOR SUITABILITY FIX — high contrast, context-aware hierarchy
+   Goal: repair dark-on-dark and overly muted text after typography/depth layers.
+   Loaded last so every page keeps the new visual style without sacrificing reading.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --read-ink: #2f2105;
+  --read-ink-strong: #201500;
+  --read-copy: rgba(48, 35, 10, .86);
+  --read-copy-soft: rgba(70, 52, 18, .70);
+  --read-muted: rgba(93, 74, 33, .62);
+  --read-faint: rgba(107, 86, 42, .52);
+
+  --read-inverse: #fffaf0;
+  --read-inverse-soft: rgba(255, 250, 240, .84);
+  --read-inverse-muted: rgba(255, 247, 226, .70);
+  --read-inverse-faint: rgba(255, 240, 200, .58);
+
+  --read-brand-gold: #ffd858;
+  --read-brand-gold-soft: #ffe89a;
+  --read-brand-brown: #6f4700;
+  --read-link: #9a6400;
+  --read-link-dark: #ffe58a;
+  --read-danger: #b72d38;
+  --read-success: #08754f;
+}
+
+html,
+body {
+  color: var(--read-copy) !important;
+}
+
+/* Light surfaces: clear but not harsh. */
+:where(
+  h1, h2, h3, h4, h5, h6,
+  .title,
+  .section-title,
+  .section-heading,
+  .section-block-title,
+  .card-title,
+  .menu-item-name,
+  .cart-page-title,
+  .profile-kc-name,
+  .profile-kc-nameline,
+  .adm-page-title,
+  .adm-card-title,
+  .disc-section h2,
+  .disc-team-box h3,
+  .member-name,
+  .team-title,
+  strong,
+  b
+) {
+  color: var(--read-ink-strong) !important;
+}
+
+:where(
+  body, p, li, td, th,
+  .section-lead,
+  .section-sub,
+  .section-block-copy,
+  .menu-item-copy,
+  .cart-page-sub,
+  .checkout-block,
+  .profile-kc-info-row,
+  .profile-kc-info-line,
+  .support-hub-card,
+  .disc-section > p,
+  .disc-section li,
+  .disc-summary-text p,
+  .team-card p,
+  .member-desc,
+  .adm-card,
+  .adm-table
+) {
+  color: var(--read-copy) !important;
+}
+
+:where(
+  small,
+  .hint,
+  .lead,
+  .menu-item-note,
+  .menu-item-brand,
+  .overview-card__note,
+  .reward-card p,
+  .disc-brand-note,
+  .disc-team-sub,
+  .profile-kc-role,
+  .profile-kc-location,
+  .adm-muted,
+  .adm-meta,
+  .adm-label,
+  .history-empty-msg,
+  .order-timeline-item small,
+  .review-helper-copy
+) {
+  color: var(--read-muted) !important;
+}
+
+/* Dark surfaces: never let the global heading hierarchy turn text brown/black. */
+:where(
+  .disc-hero,
+  .heading,
+  .fp-footer,
+  .fp-disclaimer-bar,
+  .partners-strip,
+  .auth-left,
+  .rewards-hero__copy,
+  .birthday-band,
+  .result-card,
+  .wheel-panel,
+  .rewards-spin-panel .wheel-panel,
+  .order-progress-card,
+  .hot-item,
+  .adm-info-panel,
+  .adm-board-panel
+) {
+  color: var(--read-inverse-soft) !important;
+}
+
+:where(
+  .disc-hero,
+  .heading,
+  .fp-footer,
+  .fp-disclaimer-bar,
+  .partners-strip,
+  .auth-left,
+  .rewards-hero__copy,
+  .birthday-band,
+  .result-card,
+  .wheel-panel,
+  .rewards-spin-panel .wheel-panel,
+  .order-progress-card,
+  .hot-item,
+  .adm-info-panel,
+  .adm-board-panel
+) :where(
+  h1, h2, h3, h4, h5, h6,
+  .title,
+  .section-title,
+  .card-title,
+  .rewards-hero__title,
+  .result-title,
+  .result-idle,
+  .adm-card-title,
+  strong,
+  b
+) {
+  color: var(--read-inverse) !important;
+}
+
+:where(
+  .disc-hero,
+  .heading,
+  .fp-footer,
+  .fp-disclaimer-bar,
+  .partners-strip,
+  .auth-left,
+  .rewards-hero__copy,
+  .birthday-band,
+  .result-card,
+  .wheel-panel,
+  .rewards-spin-panel .wheel-panel,
+  .order-progress-card,
+  .hot-item,
+  .adm-info-panel,
+  .adm-board-panel
+) :where(
+  p, li, span, small,
+  .lead,
+  .section-lead,
+  .section-sub,
+  .disc-hero-lead,
+  .rewards-hero__lead,
+  .rewards-hero__copy p,
+  .result-sub,
+  .spin-hint,
+  .seg-legend-item,
+  .seg-legend-item span,
+  .adm-card-copy,
+  .adm-sidebar-note
+) {
+  color: var(--read-inverse-muted) !important;
+}
+
+/* Exact hero fix for the screenshot issue. */
+.disc-hero h1 {
+  color: var(--read-inverse) !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .24) !important;
+}
+
+.disc-hero h1 em,
+.heading h3 span,
+.heading h1 span,
+.heading h2 span,
+.rewards-hero__title em,
+.birthday-band .b-icon,
+.hot-rank,
+.fp-footer-logo em,
+.logo-wordmark em {
+  color: var(--read-brand-gold) !important;
+}
+
+.disc-hero-lead {
+  color: var(--read-inverse-soft) !important;
+}
+
+.disc-hero-badge,
+.disc-section-label,
+.section-eyebrow,
+.section-label,
+.section-kicker,
+.hero-eyebrow,
+.menu-hero-label,
+.cart-board-kicker,
+.rewards-hero__eyebrow,
+.profile-kc-section-label,
+.admin-badge,
+.adm-card-kicker,
+.eyebrow {
+  color: var(--read-brand-brown) !important;
+  background: linear-gradient(135deg, rgba(255, 232, 154, .95), rgba(255, 247, 218, .84)) !important;
+  border-color: rgba(143, 96, 0, .20) !important;
+}
+
+:where(.disc-hero, .heading, .fp-footer, .rewards-hero__copy, .birthday-band, .result-card, .wheel-panel) a:not(.btn):not(.cart-checkout-btn):not(.cart-floating-checkout-btn) {
+  color: var(--read-link-dark) !important;
+  text-decoration-color: rgba(255, 229, 138, .48) !important;
+}
+
+.disc-hero-jumps a {
+  color: #fff6d8 !important;
+  background: rgba(255, 216, 88, .16) !important;
+  border-color: rgba(255, 216, 88, .38) !important;
+}
+
+.disc-hero-jumps a:hover {
+  color: #2f2105 !important;
+  background: var(--read-brand-gold-soft) !important;
+}
+
+/* Footer and disclaimer bars were too muted after the hierarchy layer. */
+.fp-footer p,
+.fp-footer li,
+.fp-footer-col p,
+.fp-footer-col a,
+.fp-footer-bar,
+.fp-disclaimer-bar {
+  color: var(--read-inverse-muted) !important;
+}
+
+.fp-footer h3,
+.fp-footer-logo,
+.fp-disclaimer-bar strong {
+  color: var(--read-inverse) !important;
+}
+
+.fp-footer a,
+.fp-disclaimer-bar a {
+  color: var(--read-link-dark) !important;
+}
+
+/* Important values and prices remain instantly scannable. */
+:where(
+  .menu-item-price,
+  .hub-cost,
+  .co-grand,
+  .total-line,
+  .summary-line.total-line,
+  .overview-card__value,
+  .wallet-balance .wa,
+  .wa,
+  .b-pts,
+  .prob-pct,
+  .prob-prize,
+  .adm-stat-value,
+  .price,
+  .value
+) {
+  color: var(--read-brand-brown) !important;
+}
+
+/* On dark surfaces, numeric highlights should be gold instead of dark brown. */
+:where(.disc-hero, .heading, .rewards-hero__copy, .birthday-band, .result-card, .wheel-panel, .order-progress-card, .hot-item, .adm-info-panel, .adm-board-panel) :where(
+  .value,
+  .price,
+  .b-pts,
+  .prob-pct,
+  .prob-prize,
+  .adm-stat-value
+) {
+  color: var(--read-brand-gold) !important;
+}
+
+/* Forms keep entered text dark and placeholders readable. */
+:where(input, textarea, select, .form-field, .profile-address-input, .review-textarea, .adm-inp, .adm-search-inp, .adm-user-select, .adm-order-select, .adm-catalog-select) {
+  color: var(--read-ink-strong) !important;
+}
+
+:where(input, textarea)::placeholder {
+  color: var(--read-faint) !important;
+  opacity: 1 !important;
+}
+
+:where(label, .label, .review-label, .info-row .label, .profile-info-row .label, .lbl) {
+  color: var(--read-copy-soft) !important;
+}
+
+/* Status colors: semantic, visible, not muddy. */
+:where(.status-pending, .status-preparing, .status-on-the-way) {
+  color: #6f4700 !important;
+}
+
+:where(.status-delivered, .adm-green, .success, .text-success) {
+  color: var(--read-success) !important;
+}
+
+:where(.status-cancelled, .adm-red, .danger, .error, .text-danger, .delete-btn) {
+  color: var(--read-danger) !important;
+}
+
+/* Preserve button contrast after this text fix loads last. */
+:where(
+  .btn-primary,
+  .auth-submit,
+  .cart-checkout-btn,
+  .cart-floating-checkout-btn,
+  .cart-action-btn,
+  .menu-add-btn,
+  .menu-order-strip .btn,
+  .reward-card__footer .btn:not([disabled]),
+  .checkout-flow-page .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .cart-flow-page .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .voucher-inline-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .cart-layer-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  button[type="submit"]:not(.modal-close):not(.mobile-close):not(.qv-close)
+) {
+  color: #3b2605 !important;
+}
+
+:where(
+  .btn-dark,
+  .btn-secondary.btn-dark,
+  .profile-kc-actions .active-action.btn-dark,
+  .profile-plan-card .btn-dark,
+  .qty-btn:hover,
+  .voucher-chip .remove-v,
+  .wheel-hub,
+  .adm-tab-btn.active
+) {
+  color: #fff9e8 !important;
+}
+
+:where(
+  .btn-outline,
+  .btn-secondary,
+  .menu-reset-btn,
+  .review-chip,
+  .filter-btn,
+  .menu-category-pill,
+  .menu-brand-chip,
+  .orders-filter-pill,
+  .auth-tab,
+  .amt-pill,
+  .section-pill,
+  .blog-read-btn,
+  .cta-link
+) {
+  color: #5f4109 !important;
+}
+
+:where(.btn[disabled], button[disabled], [aria-disabled="true"]) {
+  color: #7b6a48 !important;
+}
+
+/* Icons should support labels without becoming black on dark backgrounds. */
+:where(.disc-hero, .heading, .fp-footer, .rewards-hero__copy, .birthday-band, .result-card, .wheel-panel, .order-progress-card, .hot-item) i:not(.fa-shopping-cart) {
+  color: currentColor !important;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --read-copy: rgba(48, 35, 10, .90);
+    --read-copy-soft: rgba(70, 52, 18, .76);
+    --read-muted: rgba(93, 74, 33, .68);
+    --read-inverse-soft: rgba(255, 250, 240, .88);
+    --read-inverse-muted: rgba(255, 247, 226, .76);
+  }
+}

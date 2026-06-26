@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Student order history and delivery tracking page for Skibidi GoFood." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — My Orders</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<link href="css/menu-orders-combined.css" rel="stylesheet"/>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<script defer="" src="js/clean-urls.js"></script>
+<style>
+    body.orders-page { background: var(--bg); }
+    .orders-page-shell { max-width: 1180px; margin: 0 auto; padding: 9rem 1.6rem 5rem; }
+    .orders-route-hero { background: var(--white); border-radius: 2rem; padding: 2.6rem; box-shadow: var(--box-shadow); margin-bottom: 2rem; display:flex; justify-content:space-between; gap:1.6rem; align-items:center; }
+    .orders-route-hero h1 { font-size: clamp(2.6rem, 4vw, 4.4rem); color: var(--black); margin: 0 0 .8rem; }
+    .orders-route-hero p { font-size: 1.5rem; color: var(--light); max-width: 68rem; }
+    .orders-route-actions { display:flex; gap:1rem; flex-wrap:wrap; }
+    .orders-page .menu-orders-shell { padding: 0; }
+    .orders-page .menu-order-history-card { margin: 0; }
+    .orders-page .menu-back-to-menu { display: inline-flex; }
+    .orders-page .modal-bg.open { display:flex; }
+    @media (max-width: 780px) { .orders-route-hero { flex-direction:column; align-items:flex-start; padding:2rem; } .orders-page-shell { padding-top: 8rem; } }
+  </style>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/orders" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/></head>
+<body class="orders-page order-flow-page" id="page-top">
+<div class="notif" id="notif"></div>
+<div class="mobile-menu" id="mobile-menu">
+<button aria-label="Close menu" class="mobile-close" onclick="closeMobile()" type="button"><i class="fas fa-times"></i></button>
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a class="active" href="orders">Orders</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</div>
+<header class="header user-topbar">
+<section class="flex">
+<a class="logo" href="home"><span class="logo-wordmark">Skibidi <em>GoFood</em></span></a>
+<nav class="navbar" id="navbar">
+<a href="home">Home</a>
+<a href="menu">Menu</a>
+<a class="active" href="orders">Orders</a>
+<a href="rewards">Rewards</a>
+<a href="group">Group</a>
+</nav>
+<div class="icons">
+<div class="nav-pill" onclick="openWallet()"><i class="fas fa-wallet"></i> RM <span id="navWallet">0.00</span></div>
+<div class="nav-pill nav-pill-dark"><i class="fas fa-star"></i> <span id="navPts">0</span> pts</div>
+<a aria-label="Cart" class="nav-cart-icon" href="cart"><i class="fas fa-shopping-cart"></i><span id="navCart"></span></a>
+<div class="fas fa-user" id="user-btn" onclick="toggleProfile()"></div>
+<div class="fas fa-bars" id="menu-btn" onclick="openMobile()"></div>
+</div>
+<div class="profile" id="profileDrop">
+<div class="profile-card-head"><div class="profile-avatar" id="profileAvatar">G</div><div class="profile-meta"><span class="profile-kicker">Student Account</span><p class="name" id="profileName">Guest</p><p class="profile-handle" id="profileHandle">@guest</p></div></div>
+<div class="profile-stats"><div class="profile-stat"><span>Wallet</span><strong>RM <span id="profileWallet">0.00</span></strong></div><div class="profile-stat"><span>Points</span><strong><span id="profilePoints">0</span> pts</strong></div></div>
+<div class="profile-actions"><a class="profile-link primary" href="profile"><i class="fas fa-user-circle"></i> Profile</a><a class="profile-link soft" href="rewards"><i class="fas fa-gift"></i> Rewards</a></div>
+<button class="profile-logout" onclick="doLogout()" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</section>
+</header>
+<main class="orders-page-shell">
+<section class="orders-route-hero">
+<div>
+<h1>My Orders</h1>
+<p>Track active orders, review delivered orders, and reorder previous items without going through the menu page first.</p>
+</div>
+<div class="orders-route-actions">
+<a class="btn" href="menu"><i class="fas fa-utensils"></i> Browse Menu</a>
+<a class="btn btn-outline" href="cart"><i class="fas fa-shopping-cart"></i> View Cart</a>
+</div>
+</section>
+<section class="menu-orders-shell" data-embed="orders">
+<section class="jump-target menu-order-history-card" id="orders-panel">
+<div class="menu-order-history-head">
+<div>
+<div class="menu-order-history-label"><i class="fas fa-receipt"></i> Order history</div>
+<h2>Track recent orders</h2>
+<p>Status updates, delivery progress, vouchers used, refunds, and comments are shown here.</p>
+</div>
+<a class="btn btn-outline menu-back-to-menu" href="menu#catalog-start"><i class="fas fa-plus"></i> Add More Food</a>
+</div>
+<div class="orders-workspace">
+<aside class="orders-master-panel"><div class="orders-panel-head"><h2>Order timeline</h2></div><div class="orders-list-grid" id="orders-list"></div></aside>
+<section aria-live="polite" class="orders-detail-panel" id="order-detail"></section>
+</div>
+</section>
+</section>
+</main>
+<div aria-hidden="true" class="modal-bg" id="review-modal">
+<div aria-labelledby="review-modal-title" aria-modal="true" class="modal-box review-modal-box" role="dialog">
+<button aria-label="Close review dialog" class="modal-close" onclick="closeReviewPrompt()" type="button"><i class="fas fa-times"></i></button>
+<h3 id="review-modal-title"><i class="fas fa-star"></i> Leave a Comment &amp; Rating</h3>
+<p class="review-helper-copy" id="review-modal-copy">Your order has been delivered. Please tap a star, share a quick comment, and submit your review.</p>
+<div class="review-input-wrap"><label class="review-label">Your rating</label><div aria-label="Rate this order" class="star-picker" id="prompt-stars" role="radiogroup"></div><input id="prompt-rate" type="hidden" value="5"/><div class="star-picker-meta"><strong id="prompt-rate-label">Excellent • 5/5</strong><span>Tap a star to rate your order</span></div></div>
+<textarea class="form-field review-textarea" id="prompt-review" maxlength="240" placeholder="Tell us what went well or what needs to improve." rows="4"></textarea>
+<div class="review-text-meta"><span>Add a short comment to help improve the service.</span><strong id="prompt-review-count">0/240</strong></div>
+<div class="flex-btn"><button class="btn" onclick="submitPromptReview()" type="button"><i class="fas fa-paper-plane"></i> Submit Comment &amp; Rating</button><button class="delete-btn" onclick="closeReviewPrompt()" type="button">Later</button></div>
+</div>
+</div>
+<footer class="fp-footer">
+<div class="fp-footer-inner">
+<div class="fp-footer-brand">
+<a class="fp-footer-logo" href="home"><span>Skibidi <em>GoFood</em></span></a>
+<p>Campus-focused food ordering for MMU Melaka students. Browse partner brands, manage your wallet, and get meals delivered to your preferred spot.</p>
+</div>
+<div class="fp-footer-col">
+<h4>Explore</h4>
+<a href="home#page-top">Home</a>
+<a href="menu#catalog-start">Full Menu</a>
+<a href="rewards#rewards-panel">Rewards</a>
+<a href="group#page-top">Group Page</a>
+</div>
+<div class="fp-footer-col">
+<h4>Account</h4>
+<a href="profile#profile-panel">My Profile</a>
+<a href="cart#cart-panel">Your Tray</a>
+<a href="contact#report-panel">Report Issue</a>
+<a href="disclaimer" style="color:var(--accent);font-weight:600;">🎓 Project Disclaimer</a>
+</div>
+<div class="fp-footer-col">
+<h4>Contact</h4>
+<p><i class="fas fa-envelope"></i> hello@skibidi-gofood.my</p>
+<p><i class="fas fa-phone"></i> +60 12-345 6789</p>
+<p><i class="fas fa-map-marker-alt"></i> Multimedia University, Jalan Ayer Keroh Lama, 75450 Melaka, Malaysia</p>
+<p><i class="fas fa-clock"></i> 7:00am – 11:00pm daily</p>
+</div>
+</div>
+<div class="fp-footer-bar">
+<p>© 2026 Skibidi GoFood  ·  Made for Mini IT Project  ·  MMU Melaka</p>
+</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/auth.js?v=20260526v21"></script>
+<script src="js/text.js"></script>
+<script src="js/header.js?v=20260526v21"></script>
+<script src="js/wallet.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="orders_inline.js?v=20260526v21"></script>
+<script src="js/student-ai-chat.js?v=20260526v21"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

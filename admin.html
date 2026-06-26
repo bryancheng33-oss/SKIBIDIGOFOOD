@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Admin dashboard for managing orders, products, vouchers, reviews, and support messages for the Skibidi GoFood project." name="description"/>
+<meta content="#f7c948" name="theme-color"/>
+<link href="images/logo.webp" rel="icon" type="image/webp"/>
+<title>Skibidi GoFood — MMU Melaka Admin Panel</title>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+<!-- Unified Home Style CSS -->
+<link href="css/unified-home-style.css" rel="stylesheet"/>
+<style>
+    :root { --light: #7d8597; --black: #132238; --bg: #eef2fb; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e7ebf6 0%, #eef2fb 100%);
+      color: #1f2937;
+      font-family: var(--font-body);
+      padding: 2.4rem;
+    }
+    h1, h2, h3, h4, h5, h6, .title, .heading h3, .section-title, .section-heading, .card-title {
+      font-family: var(--font-body);
+    }
+    .adm-layout {
+      max-width: 1440px;
+      min-height: calc(100vh - 4.8rem);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 28rem minmax(0, 1fr);
+      gap: 1.8rem;
+      background: rgba(255,255,255,.48);
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 3.2rem;
+      padding: 1.8rem;
+      box-shadow: 0 28px 80px rgba(111, 132, 180, .20);
+      backdrop-filter: blur(10px);
+    }
+    .adm-sidebar {
+      background: linear-gradient(180deg, #fcfcfe 0%, #f4f6fb 100%);
+      border-radius: 2.6rem;
+      padding: 2.4rem 1.8rem;
+      box-shadow: inset 0 0 0 1px rgba(190, 198, 219, .36);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .adm-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+      margin-bottom: 2rem;
+    }
+    .adm-brand-mark {
+      width: 5.2rem;
+      height: 5.2rem;
+      border-radius: 1.8rem;
+      background: linear-gradient(135deg, #0dc88a, #57d779);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 2rem;
+      box-shadow: 0 14px 24px rgba(67, 200, 132, .24);
+    }
+    .adm-brand-text .logo {
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: #132238;
+      margin-bottom: .2rem;
+      line-height: 1.1;
+    }
+    .adm-brand-text .logo span { color: #12b981; }
+    .adm-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .55rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, .12);
+      color: #0f9f70;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-top: .2rem;
+    }
+    .adm-profile-card {
+      text-align: center;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(214, 219, 235, .9);
+      border-radius: 2.2rem;
+      padding: 2.2rem 1.5rem 1.8rem;
+      box-shadow: 0 16px 38px rgba(163, 174, 208, .18);
+      margin-bottom: 2rem;
+    }
+    .adm-profile-avatar {
+      width: 7.6rem;
+      height: 7.6rem;
+      margin: 0 auto 1.2rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #fff;
+      box-shadow: 0 10px 22px rgba(122, 137, 173, .18);
+      background: #eef2ff;
+    }
+    .adm-profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .adm-profile-name {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #122236;
+    }
+    .adm-profile-role {
+      font-size: 1.25rem;
+      color: #7d8597;
+      margin-top: .2rem;
+    }
+    .adm-profile-stats {
+      margin-top: 1.8rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .adm-profile-stat {
+      padding: 1rem .4rem;
+      border-radius: 1.4rem;
+      background: #f7f9fd;
+      border: 1px solid rgba(223, 228, 240, .95);
+    }
+    .adm-profile-stat strong {
+      display: block;
+      font-size: 1.45rem;
+      color: #132238;
+      margin-bottom: .2rem;
+    }
+    .adm-profile-stat span {
+      font-size: 1.1rem;
+      color: #8a91a6;
+    }
+    .adm-nav-section-label {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin: 1rem .8rem .9rem;
+    }
+    .adm-nav {
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
+      flex: 1;
+    }
+    .adm-tab-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      padding: 1.2rem 1.35rem;
+      border-radius: 1.5rem;
+      color: #677489;
+      font-size: 1.48rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      text-align: left;
+      transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .adm-tab-btn i {
+      width: 2rem;
+      text-align: center;
+      font-size: 1.45rem;
+    }
+    .adm-tab-btn:hover {
+      background: rgba(16, 185, 129, .08);
+      color: #16324f;
+      transform: translateX(2px);
+    }
+    .adm-tab-btn.active {
+      background: linear-gradient(135deg, #0f172a 0%, #1d3557 100%);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(29, 53, 87, .18);
+    }
+    .adm-tab-btn.active .adm-badge-dot {
+      background: rgba(255,255,255,.18);
+      color: #fff;
+    }
+    .adm-badge-dot {
+      margin-left: auto;
+      min-width: 2.4rem;
+      height: 2.4rem;
+      padding: 0 .65rem;
+      border-radius: 999px;
+      background: #fff;
+      color: #0f9f70;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      font-weight: 800;
+      box-shadow: inset 0 0 0 1px rgba(16, 185, 129, .12);
+    }
+    .adm-sidebar-footer {
+      margin-top: auto;
+      padding-top: 1.6rem;
+      border-top: 1px solid rgba(214, 219, 235, .9);
+    }
+    .adm-sidebar-note {
+      font-size: 1.22rem;
+      color: #8a91a6;
+      line-height: 1.6;
+      padding: 0 .6rem 1.2rem;
+    }
+    .adm-logout {
+      width: 100%;
+      padding: 1.15rem 1.35rem;
+      border-radius: 1.5rem;
+      background: linear-gradient(135deg, #fee2e2 0%, #fff1f2 100%);
+      color: #c2410c;
+      font-size: 1.45rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid rgba(251, 191, 191, .85);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .adm-logout:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 18px rgba(251, 146, 60, .16);
+    }
+    .adm-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+    .adm-topbar {
+      background: linear-gradient(135deg, #20c997 0%, #65d46e 100%);
+      min-height: 8.8rem;
+      border-radius: 2.2rem;
+      padding: 1.6rem 2rem;
+      box-shadow: 0 22px 40px rgba(56, 203, 135, .24);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.4rem;
+      position: sticky;
+      top: 1.4rem;
+      z-index: 20;
+    }
+    .adm-search-shell {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      min-width: 0;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      padding: .75rem 1.2rem;
+      color: rgba(255,255,255,.96);
+    }
+    .adm-search-shell input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
+      font-size: 1.45rem;
+      color: #fff;
+      outline: none;
+    }
+    .adm-search-shell input::placeholder { color: rgba(255,255,255,.78); }
+    .adm-search-btn {
+      width: 3.2rem;
+      height: 3.2rem;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,.18);
+      color: #fff;
+      cursor: pointer;
+    }
+    .adm-topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .adm-chip-btn, .adm-icon-btn {
+      border: none;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .adm-chip-btn {
+      padding: .9rem 1.25rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      font-size: 1.28rem;
+      font-weight: 700;
+    }
+    .adm-chip-btn:hover, .adm-chip-btn.active { background: rgba(15, 23, 42, .18); transform: translateY(-1px); }
+    .adm-icon-btn {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1.3rem;
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      position: relative;
+      font-size: 1.45rem;
+    }
+    .adm-icon-btn:hover { background: rgba(15, 23, 42, .18); transform: translateY(-1px); }
+    .adm-icon-badge {
+      position: absolute;
+      top: -.3rem;
+      right: -.3rem;
+      min-width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      background: #fff;
+      color: #0f9f70;
+      font-size: 1rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      padding: 0 .4rem;
+    }
+    .adm-panel {
+      display: none;
+      animation: admFade .25s ease;
+    }
+    @keyframes admFade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .adm-header {
+      margin-bottom: 1.6rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .adm-header h1 {
+      font-size: 3rem;
+      line-height: 1.1;
+      color: #132238;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    .adm-header p {
+      color: #7d8597;
+      font-size: 1.45rem;
+      max-width: 62rem;
+      line-height: 1.7;
+      margin-top: .6rem;
+    }
+    .adm-card {
+      background: rgba(255,255,255,.92);
+      border-radius: 2.1rem;
+      padding: 2rem;
+      border: 1px solid rgba(226, 232, 240, .92);
+      box-shadow: 0 16px 38px rgba(166, 178, 210, .14);
+      min-width: 0;
+    }
+    .adm-card-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #132238;
+      margin-bottom: 1.35rem;
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+    }
+    .adm-card-kicker {
+      font-size: 1.08rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #94a3b8;
+      font-weight: 800;
+      margin-bottom: .85rem;
+    }
+    .adm-dashboard-grid {
+      display: grid;
+      gap: 1.8rem;
+    }
+    .adm-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.95fr);
+      gap: 1.8rem;
+    }
+    .adm-info-panel {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .adm-info-stack {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .adm-info-item {
+      border: 1px solid rgba(226, 232, 240, .95);
+      background: #f8fafc;
+      border-radius: 1.4rem;
+      padding: 1.1rem 1.25rem;
+    }
+    .adm-info-item label {
+      display: block;
+      font-size: 1.08rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 800;
+      color: #94a3b8;
+      margin-bottom: .5rem;
+    }
+    .adm-info-item div {
+      font-size: 1.45rem;
+      color: #132238;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .adm-note-box {
+      margin-top: 1.2rem;
+      padding: 1.2rem 1.35rem;
+      border-radius: 1.4rem;
+      background: linear-gradient(135deg, rgba(251, 191, 36, .15), rgba(253, 224, 71, .18));
+      color: #8a5a00;
+      font-size: 1.28rem;
+      line-height: 1.7;
+      border: 1px solid rgba(252, 211, 77, .35);
+    }
+    .adm-board-panel {
+      min-width: 0;
+    }
+    .adm-board-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.35rem;
+      flex-wrap: wrap;
+    }
+    .adm-avatar-stack {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      padding-left: 1rem;
+    }
+    .adm-avatar-stack span {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      color: #fff;
+      border: 2px solid #fff;
+      margin-left: -.65rem;
+      box-shadow: 0 8px 16px rgba(148, 163, 184, .24);
+    }
+    .adm-board-toolbar {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+    .adm-toolbar-pill {
+      padding: .8rem 1rem;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .92);
+      color: #64748b;
+      font-size: 1.18rem;
+      font-weight: 700;
+    }
+    .adm-toolbar-pill.is-active {
+      background: rgba(32, 201, 151, .12);
+      color: #0f9f70;
+      border-color: rgba(32, 201, 151, .2);
+    }
+    .adm-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+    .adm-stat-card {
+      border-radius: 1.8rem;
+      padding: 1.55rem;
+      background: #fff;
+      border: 1px solid rgba(226, 232, 240, .92);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.62);
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .adm-stat-card::after {
+      content: '';
+      position: absolute;
+      left: 1.55rem;
+      right: 1.55rem;
+      bottom: 1rem;
+      height: .45rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(32, 201, 151, .28), rgba(59, 130, 246, .58));
+    }
+    .adm-stat-card .sc-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1rem;
+      display: inline-grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      background: rgba(32, 201, 151, .12);
+      color: #0f9f70;
+      float: none;
+    }
+    .adm-stat-card .sc-label {
+      font-size: 1.25rem;
+      color: #8a91a6;
+      margin-bottom: .45rem;
+    }
+    .adm-stat-card .sc-val {
+      font-size: 2.65rem;
+      font-weight: 800;
+      color: #122236;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .adm-analytics-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(24rem, .95fr);
+      gap: 1.8rem;
+      align-items: start;
+    }
+    .adm-analytics-left,
+    .adm-analytics-right {
+      display: grid;
+      gap: 1.8rem;
+      min-width: 0;
+    }
+    .adm-system-gauge {
+      display: grid;
+      justify-items: center;
+      gap: 1.2rem;
+      padding: .6rem 0 .4rem;
+    }
+    .adm-ring {
+      position: relative;
+      width: 18.5rem;
+      height: 18.5rem;
+      border-radius: 50%;
+      background: conic-gradient(#22c55e var(--gauge, 78%), #e7edf5 0);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(226, 232, 240, .92);
+    }
+    .adm-ring::before {
+      content: '';
+      width: 13.5rem;
+      height: 13.5rem;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: inset 0 0 0 1px rgba(226, 232, 240, .9);
+    }
+    .adm-ring-content {
+      position: absolute;
+      text-align: center;
+      display: grid;
+      gap: .2rem;
+    }
+    .adm-ring-value {
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: #122236;
+      line-height: 1;
+    }
+    .adm-ring-label {
+      font-size: 1.2rem;
+      color: #8a91a6;
+      font-weight: 700;
+    }
+    .adm-mini-metrics {
+      width: 100%;
+      display: grid;
+      gap: .9rem;
+    }
+    .adm-mini-metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.4rem;
+      padding: 1rem 1.2rem;
+      font-size: 1.28rem;
+      color: #475569;
+    }
+    .adm-mini-metric strong {
+      color: #122236;
+      font-size: 1.4rem;
+    }
+    .adm-table-wrap {
+      overflow-x: auto;
+      border-radius: 1.45rem;
+      border: 1px solid rgba(226, 232, 240, .95);
+      background: #fff;
+    }
+    table.adm-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 1.36rem;
+      min-width: 84rem;
+    }
+    .adm-table th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 800;
+      padding: 1.05rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(226, 232, 240, .92);
+      white-space: nowrap;
+    }
+    .adm-table td {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid rgba(241, 245, 249, .98);
+      vertical-align: middle;
+      color: #334155;
+      background: #fff;
+    }
+    .adm-table tr:hover td { background: #fbfdff; }
+    .adm-inp, .adm-search-inp, select.adm-inp {
+      border: 1px solid rgba(203, 213, 225, .95);
+      border-radius: 1rem;
+      padding: .75rem 1rem;
+      font-size: 1.32rem;
+      color: #122236;
+      outline: none;
+      background: #fff;
+    }
+    .adm-inp:focus, .adm-search-inp:focus {
+      border-color: rgba(16, 185, 129, .52);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, .12);
+    }
+    .adm-btn-sm {
+      border: none;
+      border-radius: 1rem;
+      padding: .75rem 1.15rem;
+      font-size: 1.22rem;
+      cursor: pointer;
+      font-weight: 700;
+      background: #eef2f7;
+      color: #122236;
+      transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+    }
+    .adm-btn-sm:hover { opacity: .92; transform: translateY(-1px); }
+    .adm-btn-sm.adm-green {
+      background: rgba(16, 185, 129, .12);
+      color: #0f9f70;
+      box-shadow: inset 0 0 0 1px rgba(16, 185, 129, .14);
+    }
+    .adm-btn-sm.adm-red {
+      background: rgba(244, 63, 94, .12);
+      color: #be123c;
+      box-shadow: inset 0 0 0 1px rgba(244, 63, 94, .14);
+    }
+    .adm-search-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .adm-search-inp { flex: 1; min-width: 24rem; max-width: 38rem; }
+    .adm-alert-list, .adm-message-list { display: grid; gap: 1.2rem; }
+    .adm-alert-card, .adm-message-card {
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.7rem;
+      padding: 1.6rem;
+      background: #fff;
+      box-shadow: 0 10px 22px rgba(166, 178, 210, .08);
+    }
+    .adm-alert-card.unread, .adm-message-card.unread {
+      border-color: rgba(251, 146, 60, .34);
+      background: linear-gradient(135deg, rgba(255, 251, 235, .96), #fff);
+    }
+    .adm-alert-head, .adm-message-top {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .adm-alert-title, .adm-message-name {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #132238;
+    }
+    .adm-alert-meta, .adm-message-meta {
+      font-size: 1.25rem;
+      color: #7d8597;
+      line-height: 1.7;
+      margin-top: .25rem;
+    }
+    .adm-message-status {
+      font-size: 1.12rem;
+      font-weight: 800;
+      padding: .45rem .95rem;
+      border-radius: 999px;
+    }
+    .adm-message-status.unread { background: rgba(244, 63, 94, .12); color: #be123c; }
+    .adm-message-status.read { background: rgba(34, 197, 94, .12); color: #15803d; }
+    .adm-message-body {
+      font-size: 1.42rem;
+      color: #132238;
+      line-height: 1.7;
+      background: #f8fafc;
+      border-radius: 1.25rem;
+      padding: 1.15rem 1.2rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .adm-message-actions { display: flex; gap: .8rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .adm-voucher-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: rgba(251, 191, 36, .14);
+      color: #8a5a00;
+      border-radius: 999px;
+      padding: .35rem .85rem;
+      font-size: 1.15rem;
+      border: 1px solid rgba(252, 211, 77, .32);
+      max-width: 100%;
+    }
+    .adm-voucher-chip button {
+      border: none;
+      background: none;
+      color: #be123c;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    .adm-user-toolbar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.35rem;
+    }
+    .adm-user-toolbar .adm-search-inp {
+      flex: 1 1 26rem;
+      max-width: none;
+      min-width: 24rem;
+    }
+    .adm-user-select { min-width: 17rem; }
+    .adm-user-insights {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .adm-user-insight {
+      background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.6rem;
+      padding: 1.2rem 1.35rem;
+      box-shadow: 0 10px 22px rgba(166, 178, 210, .08);
+      min-width: 0;
+    }
+    .adm-user-insight-label {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: 1.14rem;
+      color: #64748b;
+      margin-bottom: .55rem;
+      font-weight: 700;
+    }
+    .adm-user-insight strong {
+      display: block;
+      font-size: 2.1rem;
+      color: #132238;
+      line-height: 1.05;
+    }
+    .adm-user-insight span {
+      display: block;
+      font-size: 1.16rem;
+      color: #94a3b8;
+      margin-top: .35rem;
+    }
+    .adm-users-list {
+      display: grid;
+      gap: 1.25rem;
+    }
+    .adm-user-card {
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.9rem;
+      padding: 1.55rem;
+      background: #fff;
+      box-shadow: 0 16px 32px rgba(166, 178, 210, .08);
+    }
+    .adm-user-card-top {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .adm-user-identity {
+      display: flex;
+      gap: 1rem;
+      min-width: 0;
+      align-items: flex-start;
+      flex: 1 1 32rem;
+    }
+    .adm-user-avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 1.4rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1d3557 100%);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.65rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      box-shadow: 0 12px 22px rgba(29, 53, 87, .18);
+    }
+    .adm-user-name-row {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      flex-wrap: wrap;
+    }
+    .adm-user-name {
+      font-size: 1.72rem;
+      font-weight: 800;
+      color: #132238;
+      line-height: 1.15;
+    }
+    .adm-user-username {
+      display: inline-flex;
+      align-items: center;
+      padding: .38rem .78rem;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #475569;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .adm-user-meta {
+      display: flex;
+      gap: .55rem;
+      flex-wrap: wrap;
+      margin-top: .45rem;
+      font-size: 1.2rem;
+      color: #64748b;
+    }
+    .adm-user-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      max-width: 100%;
+      word-break: break-word;
+    }
+    .adm-user-registered {
+      margin-top: .45rem;
+      font-size: 1.14rem;
+      color: #94a3b8;
+    }
+    .adm-user-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .8rem;
+      min-width: min(100%, 34rem);
+      flex: 0 0 auto;
+    }
+    .adm-user-stat {
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.35rem;
+      padding: 1rem 1.05rem;
+      min-width: 0;
+    }
+    .adm-user-stat-label {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: .4rem;
+      white-space: nowrap;
+    }
+    .adm-user-stat strong {
+      display: block;
+      font-size: 1.6rem;
+      color: #132238;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .adm-user-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    .adm-user-edit-card,
+    .adm-user-voucher-box {
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.55rem;
+      padding: 1.15rem 1.2rem;
+      background: #fbfdff;
+      min-width: 0;
+    }
+    .adm-user-box-label {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #132238;
+      margin-bottom: .8rem;
+    }
+    .adm-user-edit-row {
+      display: flex;
+      gap: .7rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .adm-user-edit-row .adm-inp {
+      flex: 1 1 10rem;
+      min-width: 0;
+    }
+    .adm-user-help {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      margin-top: .65rem;
+      line-height: 1.55;
+    }
+    .adm-user-voucher-summary {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      font-size: 1.12rem;
+      color: #64748b;
+      margin-bottom: .85rem;
+    }
+    .adm-user-voucher-summary span {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .95);
+    }
+    .adm-user-voucher-preview {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      align-items: center;
+      min-height: 3rem;
+    }
+    .adm-user-voucher-empty {
+      font-size: 1.2rem;
+      color: #94a3b8;
+    }
+    .adm-user-voucher-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .4rem .82rem;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #475569;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: 1px solid rgba(199, 210, 254, .95);
+    }
+    .adm-user-card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(241, 245, 249, .98);
+    }
+    .adm-user-card-actions .adm-user-help {
+      margin-top: 0;
+      max-width: 50rem;
+    }
+    .adm-user-voucher-panel {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(203, 213, 225, .95);
+      display: grid;
+      gap: .9rem;
+    }
+    .adm-user-voucher-panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 1.24rem;
+      color: #475569;
+    }
+    .adm-user-voucher-panel-title strong {
+      color: #132238;
+      font-size: 1.34rem;
+    }
+    .adm-user-voucher-group-list {
+      display: grid;
+      gap: .8rem;
+      max-height: 25rem;
+      overflow-y: auto;
+      padding-right: .25rem;
+    }
+    .adm-user-voucher-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.35rem;
+      background: #f8fafc;
+      padding: 1rem 1.1rem;
+    }
+    .adm-user-voucher-group-main {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      min-width: 0;
+      flex: 1 1 22rem;
+    }
+    .adm-user-voucher-icon {
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 1.05rem;
+      background: rgba(251, 191, 36, .16);
+      display: grid;
+      place-items: center;
+      font-size: 1.55rem;
+      flex-shrink: 0;
+    }
+    .adm-user-voucher-group-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #132238;
+      line-height: 1.3;
+    }
+    .adm-user-voucher-group-meta {
+      font-size: 1.12rem;
+      color: #64748b;
+      margin-top: .2rem;
+    }
+    .adm-user-voucher-group-actions {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .adm-voucher-count-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .42rem .82rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, .12);
+      color: #0f9f70;
+      font-size: 1.08rem;
+      font-weight: 800;
+      border: 1px solid rgba(16, 185, 129, .18);
+    }
+    .adm-user-empty {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      border-radius: 1.7rem;
+      border: 1px dashed rgba(203, 213, 225, .95);
+      background: #f8fafc;
+      color: #64748b;
+      font-size: 1.4rem;
+    }
+    .adm-user-empty strong {
+      display: block;
+      font-size: 1.7rem;
+      color: #132238;
+      margin-bottom: .55rem;
+    }
+    .adm-voucher-card {
+      background: #fff;
+      border-radius: 1.7rem;
+      border: 1px solid rgba(226, 232, 240, .92);
+      padding: 1.7rem;
+      margin-bottom: 1.1rem;
+    }
+    .adm-vc-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .adm-vc-title { font-size: 1.7rem; font-weight: 800; color: #132238; }
+    .adm-vc-desc { font-size: 1.34rem; color: #64748b; }
+    .adm-vc-badge {
+      margin-left: auto;
+      background: rgba(16, 185, 129, .12);
+      color: #0f9f70;
+      font-size: 1.05rem;
+      padding: .35rem .8rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      border: 1px solid rgba(16, 185, 129, .16);
+    }
+    .adm-vc-rules {
+      border-top: 1px solid rgba(241, 245, 249, .98);
+      padding-top: 1rem;
+    }
+    .adm-vc-rules ul {
+      font-size: 1.32rem;
+      color: #475569;
+      padding-left: 2rem;
+      margin: .8rem 0;
+    }
+    .adm-vc-rules li { margin-bottom: .45rem; }
+    .adm-vc-compat { font-size: 1.26rem; margin-top: .85rem; color: #64748b; }
+    .adm-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, .42);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .adm-modal-bg.active { display: flex; }
+    .adm-modal-box {
+      background: #fff;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 68rem;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 28px 70px rgba(15, 23, 42, .22);
+    }
+    .adm-modal-box h3 { font-size: 2rem; font-weight: 800; margin-bottom: 1.7rem; color: #132238; }
+    .adm-modal-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      border: none;
+      background: #f8fafc;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #64748b;
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 50%;
+    }
+    .adm-voucher-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.3rem;
+      padding: 1.4rem;
+      border-radius: 1.35rem;
+      border: 1px solid rgba(226, 232, 240, .95);
+      margin-bottom: .9rem;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .adm-voucher-item:hover {
+      background: #f8fafc;
+      border-color: rgba(16, 185, 129, .24);
+      transform: translateY(-1px);
+    }
+    #contact-messages .message {
+      border: 1px solid #ccc;
+      padding: .5rem;
+      margin: .5rem 0;
+      background: #fff;
+      color: #000;
+      border-radius: 5px;
+    }
+    .adm-order-toolbar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .adm-order-toolbar .adm-search-inp {
+      flex: 1 1 28rem;
+      max-width: none;
+      min-width: 24rem;
+    }
+    .adm-order-select { min-width: 17rem; }
+    .adm-order-note {
+      display: flex;
+      gap: .8rem;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+      border: 1px solid rgba(199, 210, 254, .75);
+      border-radius: 1.55rem;
+      padding: 1rem 1.15rem;
+      font-size: 1.24rem;
+      color: #475569;
+      margin-bottom: 1.45rem;
+    }
+    .adm-order-note i {
+      color: #4f46e5;
+      margin-top: .15rem;
+      font-size: 1.3rem;
+    }
+    .adm-order-insights {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.55rem;
+    }
+    .adm-order-insight {
+      background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.6rem;
+      padding: 1.15rem 1.3rem;
+      box-shadow: 0 10px 22px rgba(166, 178, 210, .08);
+      min-width: 0;
+    }
+    .adm-order-insight-label {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: 1.14rem;
+      color: #64748b;
+      margin-bottom: .55rem;
+      font-weight: 700;
+    }
+    .adm-order-insight strong {
+      display: block;
+      font-size: 2rem;
+      color: #132238;
+      line-height: 1.05;
+    }
+    .adm-order-insight span {
+      display: block;
+      font-size: 1.16rem;
+      color: #94a3b8;
+      margin-top: .35rem;
+    }
+    .adm-orders-list {
+      display: grid;
+      gap: 1.3rem;
+    }
+    .adm-order-empty {
+      border: 1px dashed rgba(203, 213, 225, .95);
+      border-radius: 1.8rem;
+      padding: 2rem 1.4rem;
+      text-align: center;
+      color: #64748b;
+      background: #f8fafc;
+      font-size: 1.28rem;
+    }
+    .adm-order-empty strong {
+      display: block;
+      color: #132238;
+      font-size: 1.55rem;
+      margin-bottom: .45rem;
+    }
+    .adm-order-card {
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.9rem;
+      padding: 1.55rem;
+      background: #fff;
+      box-shadow: 0 16px 32px rgba(166, 178, 210, .08);
+    }
+    .adm-order-card-head {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .adm-order-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #132238;
+      line-height: 1.15;
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .adm-order-submeta {
+      display: flex;
+      gap: .65rem 1rem;
+      flex-wrap: wrap;
+      margin-top: .55rem;
+      font-size: 1.18rem;
+      color: #64748b;
+    }
+    .adm-order-submeta span {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      min-width: 0;
+    }
+    .adm-order-top-tags {
+      display: flex;
+      gap: .55rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .adm-order-status-badge,
+    .adm-order-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .42rem .88rem;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .adm-order-tag {
+      background: #f8fafc;
+      color: #475569;
+      border-color: rgba(226, 232, 240, .95);
+      font-weight: 700;
+    }
+    .adm-order-status-badge.is-pending {
+      background: rgba(251, 191, 36, .16);
+      color: #8a5a00;
+      border-color: rgba(252, 211, 77, .34);
+    }
+    .adm-order-status-badge.is-preparing {
+      background: rgba(96, 165, 250, .14);
+      color: #1d4ed8;
+      border-color: rgba(96, 165, 250, .24);
+    }
+    .adm-order-status-badge.is-on-the-way {
+      background: rgba(129, 140, 248, .14);
+      color: #4338ca;
+      border-color: rgba(129, 140, 248, .24);
+    }
+    .adm-order-status-badge.is-delivered {
+      background: rgba(34, 197, 94, .14);
+      color: #15803d;
+      border-color: rgba(34, 197, 94, .24);
+    }
+    .adm-order-status-badge.is-cancelled {
+      background: rgba(244, 63, 94, .14);
+      color: #be123c;
+      border-color: rgba(244, 63, 94, .24);
+    }
+    .adm-order-status-badge.is-delayed {
+      background: rgba(249, 115, 22, .16);
+      color: #c2410c;
+      border-color: rgba(249, 115, 22, .24);
+    }
+    .adm-order-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(30rem, .95fr);
+      gap: 1.2rem;
+      align-items: start;
+    }
+    .adm-order-main,
+    .adm-order-editor {
+      min-width: 0;
+    }
+    .adm-order-main {
+      display: grid;
+      gap: 1rem;
+    }
+    .adm-order-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .9rem;
+    }
+    .adm-order-stat,
+    .adm-order-items,
+    .adm-order-history,
+    .adm-order-editor-section {
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.45rem;
+      padding: 1rem 1.05rem;
+    }
+    .adm-order-stat-label,
+    .adm-order-section-title,
+    .adm-order-editor-title {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: 1.14rem;
+      color: #64748b;
+      font-weight: 800;
+      margin-bottom: .55rem;
+    }
+    .adm-order-stat strong {
+      display: block;
+      font-size: 1.55rem;
+      color: #132238;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+    .adm-order-stat small {
+      display: block;
+      margin-top: .3rem;
+      font-size: 1.1rem;
+      color: #94a3b8;
+      line-height: 1.45;
+    }
+    .adm-order-items-list {
+      display: grid;
+      gap: .75rem;
+    }
+    .adm-order-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      background: #fff;
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.1rem;
+      padding: .82rem .92rem;
+    }
+    .adm-order-item-title {
+      font-size: 1.28rem;
+      color: #132238;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .adm-order-item-note {
+      font-size: 1.1rem;
+      color: #64748b;
+      margin-top: .2rem;
+      line-height: 1.45;
+    }
+    .adm-order-item-qty {
+      font-size: 1.15rem;
+      color: #475569;
+      background: #f8fafc;
+      border-radius: 999px;
+      padding: .25rem .7rem;
+      border: 1px solid rgba(226, 232, 240, .95);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .adm-order-history-copy {
+      font-size: 1.18rem;
+      color: #334155;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .adm-order-history-timeline {
+      margin-top: .85rem;
+      display: grid;
+      gap: .65rem;
+    }
+    .adm-order-history-entry {
+      display: flex;
+      justify-content: space-between;
+      gap: .9rem;
+      align-items: flex-start;
+      padding-top: .65rem;
+      border-top: 1px dashed rgba(203, 213, 225, .9);
+      font-size: 1.1rem;
+      color: #64748b;
+    }
+    .adm-order-history-entry:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+    .adm-order-history-entry strong {
+      color: #132238;
+      display: block;
+      margin-bottom: .2rem;
+      font-size: 1.18rem;
+    }
+    .adm-order-editor {
+      display: grid;
+      gap: .95rem;
+    }
+    .adm-order-editor-section {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    }
+    .adm-order-editor-help {
+      font-size: 1.08rem;
+      color: #64748b;
+      line-height: 1.55;
+      margin-bottom: .85rem;
+    }
+    .adm-order-editor-row {
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .adm-order-editor-row .adm-inp {
+      flex: 1 1 18rem;
+      min-width: 0;
+    }
+    .adm-order-eta-input {
+      flex: 0 0 9rem !important;
+      max-width: 9rem;
+    }
+    .adm-order-editor-meta {
+      font-size: 1.12rem;
+      color: #64748b;
+      line-height: 1.55;
+      margin-top: .75rem;
+      min-height: 1.8rem;
+    }
+    .adm-order-editor-actions {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      margin-top: .85rem;
+    }
+    .adm-order-editor-actions .adm-btn-sm {
+      min-width: 12.5rem;
+      justify-content: center;
+    }
+    .adm-order-highlight {
+      color: #15803d;
+      font-weight: 800;
+    }
+    .adm-order-refund {
+      color: #15803d;
+      font-weight: 800;
+    }
+    .adm-catalog-toolbar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.35rem;
+    }
+    .adm-catalog-toolbar .adm-search-inp {
+      flex: 1 1 30rem;
+      max-width: none;
+      min-width: 24rem;
+    }
+    .adm-catalog-select { min-width: 17rem; }
+    .adm-catalog-note {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+      border: 1px solid rgba(199, 210, 254, .75);
+      border-radius: 1.55rem;
+      padding: 1rem 1.15rem;
+      font-size: 1.22rem;
+      color: #475569;
+      margin-bottom: 1.45rem;
+      line-height: 1.6;
+    }
+    .adm-catalog-note i {
+      color: #4f46e5;
+      margin-top: .15rem;
+      font-size: 1.3rem;
+    }
+    .adm-catalog-insights {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.55rem;
+    }
+    .adm-catalog-insight {
+      background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.6rem;
+      padding: 1.15rem 1.3rem;
+      box-shadow: 0 10px 22px rgba(166, 178, 210, .08);
+      min-width: 0;
+    }
+    .adm-catalog-insight-label {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: 1.14rem;
+      color: #64748b;
+      margin-bottom: .55rem;
+      font-weight: 700;
+    }
+    .adm-catalog-insight strong {
+      display: block;
+      font-size: 2rem;
+      color: #132238;
+      line-height: 1.05;
+    }
+    .adm-catalog-insight span {
+      display: block;
+      font-size: 1.16rem;
+      color: #94a3b8;
+      margin-top: .35rem;
+      line-height: 1.5;
+    }
+    .adm-catalog-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 1.2rem;
+      align-items: start;
+    }
+    .adm-catalog-column {
+      min-width: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .adm-catalog-section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .adm-catalog-section-head p {
+      margin: .35rem 0 0;
+      font-size: 1.15rem;
+      color: #64748b;
+      line-height: 1.55;
+    }
+    .adm-catalog-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .5rem .9rem;
+      border-radius: 999px;
+      background: #eef2ff;
+      border: 1px solid rgba(199, 210, 254, .95);
+      color: #4338ca;
+      font-size: 1.08rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .adm-catalog-list {
+      display: grid;
+      gap: 1rem;
+    }
+    .adm-catalog-card {
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.8rem;
+      padding: 1.35rem;
+      background: #fff;
+      box-shadow: 0 16px 32px rgba(166, 178, 210, .08);
+    }
+    .adm-catalog-card-top {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .adm-catalog-brand-main,
+    .adm-catalog-food-main {
+      display: flex;
+      gap: 1rem;
+      min-width: 0;
+      flex: 1 1 28rem;
+    }
+    .adm-catalog-brand-logo,
+    .adm-catalog-food-thumb {
+      width: 5.2rem;
+      height: 5.2rem;
+      border-radius: 1.45rem;
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .95);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .adm-catalog-brand-logo img,
+    .adm-catalog-food-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .adm-catalog-title-row {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      flex-wrap: wrap;
+    }
+    .adm-catalog-title {
+      font-size: 1.68rem;
+      font-weight: 800;
+      color: #132238;
+      line-height: 1.15;
+    }
+    .adm-catalog-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      margin-top: .35rem;
+      line-height: 1.55;
+    }
+    .adm-catalog-meta {
+      display: flex;
+      gap: .55rem;
+      flex-wrap: wrap;
+      margin-top: .55rem;
+    }
+    .adm-catalog-tag,
+    .adm-catalog-visibility {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .38rem .78rem;
+      border-radius: 999px;
+      font-size: 1.08rem;
+      font-weight: 800;
+      border: 1px solid rgba(226, 232, 240, .95);
+      background: #f8fafc;
+      color: #475569;
+      white-space: nowrap;
+    }
+    .adm-catalog-visibility.active {
+      background: rgba(34, 197, 94, .12);
+      color: #15803d;
+      border-color: rgba(34, 197, 94, .22);
+    }
+    .adm-catalog-visibility.hidden {
+      background: rgba(244, 63, 94, .12);
+      color: #be123c;
+      border-color: rgba(244, 63, 94, .2);
+    }
+    .adm-catalog-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .8rem;
+      min-width: min(100%, 31rem);
+      flex: 0 0 auto;
+    }
+    .adm-catalog-stat {
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.3rem;
+      padding: .95rem 1rem;
+      min-width: 0;
+    }
+    .adm-catalog-stat-label {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: .38rem;
+    }
+    .adm-catalog-stat strong {
+      display: block;
+      font-size: 1.46rem;
+      color: #132238;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .adm-catalog-stat small {
+      display: block;
+      margin-top: .25rem;
+      font-size: 1.05rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+    .adm-catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .9rem;
+    }
+    .adm-catalog-field {
+      background: #f8fafc;
+      border: 1px solid rgba(226, 232, 240, .95);
+      border-radius: 1.35rem;
+      padding: .95rem 1rem;
+      min-width: 0;
+    }
+    .adm-catalog-field span {
+      display: block;
+      font-size: 1.05rem;
+      color: #64748b;
+      font-weight: 800;
+      margin-bottom: .5rem;
+    }
+    .adm-catalog-field .adm-inp,
+    .adm-catalog-field textarea.adm-inp {
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+    }
+    .adm-catalog-field textarea.adm-inp {
+      min-height: 7.6rem;
+      resize: vertical;
+    }
+    .adm-catalog-field-inline {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem;
+    }
+    .adm-catalog-meta-line {
+      font-size: 1.08rem;
+      color: #64748b;
+      line-height: 1.55;
+      min-height: 1.7rem;
+      margin-top: .85rem;
+    }
+    .adm-catalog-card-actions {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      margin-top: .9rem;
+    }
+    .adm-catalog-card-actions .adm-btn-sm {
+      min-width: 11rem;
+      justify-content: center;
+    }
+    .adm-catalog-empty {
+      border: 1px dashed rgba(203, 213, 225, .95);
+      border-radius: 1.8rem;
+      padding: 2rem 1.4rem;
+      text-align: center;
+      color: #64748b;
+      background: #f8fafc;
+      font-size: 1.26rem;
+    }
+    .adm-catalog-empty strong {
+      display: block;
+      color: #132238;
+      font-size: 1.55rem;
+      margin-bottom: .45rem;
+    }
+    @media (max-width: 1200px) {
+      .adm-layout { grid-template-columns: 1fr; }
+      .adm-topbar { position: static; }
+      .adm-hero-grid, .adm-analytics-grid { grid-template-columns: 1fr; }
+      .adm-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .adm-user-insights { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .adm-order-insights { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .adm-catalog-insights { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .adm-order-body { grid-template-columns: 1fr; }
+      .adm-catalog-layout { grid-template-columns: 1fr; }
+      .adm-user-card-grid { grid-template-columns: 1fr 1fr; }
+      .adm-catalog-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); min-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      body { padding: 1.2rem; }
+      .adm-layout {
+        min-height: auto;
+        border-radius: 2.2rem;
+        padding: 1.2rem;
+      }
+      .adm-sidebar, .adm-card, .adm-topbar { border-radius: 1.8rem; }
+      .adm-topbar { padding: 1.3rem; }
+      .adm-search-shell { width: 100%; }
+      .adm-topbar, .adm-topbar-actions { align-items: stretch; }
+      .adm-topbar { flex-direction: column; }
+      .adm-topbar-actions { justify-content: flex-start; }
+      .adm-stats { grid-template-columns: 1fr; }
+      .adm-profile-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .adm-header h1 { font-size: 2.35rem; }
+      table.adm-table { min-width: 72rem; }
+      .adm-user-insights { grid-template-columns: 1fr; }
+      .adm-user-stats { grid-template-columns: 1fr; min-width: 100%; }
+      .adm-user-card-grid { grid-template-columns: 1fr; }
+      .adm-user-toolbar .adm-search-inp,
+      .adm-user-select,
+      .adm-order-toolbar .adm-search-inp,
+      .adm-order-select,
+      .adm-catalog-toolbar .adm-search-inp,
+      .adm-catalog-select { min-width: 100%; width: 100%; }
+      .adm-order-insights,
+      .adm-catalog-insights,
+      .adm-order-stat-grid,
+      .adm-catalog-grid,
+      .adm-catalog-field-inline,
+      .adm-catalog-stats { grid-template-columns: 1fr; }
+      .adm-order-card,
+      .adm-catalog-card { padding: 1.25rem; }
+      .adm-order-item,
+      .adm-order-history-entry,
+      .adm-order-editor-row { flex-direction: column; align-items: stretch; }
+      .adm-order-eta-input,
+      .adm-order-editor-row .adm-inp { max-width: none; flex-basis: auto !important; }
+      .adm-order-editor-actions .adm-btn-sm { width: 100%; }
+      .adm-user-card-actions { align-items: stretch; }
+      .adm-user-voucher-group-actions { justify-content: flex-start; }
+    }
+</style>
+<script defer="" src="js/clean-urls.js"></script>
+<link href="css/visual-rhyme.css" rel="stylesheet"/>
+<link href="css/subtle-depth.css" rel="stylesheet"/>
+<link href="css/text-hierarchy.css" rel="stylesheet"/>
+<link href="css/button-contrast-fix.css" rel="stylesheet"/>
+<link href="css/text-color-suitability-fix.css" rel="stylesheet"/>
+<link href="css/loading-page.css" rel="stylesheet"/>
+<script defer="" src="js/page-loader.js"></script>
+<link href="css/cross-browser-consistency-v3.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/website-quality-hardening-v14.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/security-hardening-v15.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/operational-completion-v16.css?v=20260526v21" rel="stylesheet"/>
+<link href="css/ai-rewards-navigation-v18.css?v=20260526v21" rel="stylesheet"/>
+<meta content="light" name="color-scheme"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="20260526v21" name="sg-build-version"/>
+<link href="https://skibidigofood.edgeone.cool/admin" rel="canonical"/><link href="manifest.webmanifest" rel="manifest"/></head>
+<body>
+<div aria-label="Loading Skibidi GoFood" aria-live="polite" class="loader gofood-loader" id="loader" role="status">
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--one"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--two"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--three"></span>
+<span aria-hidden="true" class="gofood-loader__spark gofood-loader__spark--four"></span>
+<div class="gofood-loader__card">
+<div aria-hidden="true" class="gofood-loader__scene">
+<span class="gofood-loader__steam gofood-loader__steam--one"></span>
+<span class="gofood-loader__steam gofood-loader__steam--two"></span>
+<span class="gofood-loader__steam gofood-loader__steam--three"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--one"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--two"></span>
+<span class="gofood-loader__crumb gofood-loader__crumb--three"></span>
+<div class="gofood-loader__toast"></div>
+<div class="gofood-loader__toaster">
+<span class="gofood-loader__slot"></span>
+<span class="gofood-loader__shine"></span>
+<span class="gofood-loader__dial"></span>
+<span class="gofood-loader__lever"></span>
+<span class="gofood-loader__foot gofood-loader__foot--left"></span>
+<span class="gofood-loader__foot gofood-loader__foot--right"></span>
+</div>
+<span class="gofood-loader__plate"></span>
+</div>
+<div class="gofood-loader__brand">Skibidi <span>GoFood</span></div>
+<p class="gofood-loader__copy">Preparing your campus order<span aria-hidden="true" class="gofood-loader__dots"></span></p>
+<div aria-hidden="true" class="gofood-loader__bar"><span></span></div>
+<div aria-hidden="true" class="gofood-loader__steps"><span>Prepare</span><span>Pack</span><span>Deliver</span></div>
+</div>
+</div>
+<div class="notif" id="notif"></div>
+<!-- Add Voucher Modal -->
+<div class="adm-modal-bg" id="adm-voucher-modal">
+<div class="adm-modal-box">
+<button aria-label="Close voucher modal" class="adm-modal-close" onclick="closeAdmVoucherModal()" type="button"><i aria-hidden="true" class="fas fa-times"></i></button>
+<h3 id="adm-voucher-modal-title">Issue Voucher</h3>
+<div id="adm-voucher-list"></div>
+</div>
+</div>
+<div class="adm-layout">
+<!-- Sidebar -->
+<aside class="adm-sidebar">
+<div class="adm-brand">
+<div class="adm-brand-mark"><i class="fas fa-layer-group"></i></div>
+<div class="adm-brand-text">
+<div class="logo">Skibidi <span>GoFood</span></div>
+<div class="adm-badge"><i class="fas fa-shield-alt"></i> Admin Panel</div>
+</div>
+</div>
+<div class="adm-profile-card">
+<div class="adm-profile-avatar">
+<img alt="Admin avatar" decoding="async" loading="lazy" src="images/user-avatar.webp"/>
+</div>
+<div class="adm-profile-name" id="adm-profile-name">Admin User</div>
+<div class="adm-profile-role">MMU Melaka Platform Administrator</div>
+<div class="adm-profile-stats">
+<div class="adm-profile-stat"><strong id="adm-side-users">0</strong><span>Users</span></div>
+<div class="adm-profile-stat"><strong id="adm-side-orders">0</strong><span>Orders</span></div>
+<div class="adm-profile-stat"><strong id="adm-side-messages">0</strong><span>Messages</span></div>
+</div>
+</div>
+<div class="adm-nav-section-label">Home</div>
+<nav class="adm-nav">
+<button class="adm-tab-btn" id="adm-tab-dashboard" onclick="admTab('dashboard')">
+<i class="fas fa-chart-pie"></i><span>Dashboard</span>
+</button>
+<button class="adm-tab-btn" id="adm-tab-users" onclick="admTab('users')">
+<i class="fas fa-users"></i><span>Users</span>
+</button>
+<button class="adm-tab-btn" id="adm-tab-orders" onclick="admTab('orders')">
+<i class="fas fa-receipt"></i><span>Orders</span><span class="adm-badge-dot" id="adm-alert-badge">0</span>
+</button>
+<button class="adm-tab-btn" id="adm-tab-catalog" onclick="admTab('catalog')">
+<i class="fas fa-store"></i><span>Catalog</span>
+</button>
+<button class="adm-tab-btn" id="adm-tab-reviews" onclick="admTab('reviews')">
+<i class="fas fa-star"></i><span>Reviews</span>
+</button>
+<button class="adm-tab-btn" id="adm-tab-vouchers" onclick="admTab('vouchers')">
+<i class="fas fa-ticket-alt"></i><span>Vouchers</span>
+</button>
+<button class="adm-tab-btn" id="adm-tab-messages" onclick="admTab('messages')">
+<i class="fas fa-envelope"></i><span>Messages</span><span class="adm-badge-dot" id="adm-msg-badge">0</span>
+</button>
+</nav>
+<div class="adm-sidebar-footer">
+<div class="adm-nav-section-label">Configuration</div>
+<div class="adm-sidebar-note">Review platform operations, manage users and track live order activity from one place.</div>
+<button class="adm-logout" onclick="adminLogout()">
+<i class="fas fa-sign-out-alt"></i><span>Logout</span>
+</button>
+</div>
+</aside>
+<!-- Main content -->
+<main class="adm-content">
+<div class="adm-topbar">
+<div class="adm-search-shell">
+<i class="fas fa-search"></i>
+<input id="adm-global-search" placeholder="Type in to search users, orders or reviews..." type="text"/>
+<button aria-label="Run admin search" class="adm-search-btn" onclick="adminGlobalSearch()" type="button"><i aria-hidden="true" class="fas fa-arrow-right"></i></button>
+</div>
+<div class="adm-topbar-actions">
+<button class="adm-chip-btn" id="adm-quick-dashboard" onclick="admTab('dashboard')">Dashboard</button>
+<button class="adm-chip-btn" id="adm-quick-orders" onclick="admTab('orders')">Orders</button>
+<button class="adm-chip-btn" id="adm-quick-users" onclick="admTab('users')">Users</button>
+<button aria-label="Open messages" class="adm-icon-btn" onclick="admTab('messages')" type="button">
+<i class="fas fa-envelope"></i><span class="adm-icon-badge" id="adm-top-msg-badge">0</span>
+</button>
+<button aria-label="Open alerts" class="adm-icon-btn" onclick="admTab('orders')" type="button">
+<i class="fas fa-bell"></i><span class="adm-icon-badge" id="adm-top-alert-badge">0</span>
+</button>
+</div>
+</div>
+<!-- DASHBOARD -->
+<div class="adm-panel" id="adm-panel-dashboard">
+<div class="adm-dashboard-grid">
+<section class="adm-hero-grid">
+<div class="adm-card adm-info-panel">
+<div class="adm-card-kicker">Data Information</div>
+<div class="adm-header" style="margin-bottom:0;display:block;">
+<h1>📊 Dashboard</h1>
+<p>Overview of your MMU Melaka student food platform</p>
+</div>
+<div class="adm-info-stack">
+<div class="adm-info-item">
+<label>Admin name</label>
+<div id="adm-dashboard-admin">Admin User</div>
+</div>
+<div class="adm-info-item">
+<label>Active tab</label>
+<div id="adm-active-tab-label">Dashboard</div>
+</div>
+<div class="adm-info-item">
+<label>Today</label>
+<div id="adm-dashboard-date">—</div>
+</div>
+<div class="adm-info-item">
+<label>Delivery alerts</label>
+<div id="adm-alert-summary">0 active delivery delays need review.</div>
+</div>
+</div>
+<div class="adm-note-box">
+              Use this admin page to monitor users, orders, vouchers, reviews and support messages without changing the existing platform sections.
+            </div>
+</div>
+<div class="adm-card adm-board-panel">
+<div class="adm-board-head">
+<div>
+<div class="adm-card-kicker">Task Boards</div>
+<div class="adm-card-title" style="margin-bottom:0;">Platform Overview</div>
+</div>
+<div aria-hidden="true" class="adm-avatar-stack">
+<span style="background:#f97316;">A</span>
+<span style="background:#3b82f6;">U</span>
+<span style="background:#14b8a6;">O</span>
+<span style="background:#ec4899;">R</span>
+<span style="background:#8b5cf6;">V</span>
+</div>
+</div>
+<div class="adm-board-toolbar">
+<span class="adm-toolbar-pill is-active">Board View</span>
+<span class="adm-toolbar-pill">List View</span>
+<span class="adm-toolbar-pill">Live Monitoring</span>
+</div>
+<div class="adm-stats">
+<div class="adm-stat-card">
+<div class="sc-icon">👥</div>
+<div class="sc-label">Total Users</div>
+<div class="sc-val" id="adm-total-users">—</div>
+</div>
+<div class="adm-stat-card">
+<div class="sc-icon">📦</div>
+<div class="sc-label">Total Orders</div>
+<div class="sc-val" id="adm-total-orders">—</div>
+</div>
+<div class="adm-stat-card">
+<div class="sc-icon">💰</div>
+<div class="sc-label">Total Revenue</div>
+<div class="sc-val" id="adm-total-rev">—</div>
+</div>
+<div class="adm-stat-card">
+<div class="sc-icon">⭐</div>
+<div class="sc-label">Points in Circulation</div>
+<div class="sc-val" id="adm-total-pts">—</div>
+</div>
+</div>
+</div>
+</section>
+<section class="adm-analytics-grid">
+<div class="adm-analytics-left">
+<div class="adm-card">
+<div class="adm-card-title"><i class="fas fa-bell"></i> Delivery Delay Alerts</div>
+<div class="adm-alert-list" id="adm-alert-list"></div>
+</div>
+<div class="adm-card">
+<div class="adm-card-title"><i class="fas fa-history"></i> Recent Orders</div>
+<div class="adm-table-wrap">
+<table class="adm-table">
+<thead><tr>
+<th>Order</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th>
+</tr></thead>
+<tbody id="adm-recent-orders-tbody"><tr><td colspan="6" style="text-align:center;color:var(--light)">Loading…</td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="adm-analytics-right">
+<div class="adm-card">
+<div class="adm-card-title"><i class="fas fa-chart-pie"></i> Messages Overview</div>
+<div class="adm-system-gauge">
+<div class="adm-ring" id="adm-msg-ring">
+<div class="adm-ring-content">
+<div class="adm-ring-value" id="adm-msg-ring-value">0%</div>
+<div class="adm-ring-label">Unread messages</div>
+</div>
+</div>
+<div class="adm-mini-metrics">
+<div class="adm-mini-metric"><span>Unread messages</span><strong id="adm-unread-messages">0</strong></div>
+<div class="adm-mini-metric"><span>Open delivery alerts</span><strong id="adm-open-alerts">0</strong></div>
+<div class="adm-mini-metric"><span>Active section</span><strong id="adm-active-tab-mini">Dashboard</strong></div>
+</div>
+</div>
+</div>
+<div class="adm-card">
+<div class="adm-card-title"><i class="fas fa-layer-group"></i> System Snapshot</div>
+<div class="adm-mini-metrics">
+<div class="adm-mini-metric"><span>Total revenue</span><strong id="adm-rev-mini">—</strong></div>
+<div class="adm-mini-metric"><span>Points in circulation</span><strong id="adm-pts-mini">—</strong></div>
+<div class="adm-mini-metric"><span>Managed tabs</span><strong>7</strong></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- USERS -->
+<div class="adm-panel" id="adm-panel-users">
+<div class="adm-header">
+<h2>👥 User Management</h2>
+<p>Cleaner user cards with compact voucher inventory, grouped counts, and one-click voucher controls</p>
+</div>
+<div class="adm-card">
+<div class="adm-user-toolbar">
+<input class="adm-search-inp" id="adm-user-search" placeholder="🔍 Search by username, name or email…" type="text"/>
+<select class="adm-inp adm-user-select" id="adm-user-voucher-filter">
+<option value="all">All users</option>
+<option value="with-vouchers">Has vouchers</option>
+<option value="heavy">Heavy voucher load (5+)</option>
+<option value="light">Light voucher load (1–4)</option>
+<option value="no-vouchers">No vouchers</option>
+</select>
+<select class="adm-inp adm-user-select" id="adm-user-sort">
+<option value="recent">Newest first</option>
+<option value="vouchers-desc">Most vouchers</option>
+<option value="points-desc">Highest points</option>
+<option value="wallet-desc">Highest wallet</option>
+<option value="name-asc">Name A–Z</option>
+</select>
+<button class="adm-btn-sm" onclick="renderAdminUsers(document.getElementById('adm-user-search').value)" style="padding:.7rem 1.5rem">Refresh</button>
+</div>
+<div class="adm-user-insights" id="adm-user-insights"></div>
+<div class="adm-users-list" id="adm-users-list">
+<div class="adm-user-empty"><strong>Loading users…</strong>Please wait while the admin panel prepares the cleaner user management view.</div>
+</div>
+</div>
+</div>
+<!-- ORDERS -->
+<div class="adm-panel" id="adm-panel-orders">
+<div class="adm-header">
+<h2>📦 All Orders</h2>
+<p>Cleaner order cards with stable editing controls, manual save actions, and better delivery management visibility</p>
+</div>
+<div class="adm-card">
+<div class="adm-order-toolbar adm-order-interactive">
+<input class="adm-search-inp" id="adm-order-search" placeholder="🔍 Search by order ID, user, item, payment, driver or status…" type="text"/>
+<select class="adm-inp adm-order-select" id="adm-order-status-filter">
+<option value="all">All statuses</option>
+<option value="active">Active orders</option>
+<option value="pending">Pending</option>
+<option value="preparing">Preparing</option>
+<option value="on the way">On the way</option>
+<option value="delivered">Delivered</option>
+<option value="cancelled">Cancelled</option>
+<option value="delayed">Delayed</option>
+<option value="assigned">Assigned driver</option>
+<option value="unassigned">No driver</option>
+</select>
+<select class="adm-inp adm-order-select" id="adm-order-sort">
+<option value="newest">Newest first</option>
+<option value="oldest">Oldest first</option>
+<option value="total-desc">Highest total</option>
+<option value="total-asc">Lowest total</option>
+<option value="eta-asc">Shortest ETA</option>
+<option value="user-asc">User A–Z</option>
+</select>
+<button class="adm-btn-sm" onclick="adminRefreshOrdersView(true)" style="padding:.7rem 1.5rem" type="button">Refresh</button>
+</div>
+<div class="adm-order-note">
+<i class="fas fa-info-circle"></i>
+<span>Status, driver, and ETA edits stay open while you adjust them. Nothing saves until you press <strong>Update status</strong> or <strong>Apply delivery</strong>.</span>
+</div>
+<div class="adm-order-insights" id="adm-order-insights"></div>
+<div class="adm-orders-list" id="adm-orders-list">
+<div class="adm-order-empty"><strong>Loading orders…</strong>Please wait while the admin panel prepares the cleaner order management view.</div>
+</div>
+</div>
+</div>
+<!-- CATALOG -->
+<div class="adm-panel" id="adm-panel-catalog">
+<div class="adm-header">
+<h2>🏪 Restaurant &amp; Menu Catalog</h2>
+<p>Manage partner restaurants, ratings, pricing visibility, and menu item availability</p>
+</div>
+<div class="adm-card">
+<div class="adm-catalog-toolbar">
+<input class="adm-search-inp" id="adm-catalog-search" placeholder="Search restaurants, menu items, categories, or locations" type="search"/>
+<select class="adm-inp adm-catalog-select" id="adm-catalog-brand-filter">
+<option value="all">All restaurants</option>
+</select>
+<select class="adm-inp adm-catalog-select" id="adm-catalog-availability-filter">
+<option value="all">All item visibility</option>
+<option value="active">Only active items</option>
+<option value="hidden">Only hidden items</option>
+</select>
+<select class="adm-inp adm-catalog-select" id="adm-catalog-sort">
+<option value="featured">Smart sort</option>
+<option value="rating-desc">Highest rating</option>
+<option value="price-asc">Lowest price</option>
+<option value="price-desc">Highest price</option>
+<option value="popular-desc">Most popular</option>
+<option value="name-asc">Name A–Z</option>
+</select>
+<button class="adm-btn-sm" onclick="adminRefreshCatalogView()" type="button">Refresh</button>
+</div>
+<div class="adm-catalog-note">
+<i class="fas fa-info-circle"></i>
+<span>Catalog edits now use cleaner cards instead of one crowded table. Ratings are capped at <strong>5.0</strong>, prices cannot go negative, popularity stays between <strong>0–100</strong>, and ETA ranges are corrected into a sensible min/max before saving.</span>
+</div>
+<div class="adm-catalog-insights" id="adm-catalog-insights"></div>
+<div class="adm-catalog-layout">
+<section class="adm-catalog-column">
+<div class="adm-catalog-section-head">
+<div>
+<div class="adm-card-title"><i class="fas fa-store"></i> Partner Restaurants</div>
+<p>Update store info without stretching every field into a hard-to-read row.</p>
+</div>
+<span class="adm-catalog-count" id="adm-catalog-brand-count">0 restaurants</span>
+</div>
+<div class="adm-catalog-list" id="adm-brands-list">
+<div class="adm-catalog-empty"><strong>Loading restaurants…</strong>Please wait while the cleaner catalog view is prepared.</div>
+</div>
+</section>
+<section class="adm-catalog-column">
+<div class="adm-catalog-section-head">
+<div>
+<div class="adm-card-title"><i class="fas fa-burger"></i> Menu Items</div>
+<p>Adjust price, popularity, rating, and visibility with proper validation.</p>
+</div>
+<span class="adm-catalog-count" id="adm-catalog-food-count">0 items</span>
+</div>
+<div class="adm-catalog-list" id="adm-foods-list">
+<div class="adm-catalog-empty"><strong>Loading items…</strong>Please wait while the cleaner catalog view is prepared.</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- REVIEWS -->
+<div class="adm-panel" id="adm-panel-reviews">
+<div class="adm-header">
+<h2>⭐ Customer Reviews</h2>
+<p>See ratings and comments submitted by customers after ordering</p>
+</div>
+<div class="adm-card">
+<div class="adm-card-title"><i class="fas fa-comments"></i> Review Feed</div>
+<div class="adm-table-wrap">
+<table class="adm-table">
+<thead><tr>
+<th>Date</th><th>User</th><th>Order</th><th>Items</th><th>Rating</th><th>Review</th><th>Status</th><th>Actions</th>
+</tr></thead>
+<tbody id="adm-reviews-tbody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- VOUCHERS -->
+<div class="adm-panel" id="adm-panel-vouchers">
+<div class="adm-header">
+<h2>🎟️ Voucher Management</h2>
+<p>All voucher types, their rules, and stacking compatibility</p>
+</div>
+<div class="adm-card">
+<div class="adm-card-title"><i class="fas fa-info-circle"></i> System Vouchers — Rules &amp; Compatibility</div>
+<div id="adm-voucher-overview"></div>
+</div>
+</div>
+<!-- MESSAGES -->
+<div class="adm-panel" id="adm-panel-messages">
+<div class="adm-header">
+<h2>✉️ Report Messages</h2>
+<p>Check reports submitted by users from the report page</p>
+</div>
+<div class="adm-card">
+<div class="adm-card-title"><i class="fas fa-inbox"></i> Inbox</div>
+<div class="adm-message-list" id="adm-message-list"></div>
+</div>
+</div>
+</main>
+</div>
+<script src="js/data.js"></script>
+<script src="js/state.js?v=20260526v21"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-sync.js?v=20260526v21"></script>
+<script src="js/admin.js"></script>
+<script defer="" src="js/remove-theme-toggle.js"></script>
+<script defer="" src="js/cross-browser-consistency.js?v=20260526v21"></script>
+<script defer="" src="js/website-quality-v14.js?v=20260526v21"></script> <script defer="" src="js/security-hardening-v15.js?v=20260526v21"></script> <script defer="" src="js/operational-completion-v16.js?v=20260526v21"></script>
+<script defer="" src="js/auto-update.js?v=20260526v21"></script>
+</body>
+</html>

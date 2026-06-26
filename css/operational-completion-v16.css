@@ -1,0 +1,110 @@
+/* Skibidi GoFood V16 final operational completion layer.
+   Covers package-achievable accessibility, performance, timeline regression, and security UX hardening. */
+:root { --sg-v16-focus: #111827; --sg-v16-safe-gap: clamp(0.75rem, 2vw, 1.25rem); }
+
+.sr-only, .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+html.sg-operational-v16 { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html.sg-operational-v16 { scroll-behavior: auto; }
+  html.sg-operational-v16 *, html.sg-operational-v16 *::before, html.sg-operational-v16 *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+.skip-link, .sg-v16-skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 999999;
+  transform: translateY(-160%);
+  background: #111827;
+  color: #fff;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,.24);
+}
+.skip-link:focus, .sg-v16-skip-link:focus { transform: translateY(0); outline: 3px solid #f7c948; outline-offset: 3px; }
+:where(a, button, input, select, textarea, [role="button"], [tabindex]):focus-visible {
+  outline: 3px solid var(--sg-v16-focus) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px rgba(247, 201, 72, .35) !important;
+}
+:where(button, .btn, [role="button"], input, select, textarea) { min-height: 44px; }
+:where(.box, .card, .order-card, .timeline-card, .menu-card, .cart-card, .dashboard-card) {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  contain: layout paint;
+}
+img { max-width: 100%; height: auto; }
+[data-v16-image-error="true"] { outline: 2px dashed #d32f2f; background: #fff5f5; }
+/* Stronger order timeline regression guard. */
+#orders-list,
+.orders-timeline,
+.order-timeline,
+[data-order-timeline="true"] {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: var(--sg-v16-safe-gap) !important;
+  overflow-x: hidden !important;
+}
+#orders-list > *,
+.orders-timeline > *,
+.order-timeline > *,
+[data-order-timeline="true"] > *,
+[data-order-card="true"] {
+  position: relative !important;
+  height: auto !important;
+  min-height: max-content !important;
+  max-height: none !important;
+  transform: none !important;
+  margin-block: 0 !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+}
+[data-order-card="true"] :where(.order-meta, .order-note, .order-items, .order-status, .order-total, .eta, .status-pill) {
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+@media (max-width: 700px) {
+  [data-order-card="true"] :where(.order-head, .order-footer, .order-actions, .order-row) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .65rem !important;
+  }
+}
+.sg-v16-security-warning, .sg-v16-live-audit-badge {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 99999;
+  max-width: min(36rem, calc(100vw - 2rem));
+  background: #111827;
+  color: #fff;
+  border-radius: 1rem;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 16px 40px rgba(0,0,0,.26);
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+.sg-v16-security-warning button { margin-right: .75rem; border: 0; border-radius: .6rem; padding: .45rem .75rem; font-weight: 800; cursor: pointer; }
+@media print {
+  .skip-link, .sg-v16-skip-link, .sg-security-warning, .sg-v16-security-warning, .notif, .loader { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+}

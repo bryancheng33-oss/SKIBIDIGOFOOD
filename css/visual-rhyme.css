@@ -1,0 +1,533 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   VISUAL RHYMING SYSTEM — readability-first revision
+   Goal: repeat GoFood details softly without hiding copy or making controls messy.
+   Motifs: warm tray cards, small coin dots, route dividers, delivery-label corners.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --rhyme-gold: var(--yellow, #d4a017);
+  --rhyme-gold-soft: #ffe8a3;
+  --rhyme-cream: var(--yellow-pale, #fffbeb);
+  --rhyme-ink: var(--dark, #1a1400);
+  --rhyme-text: var(--text, #2c2010);
+  --rhyme-muted: var(--muted, #7a6a40);
+  --rhyme-border: rgba(212, 160, 23, .22);
+  --rhyme-border-strong: rgba(212, 160, 23, .42);
+  --rhyme-radius-card: 1.65rem;
+  --rhyme-radius-soft: 1.1rem;
+  --rhyme-pill: 999px;
+  --rhyme-shadow: 0 .9rem 2.4rem rgba(66, 45, 10, .075);
+  --rhyme-shadow-hover: 0 1.2rem 3rem rgba(66, 45, 10, .11);
+  --rhyme-route-line: repeating-linear-gradient(90deg, rgba(212,160,23,.34) 0 .62rem, transparent .62rem 1.15rem);
+  --rhyme-card-bg: linear-gradient(145deg, rgba(255,255,255,.99), rgba(255,251,235,.78));
+}
+
+html,
+body {
+  background: linear-gradient(180deg, #fffdf4 0%, var(--rhyme-cream) 100%);
+}
+
+body {
+  position: relative;
+}
+
+/* Very light global rhythm: visible only as warmth, never as visual noise. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255,210,77,.13) 0 6rem, transparent 6.3rem),
+    radial-gradient(circle at 92% 18%, rgba(212,160,23,.07) 0 6.5rem, transparent 6.8rem),
+    radial-gradient(circle at 78% 88%, rgba(255,210,77,.08) 0 8rem, transparent 8.3rem);
+  opacity: .65;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Typography accents: route underline only where there is space ───────── */
+:where(.title, .section-title, .section-heading, .menu-hero-title, .rewards-hero__title, .auth-heading, .adm-page-title, .profile-kc-hero h1, .disc-hero h1, .error-title, .checkout-hero h1) {
+  position: relative;
+  text-wrap: balance;
+}
+
+:where(.section-title, .section-heading, .menu-hero-title, .rewards-hero__title, .profile-kc-hero h1, .checkout-hero h1)::after {
+  content: '';
+  display: block;
+  width: min(9rem, 42%);
+  height: .22rem;
+  margin-top: .65rem;
+  border-radius: var(--rhyme-pill);
+  background: var(--rhyme-route-line);
+  opacity: .62;
+}
+
+/* Centered section headings keep centered underline. */
+:where(.title, .section-title, .section-heading) {
+  text-align: center;
+}
+
+:where(.title, .section-title, .section-heading)::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Labels are compact stickers, not oversized capsules. */
+:where(.hero-eyebrow, .menu-hero-label, .menu-order-history-label, .rewards-hero__eyebrow, .disc-hero-badge, .blog-card-tag, .adm-card-kicker, .req-title, .section-label) {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 2.05rem;
+  padding: .38rem .7rem;
+  border-radius: .75rem !important;
+  border: 1px solid var(--rhyme-border) !important;
+  background: rgba(255, 248, 220, .82) !important;
+  color: #7b5705 !important;
+  box-shadow: none !important;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+/* ── Cards: warm delivery tray language without covering content ─────────── */
+:where(
+  .feature-card,
+  .blog-card,
+  .support-hub-card,
+  .menu-hero-card,
+  .menu-sidebar-card,
+  .menu-item-card,
+  .menu-order-history-card,
+  .orders-master-panel,
+  .orders-detail-panel,
+  .menu-stat-card,
+  .qv-section-card,
+  .modal-box,
+  .cart-layer-box,
+  .cart-actions-panel,
+  .cart-summary-card,
+  .cart-voucher-panel,
+  .checkout-hero,
+  .checkout-card,
+  .profile-kc-hero,
+  .profile-kc-edit-card,
+  .profile-plan-card,
+  .profile-kc-info-card,
+  .rewards-hero,
+  .overview-card,
+  .reward-card,
+  .voucher-card,
+  .spin-card,
+  .adm-card,
+  .adm-stat-card,
+  .adm-profile-card,
+  .admin-login-box,
+  .auth-form-wrap,
+  .req-box,
+  .error-card,
+  .redirect-box,
+  .disc-card,
+  .disc-panel,
+  .timeline-card,
+  .group-card,
+  .team-card
+) {
+  position: relative;
+  border-color: var(--rhyme-border) !important;
+  border-radius: var(--rhyme-radius-card) !important;
+  box-shadow: var(--rhyme-shadow) !important;
+}
+
+:where(
+  .feature-card,
+  .blog-card,
+  .support-hub-card,
+  .menu-sidebar-card,
+  .menu-item-card,
+  .menu-order-history-card,
+  .orders-master-panel,
+  .orders-detail-panel,
+  .menu-stat-card,
+  .qv-section-card,
+  .modal-box,
+  .cart-layer-box,
+  .cart-actions-panel,
+  .cart-summary-card,
+  .cart-voucher-panel,
+  .checkout-card,
+  .profile-kc-edit-card,
+  .profile-plan-card,
+  .profile-kc-info-card,
+  .overview-card,
+  .reward-card,
+  .voucher-card,
+  .spin-card,
+  .adm-card,
+  .adm-stat-card,
+  .adm-profile-card,
+  .admin-login-box,
+  .auth-form-wrap,
+  .req-box,
+  .error-card,
+  .redirect-box,
+  .disc-card,
+  .disc-panel,
+  .timeline-card,
+  .group-card,
+  .team-card
+) {
+  background: var(--rhyme-card-bg) !important;
+}
+
+/* Replaces the old coin pseudo-element that could sit near text. */
+:where(.feature-card, .blog-card, .support-hub-card, .menu-item-card, .reward-card, .voucher-card, .adm-card, .team-card) {
+  background-image:
+    linear-gradient(180deg, rgba(255,210,77,.38), rgba(255,210,77,0) .42rem),
+    var(--rhyme-card-bg) !important;
+}
+
+:where(.feature-card, .blog-card, .support-hub-card, .menu-item-card, .profile-plan-card, .overview-card, .reward-card, .voucher-card, .adm-card, .team-card):hover {
+  box-shadow: var(--rhyme-shadow-hover) !important;
+}
+
+/* Hero panels can have a faint folded-corner, but content always stays above. */
+:where(.menu-hero-card, .rewards-hero, .profile-kc-hero, .checkout-hero, .disc-hero, .error-card, .auth-left) {
+  overflow: hidden;
+}
+
+:where(.menu-hero-card, .rewards-hero, .profile-kc-hero, .checkout-hero, .disc-hero, .error-card, .auth-left) > * {
+  position: relative;
+  z-index: 1;
+}
+
+:where(.menu-hero-card, .rewards-hero, .profile-kc-hero, .checkout-hero, .disc-hero, .error-card, .auth-left)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(7rem, 18%);
+  height: min(7rem, 28%);
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.52), rgba(255,210,77,.14));
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.heading {
+  background:
+    radial-gradient(circle at 16% 20%, rgba(255,210,77,.16) 0 7rem, transparent 7.3rem),
+    linear-gradient(135deg, var(--rhyme-ink), #2a220b) !important;
+  border-bottom: 1px solid rgba(255,210,77,.22);
+}
+
+/* ── Readability-first controls ──────────────────────────────────────────── */
+/* Important: do NOT target every <button>. Only style known navigation/filter chips. */
+:where(
+  .btn,
+  .delete-btn,
+  .nav-pill,
+  .header .flex .navbar a,
+  .mobile-menu a,
+  .menu-category-pill,
+  .menu-brand-chip,
+  .filter-btn,
+  .amt-pill,
+  .auth-tab,
+  .auth-submit,
+  .cart-checkout-btn,
+  .orders-filter-pill,
+  .adm-tab,
+  .adm-btn,
+  .pill,
+  .badge,
+  .plan-badge
+):not(.mobile-close):not(.modal-close):not(.qv-close) {
+  border-radius: var(--rhyme-radius-soft) !important;
+}
+
+:where(.btn-primary, .auth-submit, .cart-checkout-btn, .adm-btn-primary, .hero .btn:first-child, button[type="submit"]) {
+  background: linear-gradient(135deg, #ffe07a 0%, var(--rhyme-gold) 76%) !important;
+  color: var(--rhyme-ink) !important;
+  border: 1px solid rgba(116,74,5,.10) !important;
+  box-shadow: 0 .65rem 1.35rem rgba(212,160,23,.18) !important;
+}
+
+:where(.btn-outline, .filter-btn, .menu-category-pill, .auth-tab, .amt-pill) {
+  border: 1.5px solid var(--rhyme-border) !important;
+  background: rgba(255,255,255,.96) !important;
+  box-shadow: none !important;
+}
+
+/* Category and brand chips now grow with their text instead of clipping it. */
+:where(.menu-category-pill, .menu-brand-chip, .filter-btn, .orders-filter-pill, .auth-tab, .amt-pill) {
+  min-height: 2.75rem;
+  height: auto !important;
+  max-width: 100%;
+  line-height: 1.25;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+:where(.menu-category-pill, .filter-btn, .orders-filter-pill, .auth-tab) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: .68rem .95rem;
+  white-space: normal !important;
+}
+
+.menu-category-rail {
+  align-items: stretch !important;
+}
+
+.menu-category-pill img,
+.filter-btn img {
+  flex: 0 0 auto;
+}
+
+.menu-category-pill span,
+.menu-brand-copy,
+.menu-brand-copy strong,
+.menu-brand-copy span,
+.filter-btn span,
+.orders-filter-pill span,
+.auth-tab span {
+  min-width: 0;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+}
+
+.menu-sidebar-card .menu-category-rail,
+.menu-sidebar-card .menu-brand-row,
+.filter-bar {
+  gap: .65rem !important;
+}
+
+.menu-sidebar-card .menu-category-pill {
+  flex: 1 1 11rem;
+  justify-content: flex-start !important;
+  text-align: left;
+}
+
+.menu-sidebar-card .menu-brand-chip {
+  min-height: 4.2rem;
+  align-items: center;
+  background: rgba(255,255,255,.96) !important;
+}
+
+.menu-brand-chip:hover,
+.menu-brand-chip.active,
+.menu-category-pill:hover,
+.menu-category-pill.active,
+.filter-btn:hover,
+.filter-btn.active,
+.auth-tab.active,
+.amt-pill.active,
+.amt-pill:hover {
+  border-color: var(--rhyme-border-strong) !important;
+  background: #fff7d8 !important;
+  color: var(--rhyme-ink) !important;
+  transform: none !important;
+}
+
+/* Wallet amount buttons: keep as simple grid cells, not long decorative pills. */
+.amt-grid {
+  gap: .75rem !important;
+}
+
+.amt-pill {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: .72rem .55rem !important;
+  border-radius: .9rem !important;
+  color: #755208 !important;
+  text-align: center;
+}
+
+/* Header controls need compact clarity, especially wallet/points. */
+.header {
+  border-bottom: 1px solid rgba(212,160,23,.20) !important;
+  background: rgba(255,255,255,.97) !important;
+}
+
+.header .flex .navbar a {
+  padding-inline: .95rem;
+  min-height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.header .flex .navbar a.active,
+.header .flex .navbar a:hover,
+.mobile-menu a:hover,
+.mobile-menu a.active {
+  background: rgba(255,239,174,.58) !important;
+  color: var(--rhyme-ink) !important;
+}
+
+.nav-pill {
+  min-height: 2.7rem;
+  padding: .58rem .86rem !important;
+  white-space: nowrap;
+  border-radius: .95rem !important;
+  border: 1px solid var(--rhyme-border) !important;
+  background: rgba(255,255,255,.94) !important;
+}
+
+.nav-pill-dark {
+  background: var(--rhyme-ink) !important;
+  color: #ffe27a !important;
+  border-color: rgba(26,20,0,.18) !important;
+}
+
+/* Keep the logo clean; no extra dots that can look like a typo. */
+.header .flex .logo::after,
+.brand-mark::after,
+.auth-brand::after {
+  content: none !important;
+}
+
+/* ── Forms: subtle consistency, no heavy capsule shape ──────────────────── */
+:where(.form-field, input, select, textarea, .adm-inp, .auth-input, .search-input, .menu-search-box input) {
+  border-radius: .9rem !important;
+  border: 1.4px solid rgba(212,160,23,.24) !important;
+  background: rgba(255,255,255,.98) !important;
+  box-shadow: none !important;
+}
+
+:where(.form-field, input, select, textarea, .adm-inp, .auth-input, .search-input, .menu-search-box input):focus {
+  outline: none !important;
+  border-color: var(--rhyme-border-strong) !important;
+  box-shadow: 0 0 0 .24rem rgba(255,210,77,.16) !important;
+}
+
+/* Icons repeat the coin idea only where icon containers exist. */
+:where(.badge-icon, .feature-icon, .contact-icon, .overview-card__icon, .adm-stat-icon, .support-hub-card i, .menu-sidebar-title i, .qv-section-title i) {
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #ffe27a, var(--rhyme-gold)) !important;
+  color: var(--rhyme-ink) !important;
+  box-shadow: 0 .45rem 1rem rgba(212,160,23,.16);
+}
+
+/* Product/image frames keep the soft tray shape but not excessive rounding. */
+:where(.hero-image-circle, .menu-item-card img, .blog-card-img, .partner-logo img, .qv-media-panel, .brand-logo, .restaurant-logo, .profile-kc-avatar, .team-card img, .auth-img-card, .error-logo-card) {
+  border-radius: var(--rhyme-radius-card) !important;
+}
+
+:where(.menu-item-card img, .blog-card-img, .team-card img, .auth-img-card, .error-logo-card) {
+  border: 1px solid rgba(212,160,23,.15);
+}
+
+/* Tables/lists: clear separators over decoration. */
+:where(table, .adm-table, .orders-list-grid, .cart-items, .review-list, .voucher-list) {
+  border-radius: var(--rhyme-radius-soft) !important;
+}
+
+:where(tr, .order-card, .cart-item, .review-item, .voucher-row, .adm-order-row) {
+  border-color: rgba(212,160,23,.16) !important;
+}
+
+/* Auth and admin stay clean because they are information-heavy. */
+.auth-left {
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255,249,220,.80) 0 8%, rgba(255,249,220,0) 9%),
+    linear-gradient(145deg, #f8bc33 0%, #f4a61e 100%) !important;
+}
+
+:where(.adm-sidebar, .adm-topbar, .adm-panel) {
+  border-color: rgba(212,160,23,.18) !important;
+}
+
+.adm-card-title i,
+.adm-page-title i {
+  color: var(--rhyme-gold) !important;
+}
+
+/* ── Small screen corrections ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .header .flex .navbar a {
+    padding-inline: .8rem;
+  }
+
+  .nav-pill {
+    min-height: 2.55rem;
+    padding: .52rem .72rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --rhyme-radius-card: 1.35rem;
+    --rhyme-radius-soft: .95rem;
+  }
+
+  body::before {
+    opacity: .42;
+  }
+
+  :where(.section-title, .section-heading, .menu-hero-title, .rewards-hero__title, .profile-kc-hero h1, .checkout-hero h1)::after {
+    width: min(7rem, 50%);
+  }
+
+  .menu-sidebar-card .menu-category-pill {
+    flex-basis: 100%;
+  }
+
+  .menu-brand-chip {
+    min-width: min(14rem, 82vw) !important;
+  }
+
+  .menu-sidebar-card .menu-brand-chip {
+    min-width: 0 !important;
+  }
+
+  .filter-btn,
+  .menu-category-pill,
+  .auth-tab {
+    padding: .64rem .82rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Removed standalone dark/theme toggle from every page. */
+.theme-toggle,
+#theme-toggle,
+.theme-switch,
+#theme-switch,
+.dark-mode-toggle,
+#dark-mode-toggle,
+.darkmode-toggle,
+#darkmode-toggle,
+.moon-toggle,
+#moon-toggle,
+button[onclick*="toggleTheme"],
+a[onclick*="toggleTheme"],
+[role="button"][onclick*="toggleTheme"],
+button[aria-label*="dark" i],
+button[aria-label*="theme" i],
+button[title*="dark" i],
+button[title*="theme" i],
+a[aria-label*="dark mode" i],
+a[aria-label*="theme" i],
+[role="button"][aria-label*="dark" i],
+[role="button"][aria-label*="theme" i] {
+  display: none !important;
+}

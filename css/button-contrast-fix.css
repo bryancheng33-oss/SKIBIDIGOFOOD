@@ -1,0 +1,347 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUTTON CONTRAST FIX — warmer, readable GoFood actions
+   Goal: remove near-black button surfaces while keeping clear CTA hierarchy.
+   Loaded last so it can correct page-level and earlier design-layer overrides.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --btn-ink: #3b2605;
+  --btn-ink-soft: #5f4109;
+  --btn-primary-top: #ffe58f;
+  --btn-primary-mid: #f7c948;
+  --btn-primary-bottom: #d99a00;
+  --btn-primary-hover-top: #ffedaa;
+  --btn-primary-hover-bottom: #e8aa10;
+  --btn-deep-top: #7a4f09;
+  --btn-deep-bottom: #5b3a05;
+  --btn-deep-hover-top: #8a5a00;
+  --btn-deep-hover-bottom: #684406;
+  --btn-deep-text: #fff9e8;
+  --btn-surface: #fffaf0;
+  --btn-surface-hover: #fff2c7;
+  --btn-border: rgba(124, 82, 8, .22);
+  --btn-focus: rgba(212, 160, 23, .40);
+  --btn-danger: #c73e49;
+  --btn-danger-hover: #b8333e;
+  --btn-disabled-bg: #eee4cf;
+  --btn-disabled-text: #7b6a48;
+}
+
+/* Base action legibility: readable text, enough tap height, no clipped labels. */
+:where(
+  .btn,
+  .delete-btn,
+  .auth-submit,
+  .cart-checkout-btn,
+  .cart-floating-checkout-btn,
+  .cart-action-btn,
+  .menu-add-btn,
+  .menu-reset-btn,
+  .review-chip,
+  .qty-btn,
+  .btn-spin,
+  .wheel-hub,
+  .adm-btn-sm,
+  .adm-tab-btn,
+  .adm-chip-btn,
+  .adm-icon-btn,
+  .adm-search-btn,
+  .adm-logout,
+  .profile-kc-bookmark,
+  .profile-kc-skills-list li button,
+  .product-card .fa-shopping-cart,
+  .blog-read-btn,
+  .cta-link
+) {
+  text-shadow: none !important;
+  white-space: normal;
+  overflow: visible;
+  line-height: 1.2;
+}
+
+/* Primary CTA buttons: warm amber, not black. */
+:where(
+  .btn-primary,
+  .auth-submit,
+  .cart-checkout-btn,
+  .cart-floating-checkout-btn,
+  .cart-action-btn,
+  .menu-add-btn,
+  .menu-order-strip .btn,
+  .reward-card__footer .btn:not([disabled]),
+  .checkout-flow-page .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .cart-flow-page .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .voucher-inline-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .cart-layer-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .profile-kc-avatar-btns .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .profile-kc-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .profile-plan-card .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .admin-login-box .btn,
+  button[type="submit"]:not(.modal-close):not(.mobile-close):not(.qv-close)
+) {
+  background: linear-gradient(135deg, var(--btn-primary-top) 0%, var(--btn-primary-mid) 54%, var(--btn-primary-bottom) 100%) !important;
+  color: var(--btn-ink) !important;
+  border: 1px solid var(--btn-border) !important;
+  box-shadow: 0 .72rem 1.45rem rgba(212, 160, 23, .22), inset 0 1px 0 rgba(255, 255, 255, .60) !important;
+}
+
+:where(
+  .btn-primary,
+  .auth-submit,
+  .cart-checkout-btn,
+  .cart-floating-checkout-btn,
+  .cart-action-btn,
+  .menu-add-btn,
+  .menu-order-strip .btn,
+  .reward-card__footer .btn:not([disabled]),
+  .checkout-flow-page .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .cart-flow-page .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .voucher-inline-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .cart-layer-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .profile-kc-avatar-btns .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .profile-kc-actions .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .profile-plan-card .btn:not(.btn-outline):not(.btn-secondary):not(.btn-dark):not(.delete-btn),
+  .admin-login-box .btn,
+  button[type="submit"]:not(.modal-close):not(.mobile-close):not(.qv-close)
+):hover:not([disabled]) {
+  background: linear-gradient(135deg, var(--btn-primary-hover-top) 0%, var(--btn-primary-mid) 50%, var(--btn-primary-hover-bottom) 100%) !important;
+  color: var(--btn-ink) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 .9rem 1.8rem rgba(212, 160, 23, .28), inset 0 1px 0 rgba(255, 255, 255, .70) !important;
+}
+
+/* Dark actions are now caramel/deep brown instead of #1a1400 / navy black. */
+:where(
+  .btn-dark,
+  .btn-secondary.btn-dark,
+  .profile-kc-actions .active-action.btn-dark,
+  .profile-plan-card .btn-dark,
+  .product-card .fa-shopping-cart:hover,
+  .qty-btn:hover,
+  .voucher-chip .remove-v,
+  .wheel-hub,
+  .adm-tab-btn.active
+) {
+  background: linear-gradient(135deg, var(--btn-deep-top) 0%, var(--btn-deep-bottom) 100%) !important;
+  color: var(--btn-deep-text) !important;
+  border: 1px solid rgba(255, 224, 122, .28) !important;
+  box-shadow: 0 .7rem 1.4rem rgba(91, 58, 5, .22), inset 0 1px 0 rgba(255, 255, 255, .18) !important;
+}
+
+:where(
+  .btn-dark,
+  .btn-secondary.btn-dark,
+  .profile-kc-actions .active-action.btn-dark,
+  .profile-plan-card .btn-dark,
+  .product-card .fa-shopping-cart:hover,
+  .qty-btn:hover,
+  .voucher-chip .remove-v,
+  .wheel-hub,
+  .adm-tab-btn.active
+):hover:not([disabled]) {
+  background: linear-gradient(135deg, var(--btn-deep-hover-top) 0%, var(--btn-deep-hover-bottom) 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Regular .btn without a semantic modifier should be a readable secondary action,
+   not an accidental black block. */
+:where(.btn:not(.btn-primary):not(.btn-dark):not(.btn-outline):not(.btn-secondary):not(.cart-checkout-btn):not(.cart-floating-checkout-btn):not(.auth-submit):not([disabled])) {
+  background: linear-gradient(135deg, #fffdf4 0%, #fff3c8 100%) !important;
+  color: var(--btn-ink) !important;
+  border: 1px solid var(--btn-border) !important;
+}
+
+:where(.btn:not(.btn-primary):not(.btn-dark):not(.btn-outline):not(.btn-secondary):not(.cart-checkout-btn):not(.cart-floating-checkout-btn):not(.auth-submit):not([disabled])):hover {
+  background: linear-gradient(135deg, #fff7dc 0%, #ffe697 100%) !important;
+  color: var(--btn-ink) !important;
+}
+
+/* Outlines / low-priority actions stay visible on light cards. */
+:where(
+  .btn-outline,
+  .btn-secondary,
+  .delete-btn,
+  .menu-reset-btn,
+  .review-chip,
+  .filter-btn,
+  .menu-category-pill,
+  .menu-brand-chip,
+  .orders-filter-pill,
+  .auth-tab,
+  .amt-pill,
+  .section-pill,
+  .adm-btn-sm:not(.adm-green):not(.adm-red),
+  .profile-kc-skills-list li button,
+  .blog-read-btn,
+  .cta-link
+) {
+  background: var(--btn-surface) !important;
+  color: var(--btn-ink-soft) !important;
+  border: 1.5px solid var(--btn-border) !important;
+  box-shadow: 0 .35rem .9rem rgba(91, 58, 5, .06), inset 0 1px 0 rgba(255,255,255,.72) !important;
+}
+
+:where(
+  .btn-outline,
+  .btn-secondary,
+  .delete-btn,
+  .menu-reset-btn,
+  .review-chip,
+  .filter-btn,
+  .menu-category-pill,
+  .menu-brand-chip,
+  .orders-filter-pill,
+  .auth-tab,
+  .amt-pill,
+  .section-pill,
+  .adm-btn-sm:not(.adm-green):not(.adm-red),
+  .profile-kc-skills-list li button,
+  .blog-read-btn,
+  .cta-link
+):hover:not([disabled]) {
+  background: var(--btn-surface-hover) !important;
+  color: var(--btn-ink) !important;
+  border-color: rgba(124, 82, 8, .34) !important;
+}
+
+/* Active chips should read as selected without turning into black blocks. */
+:where(
+  .filter-btn.active,
+  .menu-category-pill.active,
+  .menu-brand-chip.active,
+  .orders-filter-pill.active,
+  .auth-tab.active,
+  .amt-pill.active,
+  .adm-chip-btn.active,
+  .adm-toolbar-pill.is-active
+) {
+  background: linear-gradient(135deg, #fff0aa 0%, #f7c948 100%) !important;
+  color: var(--btn-ink) !important;
+  border-color: rgba(124, 82, 8, .28) !important;
+}
+
+/* Admin topbar buttons live on a colored gradient, so keep them light but not black. */
+:where(.adm-chip-btn, .adm-icon-btn, .adm-search-btn) {
+  background: rgba(255, 255, 255, .22) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, .22) !important;
+}
+
+:where(.adm-chip-btn:hover, .adm-icon-btn:hover, .adm-search-btn:hover) {
+  background: rgba(255, 255, 255, .32) !important;
+  color: #ffffff !important;
+}
+
+/* Keep semantic admin action buttons clear and not muddy. */
+.adm-btn-sm.adm-green {
+  background: rgba(16, 185, 129, .14) !important;
+  color: #08754f !important;
+  border: 1px solid rgba(16, 185, 129, .22) !important;
+}
+
+.adm-btn-sm.adm-red,
+:where(.delete-btn.danger, .btn-danger) {
+  background: rgba(199, 62, 73, .12) !important;
+  color: #a82733 !important;
+  border: 1px solid rgba(199, 62, 73, .20) !important;
+}
+
+/* Birthday gift CTA can keep its celebratory red, but not over-dark. */
+.birthday-band .btn:not([disabled]) {
+  background: linear-gradient(135deg, #f2636e 0%, var(--btn-danger) 100%) !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+.birthday-band .btn:hover:not([disabled]) {
+  background: linear-gradient(135deg, #ff7681 0%, var(--btn-danger-hover) 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Lucky spin is an important action but should feel playful, not black. */
+.btn-spin:not([disabled]) {
+  background: linear-gradient(135deg, #ffe58f 0%, #f7c948 52%, #d99a00 100%) !important;
+  color: var(--btn-ink) !important;
+  border: 1px solid var(--btn-border) !important;
+  box-shadow: 0 1rem 2rem rgba(212, 160, 23, .24), inset 0 1px 0 rgba(255,255,255,.65) !important;
+}
+
+.btn-spin:hover:not([disabled]) {
+  background: linear-gradient(135deg, #ffedaa 0%, #f7c948 52%, #e8aa10 100%) !important;
+  color: var(--btn-ink) !important;
+}
+
+/* Icon / quantity controls should show the control clearly without black hover states. */
+:where(.qty-btn, .menu-icon-btn, .product-card .fa-shopping-cart, .profile-kc-bookmark) {
+  background: #fff8dc !important;
+  color: var(--btn-ink-soft) !important;
+  border: 1px solid var(--btn-border) !important;
+}
+
+:where(.qty-btn:hover, .menu-icon-btn:hover, .profile-kc-bookmark:hover) {
+  background: linear-gradient(135deg, #fff0aa 0%, #f7c948 100%) !important;
+  color: var(--btn-ink) !important;
+}
+
+/* Disabled buttons should look unavailable but still be readable. */
+:where(.btn[disabled], .btn:disabled, button[disabled], button:disabled, [aria-disabled="true"]) {
+  background: var(--btn-disabled-bg) !important;
+  color: var(--btn-disabled-text) !important;
+  border-color: rgba(123, 106, 72, .24) !important;
+  opacity: .82 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+/* Close buttons are utility controls; keep them small, bright, and visible. */
+:where(.modal-close, .mobile-close, .qv-close, .adm-modal-close) {
+  background: rgba(255, 255, 255, .95) !important;
+  color: var(--btn-ink) !important;
+  border: 1px solid var(--btn-border) !important;
+}
+
+:where(.modal-close, .mobile-close, .qv-close, .adm-modal-close):hover {
+  background: #fff0aa !important;
+  color: var(--btn-ink) !important;
+}
+
+/* Keyboard users get a clear focus ring. */
+:where(
+  .btn,
+  .delete-btn,
+  .auth-submit,
+  .cart-checkout-btn,
+  .cart-floating-checkout-btn,
+  .cart-action-btn,
+  .menu-add-btn,
+  .menu-reset-btn,
+  .review-chip,
+  .qty-btn,
+  .btn-spin,
+  .wheel-hub,
+  .adm-btn-sm,
+  .adm-tab-btn,
+  .adm-chip-btn,
+  .adm-icon-btn,
+  .adm-search-btn,
+  .adm-logout,
+  .profile-kc-bookmark,
+  .profile-kc-skills-list li button,
+  .menu-category-pill,
+  .menu-brand-chip,
+  .filter-btn,
+  .amt-pill,
+  .auth-tab,
+  .orders-filter-pill,
+  .blog-read-btn,
+  .cta-link
+):focus-visible {
+  outline: .32rem solid var(--btn-focus) !important;
+  outline-offset: .24rem !important;
+}
+
+@media (max-width: 640px) {
+  :where(.btn, .delete-btn, .auth-submit, .cart-checkout-btn, .cart-floating-checkout-btn, .cart-action-btn, .menu-add-btn, .btn-spin) {
+    min-height: 4.4rem;
+  }
+}
