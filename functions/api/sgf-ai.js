@@ -1,5 +1,5 @@
 // Skibidi GoFood AI proxy for EdgeOne Pages Functions.
-// V22 — full website knowledge + fun personality + markdown formatting.
+// V23 — full website knowledge + Gen Z personality + markdown formatting. Cache bust: 1782438430.709231
 
 const GROQ_CHAT_COMPLETIONS_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const DEFAULT_MODEL = 'llama-3.3-70b-versatile';
@@ -293,6 +293,7 @@ export function onRequestGet() {
   return json(200, {
     ok: true,
     service: 'Skibidi GoFood AI',
+    version: 'V23',
     runtime: 'EdgeOne Pages Functions',
     endpoint: '/api/sgf-ai',
     method: 'POST for chat requests'
